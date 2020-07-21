@@ -1,0 +1,1703 @@
+/* Changes:
+ *  - used iw-flex-center() mixin
+ *  - used standard colors defined using Sass
+ *  - reordered CSS properties
+ */
+/* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
+ * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
+ * because these variables are defined in Bootstrap using "!default". So here I can change values of variables
+ * used both in iw-components and in Bootstrap.
+ *
+ * The names of the defined functions are prefixed with "iw-" to avoid any clash with functions from other
+ * libraries. See https://github.com/necolas/idiomatic-css#preprocessors-additional-format-considerations
+ * and https://sass-guidelin.es/#namespace.
+ */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/solid.min.css");
+/* usage (from Font Awesome documentation):
+ *  in HTML: solid:   <i class="fas fa-camera"></i>
+ *           brands:  <i class="fab fa-facebook"></i>
+ *  in CSS:
+ *    HTML part: <button class="class1"></button>   (button for example)
+ *    CSS  part: solid:   .class1::before { font-family: "Font Awesome 5 Free";   content: "\f030"; }
+ *               brands:  .class1::before { font-family: "Font Awesome 5 Brands"; content: "\f09a"; }
+ *
+ * icon modifier classes:
+ *   change size: fa-xs   0.75em
+                  fa-sm   0.875em
+                  fa-lg   1.33em  also applies vertical-align: -25%
+                  fa-2x   2em
+                  ...     ...
+                  fa-10x  10em
+ *   rotate/flip: fa-rotate-{90|180|270}
+ *                fa-flip-{horizontal|vertical|both}
+ *   animate:     fa-spin
+ *                fa-pulse
+ *                see https://fontawesome.com/how-to-use/on-the-web/styling/animating-icons
+ */
+/**
+ * Creates an isosceles triangle pointing left, right, down, or up, with the given: length, half the width and the color.
+ *
+ * Example: @include iw-triangle-left(16px, 8px, blue);
+ * Usage:
+ *  - can be included in an element, or in a ::before/::after pseudo-element (then add content: "";)
+ *  - can be positioned
+ * How it works: https://www.youtube.com/watch?v=4cXgXZ3Tf0s
+ */
+/**
+ * Creates a circle with the given color and the size.
+ * If size isn't given, it is like if the width and height properties weren't set, thus the circle size
+ * comes from its content.
+ * Example: @include iw-circle(blue, 16px);
+ * Usage:
+ *  - can be included in an element, or in a ::before/::after pseudo-element (then add: content: "";)
+ *  - can be positioned
+ */
+/**
+ * Behaves like iw-circle mixin, but additionally prepares the circle for displaying a single character in it (Font Awesome icon,
+ * leter, digit etc.) by centering this character.
+ *
+ * Usage:
+ *   <i class="inline fab fa-facebook"></i>
+ *
+ *   .inline.fab { @include iw-circled-sign(lightgreen, 96px);
+ *                 // vertical-align: middle;  // optional
+ *                 // font-size: $size/2;      // optional, can be default or for example set by fa-4x for Font Awesome icon
+ *               }
+ * Source: https://stackoverflow.com/questions/41532908/make-font-awesome-icons-in-a-circle-border-with-right-11-ratio
+ * This centering method has been used by Brad Traversy in the "Modern HTML & CSS From The Beginning (Including Sass)" course
+ * https://www.udemy.com/course/modern-html-css-from-the-beginning/
+ */
+/**
+ * Use flex to center the child(ren) of the current element along both axes: the main axis and the cross axis.
+ * After calling "@include iw-flex-center();":
+ *  - optionally set the height and the width of the current element
+ *  - optionally set "text-align: center;" to center text inside <p>, <h1> etc.
+ *  - optionally set "flex-direction: row;" to lay out children horizontally
+ *  - optionally set "flex: none;" on a flex item to not allow to shrink this child along the main axis
+ * Todo: add $min argument similarly as in iw-flex-scatter/iw-flex-equal($min)
+ */
+/**
+ * Uses flex to lay out the children of the current element vertically by default, and horizontally on the given screen and larger.
+ * If there is a free space, scatters the children along the main axis and centers them along the cross axis.
+ */
+/**
+ * Uses flex to lay out the children of the current element vertically by default, and horizontally on the given screen and larger.
+ * If there is enough free space, the children will have the same length along the main axis (by using "flex: 1;").
+ * Note: The children have "flex-grow: 1", so justify-content has no effect, and iw-flex-center/scatter() should not be used.
+ */
+/**
+ * A simple grid view with the given columns on the given screen and larger [, and the given gap between columns and rows]. On smaller
+ * screens, $cols defaults to "none", i.e. as if there were no grid, or the grid had only one column with 1fr/auto width [1], because
+ * on smaller screens one column usually looks the best.
+ * To obtain different grid layouts for different resolutions you can call the iw-grid-cols() mixin several times with different
+ * $min arguments in one CSS rule, for example:
+ *   .class1 { @include iw-grid-cols( 768px, 1fr 1fr,     1rem);
+ *             @include iw-grid-cols(1200px, 1fr 1fr 1fr, 1rem); }
+ *
+ * [1] If there is no grid-template-areas property, there is no explicit grid. By default, grid-auto-columns is auto. One auto column
+ * behaves as if there were no grid.
+ *
+ * Examples (with description for screens at least 768px wide):
+ *   @include iw-grid-cols(768px, auto 1fr);                - 2 columns: the 1st column width is the width of the longest element in this column
+ *   @include iw-grid-cols(768px, fit-content(350px) 1fr);  - 2 columns: the 1st column width is the width of the longest element in this column, but no more than 350px
+ *   @include iw-grid-cols(768px, 1fr 2fr);                 - 2 columns with widths: 33.3% and 66.6%
+ *   @include iw-grid-cols(768px, 1fr 1fr 1fr);             - 3 columns with equal width
+ *   @include iw-grid-cols(768px, auto auto auto auto);     - todo: check
+ *
+ *   @include iw-grid-cols(768px, 5fr 2fr, 1.5rem);         - with the 1.5rem gap between both rows and columns
+ *   @include iw-grid-cols(768px, 5fr 2fr, 1.5rem 1rem);    - with the 1.5rem gap between rows and the 1rem gap between columns
+ */
+/**
+ * (todo: remove when the gap property in flex container will be supported by all web browsers)
+ *
+ * Sets a space between flex items to $items-gap, and the distance between the flex container and its items to $container-gap.
+ *
+ * Usage:
+ *   .flex-container { display: flex;
+ *                     @include iw-flex-gap(1rem, 0.25rem); }
+ *
+ *   <div class="flex-container [container-xl]">
+ *     <div [class="flex-item"]> ... </div>
+ *     <div [class="flex-item"]> ... </div>
+ *   </div>
+ *
+ * If needed, the following version can be created: iw-flex-{row|column}-gap($items-gap, $container-gap: 0), to set gaps only between rows or columns.
+ *
+ * The mixin is a hack, therefore, it has the following disadvantages:
+ *  - The minimum $container-gap is $items-gap/2.
+ *      See the implementation to understand why.
+ *  - It is better to use "box-sizing: border-box;".
+ *      If we use the Bootstrap .container-xl utility class with a horizontal padding to restrict the width of a content on a page,
+ *      and one of this containers has also the flex-container class with the @include iw-flex-gap(...), then it is better if
+ *      "box-sizing: border-box;" is used. Thanks to it, the content of the .container-xl containers, will have the same width.
+ *      This oddity results again from the usage of the hack, and won't have a place when all web browsers will implement
+ *      the gap property in flex.
+ *
+ * When all web browser will support the gap property in flex containers https://caniuse.com/#feat=flexbox-gap,
+ * then the mixin can be replaced with the following code:
+ *   .flex-container { display: flex;
+ *                     gap: 1rem;
+ *                     margin: 0.25rem; }  // or "padding: 0.25rem;" if the container has a border or a background color
+ * As of July 2020 we still wait at least for Safari:
+ *   https://www.chromestatus.com/feature/6031643502444544
+ *   https://b.webkit.org/show_bug.cgi?id=206767
+ *
+ * Other flex gap hacks can be found here: https://stackoverflow.com/questions/20626685/better-way-to-set-distance-between-flexbox-items
+ */
+/**
+ * Creates an overlay over the parent element with the given background color and opacity (less than 1).
+ * The parent element needs to be positioned (i.e. not static).
+ * See: https://www.w3schools.com/howto/howto_css_overlay.asp
+ * Used in "Modern HTML & CSS From The Beginning (Including Sass)" course by Brad Traversy, for example in portfolio website.
+ *
+ * Example usage:
+ *   .class1        { position: relative; }
+ *   .class1::after { @include iw-overlay(black, 0.9); }
+ */
+/**
+ * Use absolute positioning and the transform property to center the CURRENT element both vertically and horizonatally
+ * within the closest positioned (i.e. not static) ancestor, if any; or the whole document, otherwise.
+ * Of course, the current element is removed from the normal document flow, so no space is created for the current
+ * element in the page layout.
+ */
+@import url("https://unpkg.com/tippy.js@6/themes/light.css");
+@import url("https://unpkg.com/tippy.js@6/themes/light-border.css");
+@import url("https://unpkg.com/tippy.js@6/themes/material.css");
+@import url("https://unpkg.com/tippy.js@6/themes/translucent.css");
+.iw-alert {
+  margin: 0.4em 0;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  padding: 0.75em;
+}
+
+/* Color styles of alert. Colors are the same as in Bootstrap, ex.: .iw-alert--{success|warning|...} */
+.iw-alert--primary {
+  border-color: #b8daff;
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.iw-alert--secondary {
+  border-color: #d6d8db;
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.iw-alert--success {
+  border-color: #c3e6cb;
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.iw-alert--warning {
+  border-color: #ffeeba;
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.iw-alert--danger {
+  border-color: #f5c6cb;
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.iw-alert--info {
+  border-color: #bee5eb;
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.iw-alert--light {
+  border-color: #fdfdfe;
+  background-color: #fefefe;
+  color: #818182;
+}
+
+.iw-alert--dark {
+  border-color: #c6c8ca;
+  background-color: #d6d8d9;
+  color: #1b1e21;
+}
+
+.iw-alert__dismiss-button {
+  float: right;
+  position: relative;
+  top: -6px;
+  opacity: 50%;
+  border: none;
+  background: transparent;
+  color: black;
+  font: 1.7rem Arial, sans-serif;
+  cursor: pointer;
+}
+
+.iw-alert__dismiss-button:hover {
+  opacity: 75%;
+  color: black;
+}
+
+.iw-btn {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background-color: #e9ecef;
+  padding: .375em .75em;
+  color: #212529;
+  font: inherit;
+  text-decoration: none;
+}
+
+.iw-btn:not(:disabled) {
+  cursor: pointer;
+}
+
+.iw-btn:disabled {
+  opacity: .65;
+  pointer-events: none;
+}
+
+.iw-btn:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 0 0.2em rgba(0, 123, 255, 0.25);
+          box-shadow: 0 0 0 0.2em rgba(0, 123, 255, 0.25);
+}
+
+.iw-btn::-moz-focus-inner {
+  border-style: none;
+}
+
+.iw-btn--block {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.iw-btn--primary {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+}
+
+.iw-btn--primary:hover, .iw-btn--primary:focus {
+  border-color: #0062cc;
+  background-color: #0069d9;
+  color: white;
+}
+
+.iw-btn--primary:focus {
+  -webkit-box-shadow: 0 0 0 0.2em rgba(38, 143, 255, 0.5);
+          box-shadow: 0 0 0 0.2em rgba(38, 143, 255, 0.5);
+}
+
+.iw-btn--secondary {
+  border-color: #6c757d;
+  background-color: #6c757d;
+  color: white;
+}
+
+.iw-btn--secondary:hover, .iw-btn--secondary:focus {
+  border-color: #545b62;
+  background-color: #5a6268;
+  color: white;
+}
+
+.iw-btn--secondary:focus {
+  -webkit-box-shadow: 0 0 0 0.2em rgba(130, 138, 145, 0.5);
+          box-shadow: 0 0 0 0.2em rgba(130, 138, 145, 0.5);
+}
+
+.iw-btn--success {
+  border-color: #28a745;
+  background-color: #28a745;
+  color: white;
+}
+
+.iw-btn--success:hover, .iw-btn--success:focus {
+  border-color: #1e7e34;
+  background-color: #218838;
+  color: white;
+}
+
+.iw-btn--success:focus {
+  -webkit-box-shadow: 0 0 0 0.2em rgba(72, 180, 97, 0.5);
+          box-shadow: 0 0 0 0.2em rgba(72, 180, 97, 0.5);
+}
+
+.iw-btn--warning {
+  border-color: #ffc107;
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.iw-btn--warning:hover, .iw-btn--warning:focus {
+  border-color: #d39e00;
+  background-color: #e0a800;
+  color: #212529;
+}
+
+.iw-btn--warning:focus {
+  -webkit-box-shadow: 0 0 0 0.2em rgba(222, 170, 12, 0.5);
+          box-shadow: 0 0 0 0.2em rgba(222, 170, 12, 0.5);
+}
+
+.iw-btn--danger {
+  border-color: #dc3545;
+  background-color: #dc3545;
+  color: white;
+}
+
+.iw-btn--danger:hover, .iw-btn--danger:focus {
+  border-color: #bd2130;
+  background-color: #c82333;
+  color: white;
+}
+
+.iw-btn--danger:focus {
+  -webkit-box-shadow: 0 0 0 0.2em rgba(225, 83, 97, 0.5);
+          box-shadow: 0 0 0 0.2em rgba(225, 83, 97, 0.5);
+}
+
+.iw-btn--info {
+  border-color: #17a2b8;
+  background-color: #17a2b8;
+  color: white;
+}
+
+.iw-btn--info:hover, .iw-btn--info:focus {
+  border-color: #117a8b;
+  background-color: #138496;
+  color: white;
+}
+
+.iw-btn--info:focus {
+  -webkit-box-shadow: 0 0 0 0.2em rgba(58, 176, 195, 0.5);
+          box-shadow: 0 0 0 0.2em rgba(58, 176, 195, 0.5);
+}
+
+.iw-btn--light {
+  border-color: #f8f9fa;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.iw-btn--light:hover, .iw-btn--light:focus {
+  border-color: #dae0e5;
+  background-color: #e2e6ea;
+  color: #212529;
+}
+
+.iw-btn--light:focus {
+  -webkit-box-shadow: 0 0 0 0.2em rgba(216, 217, 219, 0.5);
+          box-shadow: 0 0 0 0.2em rgba(216, 217, 219, 0.5);
+}
+
+.iw-btn--dark {
+  border-color: #343a40;
+  background-color: #343a40;
+  color: white;
+}
+
+.iw-btn--dark:hover, .iw-btn--dark:focus {
+  border-color: #1d2124;
+  background-color: #23272b;
+  color: white;
+}
+
+.iw-btn--dark:focus {
+  -webkit-box-shadow: 0 0 0 0.2em rgba(82, 88, 93, 0.5);
+          box-shadow: 0 0 0 0.2em rgba(82, 88, 93, 0.5);
+}
+
+.iw-btn--link {
+  background-color: transparent;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.iw-btn--link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.iw-btn--link:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  text-decoration: underline;
+}
+
+.iw-btn--link:disabled {
+  color: #6c757d;
+}
+
+.iw-btn--lg {
+  border-radius: 0.3rem;
+  padding: 0.5rem  1rem;
+  font-size: 1.25rem;
+}
+
+.iw-btn--sm {
+  border-radius: 0.2rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.iw-carousel {
+  position: relative;
+  margin: 1em;
+  text-align: center;
+}
+
+.iw-carousel__inner {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.iw-carousel__item {
+  display: none;
+  margin: 0;
+}
+
+.iw-carousel__item.active {
+  display: block;
+}
+
+.iw-carousel__control {
+  -webkit-transition: background-color 0.6s;
+  transition: background-color 0.6s;
+  margin-top: 7px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 4px 6px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.iw-carousel__control:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.iw-carousel__control--prev {
+  border-radius: 3px 0 0 3px;
+}
+
+.iw-carousel__control--next {
+  border-radius: 0 3px 3px 0;
+}
+
+.iw-carousel__indicators {
+  display: inline;
+  padding-left: 0;
+}
+
+.iw-carousel__indicators li {
+  display: inline-block;
+  -webkit-transition: background-color 0.6s;
+  transition: background-color 0.6s;
+  margin: 0 2px;
+  border-radius: 50%;
+  background-color: #bbb;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.iw-carousel__indicators li:hover, .iw-carousel__indicators li.active {
+  background-color: #717171;
+}
+
+.iw-carousel-mul {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  position: relative;
+  margin: 1em 0;
+  border: 1px solid #ced4da;
+  border-radius: 15px;
+  background: #f8f9fa;
+  padding: 10px 40px;
+}
+
+.iw-carousel-mul__inner {
+  overflow: hidden;
+}
+
+.iw-carousel-mul__inner ul {
+  -webkit-transition: -webkit-transform 250ms;
+  transition: -webkit-transform 250ms;
+  transition: transform 250ms;
+  transition: transform 250ms, -webkit-transform 250ms;
+  margin: 0;
+  padding: 0;
+  width: 9999px;
+  list-style: none;
+  font-size: 0;
+}
+
+.iw-carousel-mul__inner ul li {
+  display: inline-block;
+}
+
+.iw-carousel-mul__inner ul img {
+  display: block;
+}
+
+.iw-carousel-mul__control {
+  position: absolute;
+  top: 40%;
+  display: block;
+  opacity: 31%;
+  outline: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.iw-carousel-mul__control:hover, .iw-carousel-mul__control:focus {
+  opacity: 50%;
+  color: black;
+}
+
+.iw-carousel-mul__control--prev {
+  left: 17px;
+}
+
+.iw-carousel-mul__control--next {
+  right: 17px;
+}
+
+.iw-carousel-mul__control--prev::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f104";
+}
+
+.iw-carousel-mul__control--next::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f105";
+}
+
+/* stylelint-disable selector-max-compound-selectors */
+/**
+ * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
+ * are styled only if the submit button has been clicked.
+ *
+ * The mixin is included in a block of a form control selector in _iw-form.scss and _iw-form-custom-toggles.scss files.
+ * The form control selector should start exactly with the .iw-form[--some-modifier] CSS class, because this mixin
+ * needs to concatenate the .was-validated class to it.
+ */
+.iw-form {
+  margin: 1em 0;
+}
+
+.iw-form h1 {
+  text-align: center;
+}
+
+.iw-form fieldset {
+  border: none;
+  padding: 0;
+}
+
+.iw-form .iw-form__fieldset {
+  margin: 1.5em 0;
+  border: 1px solid #409cff;
+  border-radius: 0.25rem;
+  background-color: #f8f9fa;
+  padding: 0.35em 0.75em 0.625em;
+}
+
+.iw-form .iw-form__fieldset legend {
+  border: 1px solid #007bff;
+  border-radius: 0.25rem;
+  background-color: #007bff;
+  padding: 0 0.2em;
+  color: white;
+  font-size: 1.17em;
+  line-height: 1.5;
+}
+
+.iw-form .iw-form__fieldset > div {
+  margin-top: 1em;
+}
+
+.iw-form > label,
+.iw-form .iw-form__fieldset > div > label {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 0.1em;
+}
+
+.iw-form .iw-btn:not([type="button"]) {
+  margin: 2em 0 1em;
+}
+
+.iw-form label.required::after {
+  color: red;
+  content: " *";
+}
+
+@media (min-width: 992px) {
+  .iw-form--responsive .iw-form__fieldset {
+    margin: 1em 0 0;
+  }
+  .iw-form--responsive,
+  .iw-form--responsive .iw-form__fieldset > div {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: fit-content(350px) 1fr;
+        grid-template-columns: fit-content(350px) 1fr;
+    gap: 1rem;
+  }
+  .iw-form--responsive > label,
+  .iw-form--responsive .iw-form__fieldset > div > label {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1 / span 1;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    margin: 0;
+    max-width: 400px;
+  }
+  .iw-form--responsive > label + *,
+  .iw-form--responsive .iw-form__fieldset > div > label + * {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2 / span 1;
+  }
+  .iw-form--responsive > *,
+  .iw-form--responsive .iw-form__fieldset > div > * {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / span 2;
+    margin: 0;
+  }
+  .iw-form--responsive > .iw-btn,
+  .iw-form--responsive .iw-form__fieldset > div > .iw-btn {
+    -ms-grid-column-align: center;
+        justify-self: center;
+  }
+}
+
+/********************* <input> (without radio and checkbox), <textarea>, <select> *********************/
+.iw-form__control {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: .375rem .75rem;
+  width: 100%;
+  color: #495057;
+  font: inherit;
+}
+
+input[type="file"].iw-form__control {
+  background-color: inherit;
+}
+
+textarea.iw-form__control {
+  height: 12.5em;
+  resize: vertical;
+}
+
+.iw-form__control--sm {
+  border-radius: 0.2rem;
+  padding: .25rem .5rem;
+  height: calc(1.5em + 0.5rem + 2px);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+.iw-form__control--lg {
+  border-radius: 0.3rem;
+  padding: .5rem  1rem;
+  height: calc(1.5em + 1rem + 2px);
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+/* ---------- State indicators ---------- */
+.iw-form .iw-form__control:focus {
+  outline: none;
+}
+
+.iw-form .iw-form__control:invalid {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.iw-form .iw-form__control:focus {
+  border-color: #409cff;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.was-validated.iw-form .iw-form__control:valid {
+  border-color: #28a745;
+}
+
+.was-validated.iw-form .iw-form__control:invalid {
+  border-color: #dc3545;
+}
+
+.was-validated.iw-form .iw-form__control:valid:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.was-validated.iw-form .iw-form__control:invalid:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.was-validated.iw-form .iw-form__control:valid:checked {
+  background: rgba(40, 167, 69, 0.5);
+}
+
+.was-validated.iw-form .iw-form__control:invalid:checked {
+  background: rgba(220, 53, 69, 0.5);
+}
+
+/********************* Checkboxes and radios *********************/
+.iw-form__check {
+  position: relative;
+  display: block;
+  padding-left: 1.25rem;
+}
+
+.iw-form__check input {
+  position: absolute;
+  margin-left: -1.25rem;
+  margin-top: .3rem;
+}
+
+.iw-form__check--inline {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: .75rem;
+  padding-left: 0;
+}
+
+.iw-form__check--inline input {
+  position: static;
+  margin-left: 0;
+  margin-right: .3125rem;
+  margin-top: 0;
+}
+
+.iw-form__check input[disabled] ~ label,
+.iw-form__check input:disabled ~ label {
+  color: #6c757d;
+}
+
+.iw-form__check label {
+  margin-bottom: 0;
+}
+
+.iw-form__check:not(.iw-form__check--inline) input.iw-form__switch ~ label {
+  margin-left: 1.25rem;
+}
+
+/* ---------- State indicators ---------- */
+.was-validated .iw-form__check input:valid ~ label {
+  color: #28a745;
+}
+
+.was-validated .iw-form__check input:invalid ~ label {
+  color: #dc3545;
+}
+
+/**
+ * Replaces platform-native checkboxes and radio buttons controls with custom controls (a radio button, a checkbox, or a toggle).
+ * Why? It is hard to style states of platform-native checkboxes and radio buttons - for example :invalid state is shown differently in different web browsers.
+ * Based on: https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ The following changes were made:
+ *  - to be like in Bootstrap: the height of the controls was decreased from 21px to 16px, label font size has been increased from 14px to the default (16px),
+ *                             colors has been changed, width of focused controls box-shadow has been increased from 2px to 3px, no change on :hover,
+ *                             a radio button and a checkbox inner parts aren't animated, a toggle knob doesn't bounce, transitions has been speed up
+ *  - code has been simplified: among others the order of CSS rules has been changed (it was possible because CSS selectors are nested more rarely)
+ * When Windows scaling is enabled, then artifacts can be visible in small elements which have width/height or position not divisible by 4px. So if it is crucial
+ * that there are no artifacts visible (like in a radio button or a toggle), then it is best if:
+ *  - all widths and heights are a multiple of 4px,
+ *  - "transform: ..." functions are used because their result can be non-integer pixels that are displayed correctly.
+ */
+/**
+ * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
+ * are styled only if the submit button has been clicked.
+ *
+ * The mixin is included in a block of a form control selector in _iw-form.scss and _iw-form-custom-toggles.scss files.
+ * The form control selector should start exactly with the .iw-form[--some-modifier] CSS class, because this mixin
+ * needs to concatenate the .was-validated class to it.
+ */
+@supports ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
+  .iw-form--custom-toggles .iw-form__check input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    display: inline-block;
+    -webkit-transition: border-color .15s, background .15s, -webkit-box-shadow .15s;
+    transition: border-color .15s, background .15s, -webkit-box-shadow .15s;
+    transition: border-color .15s, box-shadow .15s, background .15s;
+    transition: border-color .15s, box-shadow .15s, background .15s, -webkit-box-shadow .15s;
+    border: 1px solid #adb5bd;
+    height: 16px;
+    vertical-align: middle;
+  }
+  .iw-form--custom-toggles .iw-form__check input:disabled {
+    background: #f8f9fa;
+    opacity: .9;
+  }
+  .iw-form--custom-toggles .iw-form__check input:not(:disabled) {
+    background: white;
+  }
+  .iw-form--custom-toggles .iw-form__check input:disabled:checked {
+    background: #dee2e6;
+  }
+  .iw-form--custom-toggles .iw-form__check input:not(:disabled):checked {
+    background: #007bff;
+    border-color: #007bff;
+  }
+  .iw-form--custom-toggles .iw-form__check input:checked {
+    --opacity: 1;
+    --x: 50%;
+    --color: white;
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="radio"] {
+    border-radius: 50%;
+    width: 16px;
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="checkbox"]:not(.iw-form__switch) {
+    border-radius: 5px;
+    width: 16px;
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="checkbox"].iw-form__switch {
+    border-radius: 8px;
+    width: 32px;
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="radio"]::after, .iw-form--custom-toggles .iw-form__check input[type="checkbox"]::after {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    display: block;
+    -webkit-transition: opacity .15s, -webkit-transform .15s;
+    transition: opacity .15s, -webkit-transform .15s;
+    transition: transform .15s, opacity .15s;
+    transition: transform .15s, opacity .15s, -webkit-transform .15s;
+    height: 16px;
+    content: "";
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="radio"]::after {
+    border-radius: 50%;
+    background: white;
+    width: 16px;
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="checkbox"]:not(.iw-form__switch)::after {
+    border: 4px solid white;
+    border-left: 0;
+    border-top: 0;
+    width: 10px;
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="checkbox"].iw-form__switch::after {
+    border-radius: 50%;
+    background: var(--color, #adb5bd);
+    width: 16px;
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="radio"]::after {
+    -webkit-transform: translate(-50%, -50%) scale(0.5);
+            transform: translate(-50%, -50%) scale(0.5);
+    opacity: var(--opacity, 0);
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="checkbox"]:not(.iw-form__switch)::after {
+    -webkit-transform: translate(-50%, -50%) translateY(-10%) rotate(43deg) scale(0.5);
+            transform: translate(-50%, -50%) translateY(-10%) rotate(43deg) scale(0.5);
+    opacity: var(--opacity, 0);
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="checkbox"].iw-form__switch::after {
+    -webkit-transform: translate(-50%, -50%) translateX(var(--x, -50%)) scale(0.75);
+            transform: translate(-50%, -50%) translateX(var(--x, -50%)) scale(0.75);
+    opacity: 1;
+  }
+  .iw-form--custom-toggles .iw-form__check input[type="checkbox"].iw-form__switch:disabled:not(:checked)::after {
+    opacity: .6;
+  }
+  .iw-form--custom-toggles .iw-form__check input:focus {
+    outline: none;
+  }
+  .iw-form--custom-toggles .iw-form__check input:invalid {
+    outline: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .iw-form--custom-toggles .iw-form__check input:focus {
+    border-color: #409cff;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  .was-validated.iw-form--custom-toggles .iw-form__check input:valid {
+    border-color: #28a745;
+  }
+  .was-validated.iw-form--custom-toggles .iw-form__check input:invalid {
+    border-color: #dc3545;
+  }
+  .was-validated.iw-form--custom-toggles .iw-form__check input:valid:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  .was-validated.iw-form--custom-toggles .iw-form__check input:invalid:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+  .was-validated.iw-form--custom-toggles .iw-form__check input:valid:checked {
+    background: rgba(40, 167, 69, 0.5);
+  }
+  .was-validated.iw-form--custom-toggles .iw-form__check input:invalid:checked {
+    background: rgba(220, 53, 69, 0.5);
+  }
+  .iw-form--custom-toggles .iw-form__check input + label {
+    display: inline-block;
+    margin-left: 0.25em;
+    line-height: 1.5;
+    vertical-align: middle;
+  }
+}
+
+.iw-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  margin: 0.7em 0;
+  line-height: 1.5;
+}
+
+.iw-nav__item {
+  color: inherit;
+  text-decoration: none;
+}
+
+.iw-nav__item--disabled {
+  color: #6c757d;
+  cursor: default;
+}
+
+#iw-page__second-nav .iw-nav__item--disabled {
+  color: #646c73;
+}
+
+.iw-nav__item--active {
+  font-weight: bold;
+}
+
+.iw-nav--tabs {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.iw-nav--tabs a:hover {
+  text-decoration: none;
+}
+
+.iw-nav--tabs .iw-nav__item {
+  margin-bottom: -1px;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  padding: .3em .6em;
+}
+
+.iw-nav--tabs .iw-nav__item:not(.iw-nav__item--disabled):hover,
+.iw-nav--tabs .iw-nav__item--active {
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  border-top: 1px solid #dee2e6;
+}
+
+.iw-nav--tabs .iw-nav__item--active {
+  border-bottom: 1px solid white;
+  background: #f8f9fa;
+  font-weight: normal;
+}
+
+.iw-panels {
+  margin: 0.7em 0;
+}
+
+.iw-panels__panel {
+  display: none;
+}
+
+.iw-panels__panel--active {
+  display: block;
+}
+
+.iw-navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.iw-navbar a {
+  padding: 0.8em;
+  text-decoration: none;
+}
+
+.iw-navbar a:hover {
+  text-decoration: none;
+}
+
+.iw-navbar--dark {
+  background: #343a40;
+}
+
+.iw-navbar--dark * {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.iw-navbar--dark *:hover {
+  color: white;
+}
+
+.iw-navbar--light {
+  background: #f8f9fa;
+}
+
+.iw-navbar--light * {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.iw-navbar--light *:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.iw-navbar__brand {
+  font-size: 125%;
+}
+
+.iw-navbar__nav {
+  list-style: none;
+}
+
+@media (min-width: 576px) {
+  /* landscape phones and larger screens */
+  .iw-navbar__toggler {
+    display: none;
+  }
+  .iw-navbar__nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: auto;
+    margin-right: 0.5em;
+  }
+}
+
+@media (max-width: 575px) {
+  /* phones */
+  .iw-navbar__toggler {
+    margin-left: auto;
+    margin-right: 0.75em;
+    outline: none;
+    cursor: pointer;
+  }
+  /* -------- Bootstrap style hamburger icon; source: copied from Bootstrap 4.4.1 from bootstrap.css file -------- */
+  /* names of classes are changed */
+  .iw-navbar__toggler {
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+  .iw-navbar--light .iw-navbar__toggler {
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .iw-navbar--dark .iw-navbar__toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .iw-navbar__toggler-icon {
+    display: inline-block;
+    background: no-repeat center center;
+    background-size: 100% 100%;
+    width: 1.5em;
+    height: 1.5em;
+    content: "";
+    vertical-align: middle;
+  }
+  .iw-navbar--light .iw-navbar__toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(  0,   0,   0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  .iw-navbar--dark .iw-navbar__toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  /* second alternative: Font Awesome icon --------------------- */
+  /* ----------------------------------------------------------------------------------------------------------------- */
+  .iw-navbar__nav {
+    display: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 0;
+    padding-left: 0.4em;
+    width: 100%;
+  }
+  .iw-navbar__nav > * {
+    padding-bottom: 0.5em;
+  }
+  .iw-navbar__nav--visible {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+body {
+  margin: 0;
+  color: #212529;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#iw-page {
+  display: -ms-grid;
+  display: grid;
+  min-height: 100vh;
+}
+
+#iw-page header {
+  grid-area: header;
+}
+
+#iw-page__second-nav {
+  grid-area: nav2;
+  padding: 0 0.7em;
+  display: none;
+}
+
+#iw-page main {
+  grid-area: main;
+}
+
+#iw-page aside {
+  grid-area: aside;
+}
+
+#iw-page footer {
+  grid-area: footer;
+  padding: 0 0.7em;
+}
+
+.iw-page--layout-1column,
+.iw-page--layout-2column,
+.iw-page--layout-2column-right,
+.iw-page--layout-3column {
+  grid-template: "header" auto "nav2"   auto "main"   auto "aside"  1fr "footer" auto;
+}
+
+.iw-page--style-facebook {
+  background-color: #e9ecef;
+}
+
+.iw-page--style-facebook a {
+  text-decoration: none;
+}
+
+.iw-page--style-facebook a:hover {
+  text-decoration: underline;
+}
+
+.iw-page--style-facebook .iw-page__section {
+  margin: 0.3em 0;
+  border: 1px solid #d9d9d9;
+  background-color: white;
+  padding: 0 0.7em;
+}
+
+@media (min-width: 768px) {
+  #iw-page__second-nav {
+    display: inherit;
+  }
+  /* "nav2" item not higher than its content; footer sticks to bottom */
+  .iw-page--layout-2column-right {
+    grid-template: "header header" auto "main   nav2"   auto "main   aside"  1fr "footer footer" auto /  3fr    1fr;
+  }
+  .iw-page--layout-2column,
+  .iw-page--layout-3column {
+    grid-template: "header header" auto "nav2   main"   auto "nav2   aside"  1fr "footer footer" auto /  160px  1fr;
+  }
+  .iw-page--style-facebook .iw-page__section {
+    margin: 0.3em;
+    border-radius: 0.3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .iw-page--layout-3column {
+    grid-template: "header header header" auto "nav2   main   aside"  1fr "footer footer footer" auto /  160px  3fr    1fr;
+  }
+}
+
+.iw-signup {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 400px;
+  font-family: "Raleway", sans-serif;
+}
+
+.iw-signup form {
+  background-color: white;
+  padding: 15px 25px;
+  color: #212529;
+}
+
+.iw-signup h1,
+.iw-signup p {
+  margin: 0;
+}
+
+.iw-signup p {
+  text-align: center;
+}
+
+.iw-signup__bottom-text {
+  margin-top: 1.25em;
+  font-size: smaller;
+}
+
+.iw-signup footer {
+  margin-top: 0.62em;
+}
+
+.iw-signup footer a {
+  color: #007bff;
+}
+
+.iw-table {
+  margin: 1em 0;
+  border-collapse: collapse;
+}
+
+.iw-table--bordered th,
+.iw-table--bordered td {
+  border: 1px solid #dee2e6;
+  padding: 0.35em;
+}
+
+.iw-table--head-light thead th {
+  background: #f8f9fa;
+}
+
+.iw-table--head-dark thead th {
+  background: #343a40;
+  color: white;
+}
+
+.iw-table thead th a {
+  color: inherit;
+}
+
+.iw-table thead th.is-sorted-desc::after {
+  font-family: "Font Awesome 5 Free";
+  content: " \f0d8";
+}
+
+.iw-table thead th.is-sorted-asc::after {
+  font-family: "Font Awesome 5 Free";
+  content: " \f0d7";
+}
+
+.iw-table--diff-sort-icons thead th[data-type="string"].is-sorted-desc::after {
+  font-family: "Font Awesome 5 Free";
+  content: " \f882";
+}
+
+.iw-table--diff-sort-icons thead th[data-type="string"].is-sorted-asc::after {
+  font-family: "Font Awesome 5 Free";
+  content: " \f15d";
+}
+
+.iw-table--diff-sort-icons thead th[data-type="number"].is-sorted-desc::after {
+  font-family: "Font Awesome 5 Free";
+  content: " \f887";
+}
+
+.iw-table--diff-sort-icons thead th[data-type="number"].is-sorted-asc::after {
+  font-family: "Font Awesome 5 Free";
+  content: " \f162";
+}
+
+.iw-table--draggable-cols thead th {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+/**
+ * The component looks similar to:
+ *  - https://www.w3schools.com/howto/howto_css_timeline.asp
+ *  - https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285592 - but it has no animation, boxes have
+ *      rounded corners, an arrow is flatter and placed at the top of a box.
+ *
+ * The code is also inspired by these two timelines, but it is more similar to W3Schools code. More important changes:
+ *  - written as a BEM component
+ *     - default colors changed to shades of gray
+ *  - used iw-triangle-left() mixin for creating triangles/arrows
+ *  - used :nth-child(even) instead of right/left CSS classes (like in code from Udemy)
+ *  - values replaced by Sass and CSS variables
+ *  - mobile first: "transform: scaleX(-1)" is used to get an item on the left on larger screens => the code is simpler
+ *
+ * Both iw-timeline__item and iw-timeline__box are required, because on large screens some iw-timeline__item-s are mirrored relative
+ * to the timeline line, but next we need to reverse the mirroring for the iw-timeline__item content.
+ */
+:root {
+  --iw-timeline-line-color:       #e9ecef;
+  --iw-timeline-box-color:        #e9ecef;
+  --iw-timeline-dot-border-color: transparent;
+}
+
+.iw-timeline--style-w3schools {
+  --iw-timeline-line-color:       white;
+  --iw-timeline-box-color:        white;
+  --iw-timeline-dot-border-color: #ff9f55;
+  background-color: #474e5d;
+}
+
+.iw-timeline--style-brad {
+  --iw-timeline-line-color:       white;
+  --iw-timeline-box-color:        #5b7bb4;
+  --iw-timeline-dot-border-color: transparent;
+  background-color: #425b84;
+  color: white;
+}
+
+.iw-timeline {
+  position: relative;
+  margin: 0 auto;
+  padding: 1em 1em 1em 30px;
+}
+
+.iw-timeline::after {
+  position: absolute;
+  left: 30px;
+  top: 1em;
+  bottom: 1em;
+  margin-left: -3px;
+  background: var(--iw-timeline-line-color);
+  width: 6px;
+  content: "";
+}
+
+.iw-timeline__item {
+  position: relative;
+  margin-top: 1em;
+  list-style: none;
+}
+
+.iw-timeline__box {
+  margin-left: 40px;
+  border-radius: 0.3rem;
+  background: var(--iw-timeline-box-color);
+  padding: 1px 1em;
+}
+
+.iw-timeline__item::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  z-index: 1;
+  border-radius: 50%;
+  background-color: var(--iw-timeline-box-color);
+  width: 28px;
+  height: 28px;
+  border: 4px solid var(--iw-timeline-dot-border-color);
+  content: "";
+}
+
+.iw-timeline__item::before {
+  position: absolute;
+  left: 31px;
+  top: 12px;
+  border-left: 0           solid transparent;
+  border-right: 10px solid var(--iw-timeline-box-color);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  width: 0;
+  height: 0;
+  content: "";
+}
+
+@media (min-width: 1000px) {
+  .iw-timeline {
+    padding-left: 1em;
+  }
+  .iw-timeline::after {
+    left: 50%;
+  }
+  .iw-timeline__item {
+    left: 50%;
+    width: 50%;
+  }
+  .iw-timeline__item:nth-child(odd) {
+    -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+    -webkit-transform-origin: 0;
+            transform-origin: 0;
+    z-index: 1;
+  }
+  .iw-timeline__item:nth-child(odd) .iw-timeline__box {
+    -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+  }
+}
+
+/*
+// custom Tippy.js theme
+.tippy-box[data-theme~='tomato'] { background-color: tomato;
+                                   color: yellow; }
+*/
+.iw-tooltip-cust {
+  z-index: 9999;
+  border: 1px solid #adb5bd;
+  border-radius: 0.25rem;
+  -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  background: white;
+  padding: 5px 8px;
+  max-width: 400px;
+  color: #333;
+  font: italic 14px/1.3 sans-serif;
+  text-align: center;
+}
+
+.iw-tooltip-cust--dark {
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: #333;
+  color: white;
+  font-style: normal;
+}
+
+.iw-tree {
+  margin: 1em 0;
+  line-height: 1.2;
+}
+
+.iw-tree__button {
+  display: inline-block;
+  margin-right: 0.1em;
+  width: 1em;
+  color: #878a8c;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.iw-tree__node--inner > .iw-tree__button::before {
+  font-family: "Font Awesome 5 Free";
+  font-size: 125%;
+  content: "\f0da";
+}
+
+.iw-tree__node--open > .iw-tree__button::before {
+  font-family: "Font Awesome 5 Free";
+  font-size: 125%;
+  content: "\f0d7";
+}
+
+.iw-tree__node--inner > ul {
+  display: none;
+  padding-left: 1.3em;
+  list-style: none;
+}
+
+.iw-tree__node--open > ul {
+  display: block;
+}
+
+.iw-tree__node--leaf {
+  padding-left: 1.1em;
+}
+
+.iw-tree__node--inner,
+.iw-tree__node--leaf {
+  margin: 0.2em 0;
+  outline: none;
+}
+
+.iw-tree__title {
+  border-radius: 0.25rem;
+  padding: 0.1em 0.3em;
+}
+
+:focus > .iw-tree__title {
+  background-color: #e9ecef;
+}
+
+.iw-tree > ul {
+  padding-left: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+/* Page colors */
+.page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 4rem;
+  height: 100vh;
+  text-align: center;
+}
+
+#page-1 {
+  background: steelblue;
+}
+
+#page-2 {
+  background: tan;
+}
+
+#page-3 {
+  background: teal;
+}
+
+#page-4 {
+  background: slateblue;
+}
+
+.page h1 {
+  margin: 1rem;
+  font-size: 4rem;
+  line-height: 1.2;
+}
+
+.page p {
+  font-size: 1.3rem;
+}
+
+.btn {
+  display: inline-block;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  margin-top: 1rem;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.btn {
+  background: #f8f9fa;
+  color: #343a40;
+}
+
+.btn:hover {
+  background: #343a40;
+  color: white;
+}
+
+.btn-dark {
+  background: #343a40;
+  color: white;
+}
+
+.btn-dark:hover {
+  background: #f8f9fa;
+  color: #343a40;
+}
+
+/* animated h1 and p on page-1 */
+#page-1 h1 {
+  -webkit-transform: translateY(-140vh);
+          transform: translateY(-140vh);
+  -webkit-animation: heading 2s forwards ease-in;
+          animation: heading 2s forwards ease-in;
+}
+
+#page-1 p {
+  -webkit-transform: translateX(-120vw);
+          transform: translateX(-120vw);
+  -webkit-animation: text    2s forwards ease-in 1s;
+          animation: text    2s forwards ease-in 1s;
+}
+
+@-webkit-keyframes heading {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes heading {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes text {
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes text {
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+/*# sourceMappingURL=style.css.map */

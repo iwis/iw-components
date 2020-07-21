@@ -1,0 +1,51 @@
+/* Style for gallery on work.html page
+ *
+ * Changes:
+ *  - removed unnecessary code, for example, as suggested in comments:
+ *     1) all three ".item-image[...]" selectors were replaced by:
+ *          .item-image     { transition: transform 750ms $item-timing; }
+ *          .item-image img { display: block; }
+ *     2) content of the .item-text div is centered using flex instead of:
+ *          top: 50%;
+ *          transform: translateY(-50%);
+ *        and thus unnecessary .item-text-wrap div has been removed both from HTML and CSS
+ *  - used iw-overlay() mixin
+ *  - other smaller changes
+ */
+
+/* stylelint-disable order/properties-order */
+
+$item-timing: cubic-bezier(0.2, 1, 0.3, 1);
+
+.items                { @include iw-grid-cols(501px, repeat(3, 1fr), 0);
+                        box-shadow: 0 5px 10px 0 rgba(black, 0.3); }
+
+.item                 { position: relative;
+                        overflow: hidden;  // nothing sticks out of an item, comment it to see how the yellow overlay works
+
+  &::after            { @include iw-overlay($primary, 0.9);                          // yellow overlay
+                        transition: transform 3s $item-timing;
+                        transform: scale(2) translate(-75%, -75%) rotate(-28deg); }  // hide it by default
+  &:hover::after      { transform: scale(2) translate(0, 0)       rotate(-28deg); }  // show it on hover
+
+  &:hover .item-image { transform: scale(1.2); }                                     // scale image on hover
+  &:hover .item-text  { opacity: 1; transform: translateY(0); }                      // show text on hover
+}
+
+.item-image           { transition: transform 750ms $item-timing; }
+.item-image img       { display: block; }  // remove whitespace below img: https://stackoverflow.com/q/5804256/4592248
+
+.item-text            { position: absolute;
+                        left: 0; right: 0; top: 0; bottom: 0;       // cover the whole parent element
+                        z-index: 1;
+                        @include iw-flex-center();                  // center children
+                        text-align: center;
+                        color: white;
+                        transition: all 500ms $item-timing 300ms;   // opacity and transform
+                        opacity: 0; transform: translateY(-20%); }  // hide by default
+.item-text-category   { opacity: 0.7;
+                        font-size: 1.2rem;
+                        text-transform: uppercase; }
+.item-text-title      { margin-top: 5px;
+                        padding: 0 1rem;
+                        font-size: 2rem; }

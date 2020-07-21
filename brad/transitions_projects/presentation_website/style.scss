@@ -1,0 +1,48 @@
+/* Changes:
+ *  - used iw-flex-center() mixin
+ *  - used standard colors defined using Sass
+ *  - reordered CSS properties
+ */
+
+@import "../../../lib/iw-components";
+
+body            { margin: 0;
+                  padding: 0;
+                  overflow: hidden;
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  line-height: 1.4; }
+
+/* Page colors */
+.page           { @include iw-flex-center();
+                  padding: 0 4rem;
+                  height: 100vh;
+                  text-align: center; }
+#page-1         { background: steelblue; }
+#page-2         { background: tan;       }
+#page-3         { background: teal;      }
+#page-4         { background: slateblue; }
+
+.page h1        { margin: 1rem;
+                  font-size: 4rem;
+                  line-height: 1.2; }
+.page p         { font-size: 1.3rem; }
+
+.btn            { display: inline-block;
+                  transition: all 0.3s ease-in;
+                  margin-top: 1rem;
+                  border: none;
+                  padding: 1rem 2rem;
+                  font-size: 1.1rem;
+                  text-decoration: none; }
+.btn            { background: $gray-100; color: $gray-800; }
+.btn:hover      { background: $gray-800; color: white;   }
+.btn-dark       { background: $gray-800; color: white;   }
+.btn-dark:hover { background: $gray-100; color: $gray-800; }
+
+/* animated h1 and p on page-1 */
+#page-1 h1      { transform: translateY(-140vh); animation: heading 2s forwards ease-in;    }
+#page-1 p       { transform: translateX(-120vw); animation: text    2s forwards ease-in 1s; }
+
+@keyframes heading { to { transform: translateY(0); } }
+@keyframes text    { to { transform: translateX(0); } }

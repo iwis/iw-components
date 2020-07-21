@@ -1,0 +1,182 @@
+/* Source code and description: https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13875758
+ * based on: https://mobirise.com/html-templates/profile/
+ *
+ * Changed:
+ *  - simpler selectors by removing nesting: https://sass-guidelin.es/#selector-nesting
+ *  - used btn class besides btn-... classes (BEM standard)
+ *  - used "transform: scale(...);" instead of changing dimensions:
+ *    https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13875776#questions/8116965
+ *  - used mixins: iw-circle(), iw-grid-cols(), iw-flex-center(), iw-flex-scatter(), iw-overlay(), and iw-flex-gap() hack
+ *  - used Bootstrap color variables: $primary, $gray-100, $gray-800, $border-color
+ *  - "grid-gap" changed to "gap"
+ *  - order of CSS properties
+ *  - formatting
+ *  - other smaller changes
+ *
+ * Todo:
+ *  - optionally integrate with iw-utilities
+ *  - optionally mobile first
+ *  - make a "progress" component
+ *  - other
+ */
+
+// Change colors
+$primary:      #ffbc00;
+$gray-100:     #f4f4f4;  // remove a Bootstrap blue-ish tint, hsl(0, 0%, 96%)
+$gray-800:     #333;     // remove a Bootstrap blue-ish tint, hsl(0, 0%, 20%)
+$border-color: #ccc;     // remove a Bootstrap blue-ish tint, hsl(0, 0%, 80%)
+
+@import "../../../lib/variables_functions";
+@import "utilities";
+@import "item_grid";                         // work.html page style
+
+// ---------- General Styles ------------------------------------------------------------
+*           { margin: 0;
+              padding: 0; }
+
+body        { background: white;
+              font-family: "Dosis", sans-serif;
+              line-height: 1.6; }
+
+a           { color: iw-theme-color("dark");
+              text-decoration: none; }
+
+ul          { list-style: none; }
+
+h2, h3, h4  { text-transform: uppercase; }
+
+img         { width: 100%; }
+
+// ---------- Main Nav ------------------------------------------------------------------
+#main-nav                         { @include iw-flex-scatter(501px);
+                                    padding-top: 1rem; }
+#main-nav #logo                   { width: 70px;
+                                    height: 70px;
+                                    color: white;
+                                    text-transform: uppercase; }
+#main-nav ul                      { display: flex; }
+#main-nav li                      { padding: 1rem; }
+#main-nav a                       { transition: border-color 0.5s;
+                                    border-bottom: 3px transparent solid;
+                                    padding-bottom: 0.5rem;
+                                    color: white;
+                                    text-decoration: none;
+                                    text-transform: uppercase;
+  &:hover                         { border-color: $border-color; }
+  &.current                       { border-color: $primary; }
+}
+
+// ---------- Header --------------------------------------------------------------------
+#header-home                      { background: url("../img/showcase.jpg") no-repeat center right / cover;
+                                    height: 100vh;
+                                    color: white; }
+#header-home .header-content      { padding-top: 20%;
+                                    text-align: center; }
+#header-home .header-content h1   { font-size: 4rem;
+                                    line-height: 1.2; }
+
+#header-inner                     { border-bottom: 3px solid $primary;
+                                    background: url("../img/showcase.jpg") no-repeat 20% 30% / cover;
+                                    height: 5.5rem; }
+
+// ---------- Home Sections -------------------------------------------------------------
+// Home Section A
+#home-a .specials                 { @include iw-grid-cols(501px, repeat(2, 1fr), 1rem);
+                                    @include iw-grid-cols(769px, repeat(4, 1fr), 1rem);
+                                    margin-top: 3rem; }
+#home-a .specials .fas            { padding-bottom: 0.4rem;
+                                    color: $primary; }
+
+// Home Section B
+#home-b .stats                    { @include iw-grid-cols(501px, repeat(4, 1fr), 0); }
+#home-b .stats li                 { line-height: 2; }
+#home-b .stats li.stats-title     { font-size: 1.5rem; }
+#home-b .stats li.stats-number    { font-size: 2rem;
+                                    font-weight: bold; }
+#home-b .stats div                { padding: 3rem 0;
+  &:nth-child(odd)                { background: iw-theme-color("light"); }
+  &:nth-child(even)               { background: $border-color; }
+}
+
+// Home Section C
+#home-c .process                  { @include iw-grid-cols(501px, repeat(4, 1fr), 1.5rem);
+                                    text-align: center; }
+#home-c .process-icon             { position: relative;
+                                    transition: all 1s;
+                                    @include iw-circled-sign(iw-theme-color("dark"), 70px);
+                                    padding: 2rem;
+                                    color: white; }
+#home-c .process-step             { position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                    transition: all 1s;
+                                    @include iw-circled-sign($primary, 15px);
+                                    padding: 1rem;
+                                    font-size: 28px; }
+#home-c .process-icon:hover       { transform: scale(1.15); background: $primary;
+  .process-step                   { transform: scale(0.85); background: iw-theme-color("dark"); }
+}
+
+// ---------- About Sections ------------------------------------------------------------
+// About A
+#about-a .about-info              { @include iw-grid-cols(501px, repeat(3, 1fr), 1.2rem); }
+#about-a .bio                     { border-left: 3px solid $primary;
+                                    padding: 0.8rem; }
+#about-a .award .fas              { margin: 1rem;
+                                    color: $primary; }
+
+// About B (todo: make a progress component)
+#about-b .progress                { margin-bottom: 0.6rem;
+                                    border-radius: $border-radius-lg;
+                                    background: $border-color;
+                                    height: 20px;
+                                    overflow: hidden; }
+#about-b .progress div            { background: $primary;
+                                    height: 100%; }
+
+// About C
+#about-c .about-logos             { @include iw-grid-cols(501px, repeat(4, 1fr), 2rem); }
+#about-c .about-logos img         { width: 70%; }
+
+// About D
+#about-d .testimonials            { @include iw-grid-cols(501px, repeat(2, 1fr), 0.5rem);
+                                    @include iw-grid-cols(769px, repeat(4, 1fr), 0.5rem); }
+#about-d .testimonials p          { border: 1px solid $border-color;
+                                    border-radius: $border-radius-lg;
+                                    padding: 0.5rem; }
+#about-d .testimonials ul         { display: flex;
+                                    align-items: center;
+                                    margin-top: 1rem;
+                                    list-style: none; }
+#about-d .testimonials img        { margin-right: 0.5rem;
+                                    @include iw-circle(transparent, 50px); }
+
+// ---------- Contact Page --------------------------------------------------------------
+#contact-a .text-fields           { @include iw-grid-cols(501px, repeat(2, 1fr), 1.2rem);
+                                    margin-bottom: 1.2rem; }
+#contact-a .message-input         { height: 100px;
+                                    resize: vertical; }
+#contact-a .text-input            { padding: 0.5rem 1rem; }
+#contact-a .btn[type="submit"]    { width: 50%; }
+
+#contact-b .contact-info          { @include iw-grid-cols(501px, repeat(3, 1fr), 0);
+                                    text-align: center; }
+
+#contact-c h1                     { font-size: 4rem;
+                                    text-align: center; }
+
+// ---------- Footer --------------------------------------------------------------------
+#main-footer                      { background: iw-theme-color("dark");
+                                    color: white; }
+#main-footer .footer-content      { @include iw-flex-scatter(501px);
+                                    @include iw-flex-gap(1rem, 1.2rem); }
+#main-footer .social .fab         { margin-right: 1rem;
+                                    @include iw-circled-sign(transparent, 20px);
+                                    border: 2px white solid;
+                                    padding: 0.5rem;
+  &:hover                         { background: $primary; }
+}
+
+// --------------------------------------------------------------------------------------
+
+@import "media";  // media queries

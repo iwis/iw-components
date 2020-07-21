@@ -1,0 +1,98 @@
+/* Hamburger menu overlay using only CSS without JavaScript.
+ * Code source: https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285580
+ *
+ * The code was simplified by:
+ *  - using the iw-flex-center() and iw-circle() mixins
+ *  - using Sass selector nesting
+ *  - removing some not required flex properties described in Q&A for lesson "81. Hamburger Menu Overlay [2] - Creating The Hamburger"
+ *  - changing formatting
+ *  - adding comments
+ *  - other changes
+ *
+ * Todo:
+ *  - BEM
+ *  - now the hamburger isn't accessible
+ *  - the hamburger HTML and CSS code can be simplified by using "appearance: none;" as in iw-form-custom-togglers.scss
+ */
+
+@import "../../../../lib/variables_functions";
+
+.menu-wrap {                  $transition-duration: 0.4s;
+                              position: fixed; left: 0; top: 0;
+                              z-index: 1;     // always on top
+
+  .toggler                  { position: absolute; left: 0; top: 0;
+                              opacity: 0;     // don't show the native checkbox control
+                              z-index: 2;     // on top of everything, because it needs to be clickable
+                              width: 50px;
+                              height: 50px;
+                              cursor: pointer; }
+
+  .hamburger                { position: absolute; left: 0; top: 0;
+                              z-index: 1;     // under the .toggler checkbox
+                              background: var(--primary-color);
+                              padding: 1rem;
+                              width: 60px;
+                              height: 60px;
+                              @include iw-flex-center(); }
+
+  // hamburger middle line
+  .hamburger > div          { position: relative;
+                              transition: all $transition-duration;
+                              background: white;
+                              width: 100%;
+                              height: 2px; }  // a thin line
+
+  // hamburger top & bottom lines
+  .hamburger > div::before,
+  .hamburger > div::after   { position: absolute;
+                              z-index: 1;
+                              background: inherit;
+                              width: 100%;
+                              height: 2px;    // a thin line
+                              content: ""; }
+  .hamburger > div::before  { top: -10px; }   // moves the top line up
+  .hamburger > div::after   { top:  10px; }   // moves the bottom line down
+
+  .toggler:checked {  // turn hamburger into x
+            + .hamburger > div::before,
+            + .hamburger > div::after   { transform: rotate(90deg); top: 0; }  // turn hamburger into +
+            + .hamburger > div          { transform: rotate(135deg);        }  // rotate + into x
+    &:hover + .hamburger > div          { transform: rotate(225deg);        }  // rotate x even more on hover
+  }
+
+  .menu                                 { position: fixed; left: 0; top: 0;
+                                          visibility: hidden;
+                                          width: 100%;
+                                          height: 100%;
+                                          overflow: hidden;
+                                          @include iw-flex-center(); }
+
+  .menu-overlay                         { flex: none;     // don't allow to shrink the overlay vertically
+                                          transform: scale(0);
+                                          transition: all $transition-duration;  // all i.e. transform and visibility
+                                          @include iw-circle(var(--overlay-color), 200vw);
+                                          @include iw-flex-center(); }           // center the content
+
+  .menu-container                       { transition: opacity $transition-duration;
+                                          opacity: 0;
+                                          max-width: 90vw;
+                                          max-height: 100vh;
+                                          text-align: center; }
+
+  .menu-container > ul > li             { padding: 1rem;
+                                          list-style: none;
+                                          color: white;
+                                          font-size: 1.5rem; }
+
+  .menu-container > ul > li > a         { transition: color $transition-duration;
+                                          color: inherit;
+                                          text-decoration: none; }
+  .menu-container > ul > li > a:hover   { color: var(--secondary-color); }
+
+  .toggler:checked {  // show menu
+    ~ .menu                             { visibility: visible; }
+    ~ .menu .menu-overlay               { transform: scale(1); transition-duration: 0.75s; }  // open menu slower
+    ~ .menu .menu-container             { opacity: 1;          transition-delay:    0.4s;  }  // show menu links with the 0.4s delay
+  }
+}

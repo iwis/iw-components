@@ -1,0 +1,73 @@
+/* Changes:
+ *  - used Sass: color variables from Bootstrap, iw-flex-center() mixin
+ *  - formatting
+ * Todo:
+ *  - change to BEM component - it needs to be integrated with iw-navbar and maybe with iw-nav
+ *                              see also Bootstrap's .nav-item and .dropdown
+ *  - write iw-badge component and then use it
+ */
+
+@import "../../../lib/variables_functions";
+
+:root                                 { --primary-color:   coral;
+                                        --secondary-color: chocolate; }
+
+*                                     { margin:  0;
+                                        padding: 0; }
+
+html,
+body                                  { background: $gray-100;
+                                        font-family: Arial, Helvetica, sans-serif; }
+
+#navbar ul                            { list-style: none; }
+
+#navbar ul li                         { position: relative;
+                                        display: inline-block;
+                                        padding: 1rem;
+                                        color: $gray-800; }
+#navbar ul li a                       { color: $gray-800;
+                                        text-decoration: none; }
+
+#navbar ul li:hover                   { background: var(--primary-color);
+                                        color: white;
+                                        cursor: pointer; }
+#navbar ul li:hover a                 { color: white; }
+
+// show a nested dropdown on hover
+#navbar ul li       ul                { display: none; }                    // hide nested ul by default
+#navbar ul li:hover ul                { position: absolute;
+                                        left: 0;
+                                        display: block;                     // it is none by default
+                                        margin-top: 1rem;
+                                        width: 200px; }
+#navbar ul li:hover ul li             { display: block;
+                                        background: $gray-200; }
+#navbar ul li:hover ul li a           { color: $gray-800; }
+#navbar ul li:hover ul li:hover       { background: $gray-300;
+                                        color: inherit; }
+
+// badge with a number of posts
+#navbar ul li:hover ul li       span  { float: right;
+                                        border-radius: $border-radius-lg;
+                                        background: var(--primary-color);
+                                        padding: 0.2rem 0.5rem;
+                                        color: white;
+                                        font-size: 0.8rem;
+                                        text-align: center; }
+#navbar ul li:hover ul li:hover span  { background: var(--secondary-color); }
+
+@media (max-width: 600px) {
+  #navbar ul li                       { display: block; }      // vertically
+
+  #navbar ul li:hover ul              { position: relative;    // not absolute
+                                        width: 100%; }
+}
+
+// showcase
+#showcase                             { @include iw-flex-center();
+                                        background: var(--primary-color);
+                                        padding: 0 2rem;
+                                        height: 300px;
+                                        text-align: center; }
+#showcase h1                          { color: white;
+                                        font-size: 4rem; }

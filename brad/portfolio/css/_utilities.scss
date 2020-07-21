@@ -1,0 +1,45 @@
+.container      { margin: auto;
+                  padding: 0 1.5rem;
+                  max-width: 1280px;
+                  overflow: hidden; }
+
+// Buttons
+.btn            { display: inline-block;
+                  transition: all 0.5s;
+                  border: none;
+                  padding: 0.8rem 2rem;
+                  cursor: pointer;
+  &:hover       { background: $primary; } }
+
+// todo: use a function to compute the color based on the background color
+.btn-light      { background: iw-theme-color("light"); color: iw-theme-color("dark");  }
+.btn-dark       { background: iw-theme-color("dark");  color: iw-theme-color("light"); }
+
+// Backgrounds
+.bg-primary     { background: $primary;                color: white; }  // white font looks well on a gold background
+.bg-light       { background: iw-theme-color("light"); color: iw-color-yiq(iw-theme-color("light")); }
+.bg-dark        { background: iw-theme-color("dark");  color: iw-color-yiq(iw-theme-color("dark"));  }
+
+.lead           { margin-bottom: 2rem;
+                  font-size: 1.3rem; }
+
+.text-center    { text-align: center; }
+
+// Padding and margin
+.my-2           { margin: 2rem 0; }
+.py-2           { padding: 2rem 0; }
+.py-3           { padding: 3rem 0; }
+.py-4           { padding: 4rem 0; }
+
+.section-title  { display: block;
+                  padding-bottom: 0.5rem;
+                  font-size: 2rem;
+                  font-weight: 100;
+                  text-align: center;
+                  text-transform: uppercase; }
+
+.bottom-line    { display: block;
+                  margin: 0 auto 1rem;
+                  background: $primary;
+                  width: 3rem;
+                  height: 2px; }

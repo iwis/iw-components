@@ -1,0 +1,17 @@
+/* Code source: https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285592
+ * Changes:
+ *  - used iw-timeline component
+ *  - used container-xl and text-center utility
+ */
+
+// use the iw-timeline component and container-xl utility
+@import "../../../lib/iw-components";
+@import "../../../lib/iw-utilities";
+
+*             { box-sizing: border-box; }
+
+body          { font: normal 1rem/1.5 "Arial", sans-serif; }
+
+#main-header  { background: #5b7bb4; }
+
+h1            { font-size: 2.3rem; }

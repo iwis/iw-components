@@ -1,0 +1,48 @@
+/* Code source: https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285580
+ * Changes:
+ *  - changed order of CSS properties
+ *  - the code was simplified by:
+ *     - using linear-gradient() to obtain background overlay
+ *     - using the iw-flex-center() mixin
+ */
+
+@import "../../../../lib/variables_functions";
+
+:root                         { --primary-color:   rgba( 13, 110, 139, 0.75);
+                                --secondary-color: rgba(229, 148,   0, 0.9 );
+                                --overlay-color:   rgba( 24,  39,  51, 0.85); }
+
+*                             { box-sizing: border-box;
+                                margin: 0;
+                                padding: 0; }
+
+body                          { font-family: "Roboto", sans-serif;
+                                line-height: 1.4; }
+
+.container                    { margin: auto;
+                                padding: 0 3rem;
+                                max-width: 960px;
+                                overflow: hidden; }
+
+#showcase                     { // image with the 75% opaque primary color overlay (makes the text more readable)
+                                background: linear-gradient(var(--primary-color), var(--primary-color)),
+                                            url("../img/showcase.jpg") no-repeat center center/cover;
+                                height: 100vh;
+                                color: white; }
+
+#showcase .showcase-container { @include iw-flex-center();
+                                height: 100%;
+                                text-align: center; }
+
+#showcase h1                  { font-size: 4rem;   }
+#showcase p                   { font-size: 1.3rem; }
+
+.btn                          { display: inline-block;
+                                transition: opacity 1s ease-in-out;
+                                margin-top: 1rem;
+                                border: none;
+                                background: var(--primary-color);
+                                padding: 0.75rem 1.5rem;
+                                color: white;
+                                text-decoration: none; }
+.btn:hover                    { opacity: 0.7; }

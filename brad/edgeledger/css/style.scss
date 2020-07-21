@@ -1,0 +1,83 @@
+// Single-page website. The page is responsive. The page isn't mobile first.
+//
+// Source: https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285432
+// changes: more DRY code thanks to using a reimplementation of Bootstrap utility, btn and form classes, iw-flex-center() mixin
+//          used some SCSS
+//          added form validation
+//          more clean setting of gaps in flex: https://stackoverflow.com/a/20653092/4592248
+//          other changes to make code more logical and more DRY
+
+$primary: #93cb52; // change primary color
+
+// use a reimplementation of Bootstrap utility, form and btn classes
+@import "../../../lib/iw-components";
+@import "../../../lib/iw-utilities";
+
+/* Main styling */
+*               { box-sizing: border-box;
+                  margin: 0;                // reset
+                  padding: 0; }
+body            { font-family: "Roboto", sans-serif;
+                  line-height: 1.4; }
+p               { margin: 0.75rem 0; }
+a               { text-decoration: none; }
+
+/* Utility classes */
+
+// large and medium heading (Bootstrap 'display-n' classes are too large here)
+.l-heading      { margin-bottom: 0.75rem; font-size: 4rem; line-height: 1.1; }
+.m-heading      { margin-bottom: 0.75rem; font-size: 2rem; line-height: 1.1; }
+
+/* Navbar */
+#navbar                         { @extend .sticky-top;        // always visible at the top of the page
+                                  @include iw-flex-scatter(500px);
+                                  @include iw-flex-gap(1rem, 1rem);
+                                  background: $gray-800;
+                                  color: white; }
+#navbar ul                      { display: flex;
+                                  align-items: center;
+                                  list-style: none; }
+#navbar ul li a                 { margin: 0 0.25rem;
+                                  padding: 0.75rem;
+                                  color: white; }
+#navbar ul li a:hover           { border-radius: $border-radius-lg;
+                                  background: $primary; }
+
+/* Showcase */
+#showcase                       { // image darkened using 40% opaque black overlay (makes the text more readable)
+                                  background: linear-gradient(rgba(black, .4), rgba(black, .4)),
+                                              url("../img/showcase.jpg") no-repeat center center/cover;
+                                  height: 100vh;              // cover the whole viewport height
+                                  color: white; }
+#showcase .showcase-content     { @include iw-flex-center();  // center children of .showcase-content in the .showcase-content
+                                  margin-top: -2rem;          // #navbar is at least 2rem high
+                                  padding: 0 2rem;
+                                  height: 100%;               // cover the whole #showcase
+                                  text-align: center; }       // also center their text
+
+/* Section: What we do */
+#what .items                    { @include iw-flex-equal(768px);
+                                  @include iw-flex-gap(2rem, 2rem); }
+#what .items .item              { text-align: center; }
+#what .items .item i            { margin-bottom: 1rem;
+                                  @include iw-circle($primary);
+                                  padding: 1rem; }
+
+/* Section: Who we are */
+#who                            { @include iw-flex-equal(0); }
+#who .who-img                   { background: url("../img/people.jpg") no-repeat center center/cover; }
+#who ul                         { margin: 0.5em 0; }
+#who ul li                      { border-bottom: $gray-700 dotted 1px;
+                                  padding: 0.5em 0; }
+
+/* Section: Clients */
+#clients .items                 { display: flex; }
+#clients .items img             { display: block;
+                                  margin: auto;
+                                  width: 60%; }
+
+/* Section: Contact */
+#contact                        { @include iw-flex-equal(500px); }
+#contact .map #map              { border: none;
+                                  width: 100%;
+                                  height: 100%; }

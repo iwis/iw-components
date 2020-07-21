@@ -1,0 +1,161 @@
+/* Code source and description: Section 12: "NewsGrid Website" in the "Modern HTML & CSS From The Beginning (Including Sass)" course by Brad Traversy
+ *                              https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285632
+ *
+ * Changes:
+ *  - simpler or shorter code thanks to:
+ *     - using standard colors defined with Sass
+ *     - using iw-utilities:  .sticky-top, .container-xl, .py-4, .bg-..., .text-white
+ *     - using iw-components: .iw-btn
+ *     - using mixins: iw-flex-center(), iw-flex-scatter(), iw-grid-cols(...), and iw-flex-gap() hack
+ *     - using linear-gradient for #showcase background overlay
+ *     - using flex instead of grid for "#main-nav .container-xl" and "#showcase .showcase-container", as suggested in the course
+ *     - changed formatting
+ *     - adding comments
+ *  - properties ordered similarly to https://rhodesmill.org/brandon/2011/concentric-css/
+ *  - other smaller changes
+ *
+ * Todo:
+ *  - use additional components: badge (.category), .card?
+ *  - mobile first?
+ *
+ * Notes:
+ *  - Brad uses rem instead of em
+ */
+
+// change the primary and secondary colors
+$primary:   #c72727;  // ~ hsl( 0,  67%, 47%)
+$secondary: #f99500;  // ~ hsl(36, 100%, 49%)
+
+// use a reimplementation of Bootstrap utility classes, and btn class; use iw-flex-center() mixin
+@import "../../../lib/iw-components";
+@import "../../../lib/iw-utilities";
+
+*             { box-sizing: border-box;
+                margin: 0;
+                padding: 0; }
+
+body          { background: $gray-200;
+                font-family: "Lato", sans-serif;
+                line-height: 1.5; }
+
+a             { color: $gray-800;
+                text-decoration: none; }
+
+ul            { list-style: none; }
+
+p             { margin: .5rem 0; }
+
+img           { width: 100%; }                          // restrict images width
+
+h1, h2, h3,
+h4, h5, h6    { margin-bottom: .55rem;
+                font-family: "Staatliches", cursive;    // used on the cover of an exhibition catalog of Staatliches Bauhaus art school, 1923
+                line-height: 1.3; }                     // smaller than for the whole <body>
+
+/* ------------------ Utilities --------------------------------------------------------- */
+
+.l-heading          { font-size: 3rem; }
+
+.list li            { border-bottom: $gray-700 dotted 1px;
+                      padding: .5rem 0;
+                      width: 90%; }
+.list li a:hover    { color: $primary; }
+
+/* ------------------ Components --------------------------------------------------------- */
+
+// badge - marks a category of articles
+.category           { display: inline-block;
+                      margin-bottom: 0.5rem;
+                      border-radius: 15px;
+                      padding: 0.4rem 0.6rem;
+                      color: white;
+                      font-size: 0.55rem;
+                      text-transform: uppercase; }
+.category-sports    { background: #f99500; }  // ~ hsl( 36, 100%, 49%)
+.category-ent       { background: #a66bbe; }  // ~ hsl(283,  39%, 58%)
+.category-tech      { background: #009cff; }  // ~ hsl(203, 100%, 50%)
+
+// customize iw-btn: make it greater and not rounded
+// Brad's buttons didn't have box-shadow on focus - it looks nice in Chrome, but Firefox displays it differently
+.iw-btn             { border-radius: 0;
+                      padding: 0.45rem 1.4rem; }
+.iw-btn--secondary { &, &:hover, &:focus { color: white; } }  // it is ok on #f99500 background, and looks more consistent with .iw-btn--primary
+
+// card
+.card               { background: white;
+                      padding: 1rem; }
+
+// inner page grid container
+.page-container                 { @include iw-grid-cols(600px, 5fr 2fr, 1.5rem);
+                                  margin: 2rem 0; }
+
+@media (min-width: 600px) {
+  .page-container > *:first-child { grid-row: span 3; }  // the main article is 3 rows high
+}
+
+/* ------------------- Pages ------------------------------------------------------------- */
+
+/* Navigation */
+#main-nav                     { @extend .sticky-top;                  // always visible at the top of the page
+                                background: white; }
+
+#main-nav .container-xl       { // it is the Bootstrap .container-xl
+                                @include iw-flex-scatter(768px);
+                                padding: 15px; }                      // also top and bottom paddings
+
+#main-nav .logo               { width: 180px; }                       // smaller, not 100%
+
+#main-nav .social i           { margin-right: .5rem;
+                                color: $gray-600; }
+
+#main-nav ul                  { display: flex; }
+#main-nav ul li a             { padding: 0.75rem;
+                                font-weight: bold; }
+#main-nav ul li a.current     { background: $primary;  color: white; }
+#main-nav ul li a:hover       { background: $gray-200; color: $gray-800; }
+
+/* Showcase */
+#showcase                     { // image darkened using 60% opaque gray overlay (makes the text more readable)
+                                background: linear-gradient(rgba($gray-800, .6), rgba($gray-800, .6)),
+                                            url("../img/featured.jpg") no-repeat center center/cover;
+                                padding: 2rem;
+                                color: white; }
+
+#showcase .showcase-container { @include iw-flex-center();
+                                width: 50%;                           // we will put content only in the left part
+                                height: 50vh; }
+
+/* Home articles */
+#home-articles .articles-container                  { @include iw-grid-cols(600px, 1fr 1fr,     1rem);
+                                                      @include iw-grid-cols(768px, 1fr 1fr 1fr, 1rem); }
+
+// the first and the last article ...
+#home-articles .articles-container > *:first-child,
+#home-articles .articles-container > *:last-child   { @media (min-width: 768px) { grid-column: span 2; }  // ... occupy 2 columns on larger screens, and ...
+                                                      @include iw-grid-cols(768px, 1fr 1fr, 1rem);        // ... divide into 2 columns on larger screens
+                                                      align-items: center; }                              // center vertically
+
+/* Article */
+#article .meta                                      { @include iw-flex-scatter(0);
+                                                      @include iw-flex-gap(0.5rem, 0.5rem);               // also resets the margin set in .category
+                                                      background: $gray-200; }
+
+/* Footer */
+#main-footer .footer-container                      { @include iw-grid-cols(600px, 1fr 1fr 1fr 1fr, 1.5rem); }
+
+#main-footer img                                    { width: 150px; }                 // smaller, not 100%
+
+#main-footer .footer-container input[type="email"]  { margin-bottom: 0.5rem;
+                                                      padding: 0.5rem;
+                                                      width: 90%; }
+#main-footer .footer-container button               { width: 90%; }
+
+#main-footer .list li a                             { color: inherit; }
+#main-footer .list li a:hover                       { color: $primary; }
+
+// copyright occupies the whole row
+#main-footer .footer-container > *:last-child       { grid-column: 1 / -1;
+                                                      background: $gray-700;
+                                                      padding: .5rem;
+                                                      font-size: 0.75rem;
+                                                      text-align: center; }
