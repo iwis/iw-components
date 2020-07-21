@@ -1,0 +1,20 @@
+.iw-table                                         { margin: 1em 0;      // external top & bottom margins of component
+                                                    border-collapse: collapse; }
+
+.iw-table--bordered        th,
+.iw-table--bordered        td                     { border: 1px solid $border-color;
+                                                    padding: 0.35em; }
+
+.iw-table--head-light      thead th               { background: $gray-100; }
+.iw-table--head-dark       thead th               { background: $gray-800;
+                                                    color: white; }
+.iw-table                  thead th a             { color: inherit; }  // stylelint-disable-line selector-max-compound-selectors
+
+.iw-table                  thead th.is-sorted-desc::after                     { font-family: "Font Awesome 5 Free"; content: " \f0d8"; }  // caret-up      // { font-size: 75%; content: "▲"; } // U+25B2
+.iw-table                  thead th.is-sorted-asc::after                      { font-family: "Font Awesome 5 Free"; content: " \f0d7"; }  // caret-down    // { font-size: 75%; content: "▼"; } // U+25BC
+.iw-table--diff-sort-icons thead th[data-type="string"].is-sorted-desc::after { font-family: "Font Awesome 5 Free"; content: " \f882"; }  // sort-alpha-up-alt
+.iw-table--diff-sort-icons thead th[data-type="string"].is-sorted-asc::after  { font-family: "Font Awesome 5 Free"; content: " \f15d"; }  // sort-alpha-down
+.iw-table--diff-sort-icons thead th[data-type="number"].is-sorted-desc::after { font-family: "Font Awesome 5 Free"; content: " \f887"; }  // sort-numeric-up-alt
+.iw-table--diff-sort-icons thead th[data-type="number"].is-sorted-asc::after  { font-family: "Font Awesome 5 Free"; content: " \f162"; }  // sort-numeric-down
+
+.iw-table--draggable-cols  thead th               { cursor: grab; }

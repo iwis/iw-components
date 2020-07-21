@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+  
+  <style>
+    #container { position: relative;
+                 left: 150px; top: 150px;
+                 margin: 10px;
+                 border: 1px solid gray;
+                 padding: 10px;
+                 width: 400px; height: 400px; }
+  </style>
+</head>
+<body>
+
+  <div id="container">
+    <p>A tooltip:</p>
+    <p>
+      <button data-tippy-content="This tooltip is created from <em>data-tippy-content</em> attribute. It is displayed at the top of an element, or at the bottom if there is no space at the top.">
+        Button with a tooltip
+      </button>
+    </p>
+  </div>
+
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <script src="lib/iw-tooltip/iw-tooltip.js"></script>
+</body>
+</html>

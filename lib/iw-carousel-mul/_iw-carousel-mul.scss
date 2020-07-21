@@ -1,0 +1,37 @@
+.iw-carousel-mul                        { box-sizing: content-box;  // component width without padding is set in HTML
+                                          position: relative;
+                                          margin: 1em 0;            // external top & bottom margins of component
+                                          border: 1px solid $gray-400;
+                                          border-radius: 15px;
+                                          background: $gray-100;
+                                          padding: 10px 40px; }
+
+.iw-carousel-mul__inner                 { overflow: hidden; }
+.iw-carousel-mul__inner ul              { transition: transform 250ms;
+                                          margin:  0;
+                                          padding: 0;
+                                          width: 9999px;
+                                          list-style: none;
+                                          // remove white-space between inline-block'ed li
+                                          // http://davidwalsh.name/remove-whitespace-inline-block
+                                          font-size: 0; }
+.iw-carousel-mul__inner ul li           { display: inline-block; }  // removes extra space between list items
+.iw-carousel-mul__inner ul img          { display: block;        }  // removes extra space near images
+
+.iw-carousel-mul__control               { position: absolute;
+                                          top: 40%;
+                                          display: block;
+                                          opacity: 31%;
+                                          outline: none;
+                                          border: none;
+                                          background: transparent;
+                                          padding: 0;
+                                          color: black;
+                                          font-size: 24px;
+                                          cursor: pointer;
+  &:hover, &:focus                      { opacity: 50%;
+                                          color: black; } }
+.iw-carousel-mul__control--prev         { left:  17px; }
+.iw-carousel-mul__control--next         { right: 17px; }
+.iw-carousel-mul__control--prev::before { font-family: "Font Awesome 5 Free"; content: "\f104"; }  // angle-left
+.iw-carousel-mul__control--next::before { font-family: "Font Awesome 5 Free"; content: "\f105"; }  // angle-right

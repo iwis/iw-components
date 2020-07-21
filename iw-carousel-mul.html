@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script type="module" src="lib/iw-carousel-mul/iw-carousel-mul.js"></script>
+
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+  
+  <style>
+    /* Set the size of a single image and the total width of a carousel (to a multiply of the width of an image) */
+    .iw-carousel-mul1                                 { width:  520px; }
+    .iw-carousel-mul1 .iw-carousel-mul__inner ul img  { width:  130px;
+                                                        height: 130px; }
+
+    .iw-carousel-mul2                                 { width:  300px; }
+    .iw-carousel-mul2 .iw-carousel-mul__inner ul img  { width:  100px;
+                                                        height: 100px; }
+  </style>
+</head>
+
+<body>
+
+  <p>Carousel with 4 visible images:</p>
+
+  <!-- iw-carousel-mul component -->
+  <div class="iw-carousel-mul iw-carousel-mul1">
+
+    <button class="iw-carousel-mul__control iw-carousel-mul__control--prev" aria-label="Previous images"></button>
+
+    <div class="iw-carousel-mul__inner">
+      <ul>
+        <li><img src="https://en.js.cx/carousel/1.png" alt="Smiling emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/2.png" alt="Dynamite emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/3.png" alt="Smiling emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/4.png" alt="Smiling emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/5.png" alt="Love emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/6.png" alt="Bomb emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/7.png" alt="Ninja emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/8.png" alt="Smoking emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/9.png" alt="Surprised emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/10.png" alt="Laughing emoticon"></li>
+      </ul>
+    </div>
+
+    <button class="iw-carousel-mul__control iw-carousel-mul__control--next" aria-label="Next images"></button>
+
+  </div>
+  <!-- iw-carousel-mul component -->
+
+
+  <p>Carousel with 3 visible images of reduced size:</p>
+
+  <!-- iw-carousel-mul component -->
+  <div class="iw-carousel-mul iw-carousel-mul2">
+
+    <button class="iw-carousel-mul__control iw-carousel-mul__control--prev" aria-label="Previous images"></button>
+
+    <div class="iw-carousel-mul__inner">
+      <ul>
+        <li><img src="https://en.js.cx/carousel/1.png" alt="Smiling emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/2.png" alt="Dynamite emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/3.png" alt="Smiling emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/4.png" alt="Smiling emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/5.png" alt="Love emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/6.png" alt="Bomb emoticon"></li>
+        <li><img src="https://en.js.cx/carousel/7.png" alt="Ninja emoticon"></li>
+      </ul>
+    </div>
+
+    <button class="iw-carousel-mul__control iw-carousel-mul__control--next" aria-label="Next images"></button>
+
+  </div>
+  <!-- iw-carousel-mul component -->
+
+</body>
+</html>

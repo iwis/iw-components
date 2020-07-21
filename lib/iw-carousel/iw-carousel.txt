@@ -1,0 +1,51 @@
+Structure of CSS classes (it is very similar to https://getbootstrap.com/docs/4.4/components/carousel/):
+  iw-carousel
+    iw-carousel__inner
+      iw-carousel__item [active]
+  iw-carousel__control iw-carousel__control--{prev|next}
+  iw-carousel__indicators
+    [active]
+
+based on: https://www.w3schools.com/howto/howto_js_slideshow.asp
+ - changed to BEM using classes names from Bootstrap carousel
+ - also other changes
+
+todo:
+ - other carousel options  - see carousel on Bootstrap and w3schools
+ - iw-carousel__indicators are not visible after printing on a printer, because printers don't print background. Add border to fix it.
+
+Example usage
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-carousel/iw-carousel.js"></script>
+
+  <link  href="lib/iw-carousel/iw-carousel.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="iw-carousel">
+    <div class="iw-carousel__inner">
+      <figure class="iw-carousel__item active">  <img src="https://source.unsplash.com/PIso4WnCne8/900x600" alt="mountains" style="width:100%;">  <figcaption>Yosemite Valley 1</figcaption>  </figure>
+      <figure class="iw-carousel__item">         <img src="https://source.unsplash.com/i6-447LjtqY/900x600" alt="mountains" style="width:100%;">  <figcaption>Yosemite Valley 2</figcaption>  </figure>
+      <figure class="iw-carousel__item">         <img src="https://source.unsplash.com/tGTVxeOr_Rs/900x600" alt="tree"      style="width:100%;">  <figcaption>Nicaragua</figcaption>  </figure>
+      <figure class="iw-carousel__item">         <img src="https://source.unsplash.com/83h69HUgWKg/900x600" alt="boats"     style="width:100%;">  <figcaption>Some boats</figcaption>  </figure>
+    </div>
+    
+    <button class="iw-carousel__control iw-carousel__control--prev" aria-label="Previous image">&#10094;</button>
+    <ol class="iw-carousel__indicators">
+      <li data-slide-to="0" class="active"></li>
+      <li data-slide-to="1"></li>
+      <li data-slide-to="2"></li>
+      <li data-slide-to="3"></li>
+    </ol>
+    <button class="iw-carousel__control iw-carousel__control--next" aria-label="Next image">&#10095;</button>
+  </div>
+
+</body>
+</html>

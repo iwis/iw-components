@@ -1,0 +1,72 @@
+.iw-navbar                      { display: flex;
+                                  flex-wrap: wrap;
+                                  align-items: center; }
+.iw-navbar        a             { padding: 0.8em;
+                                  text-decoration: none; }
+.iw-navbar        a:hover       { text-decoration: none; }
+
+.iw-navbar--dark                { background: $gray-800; }
+.iw-navbar--dark  *             { color: rgba(white, 0.8); }
+.iw-navbar--dark  *:hover       { color: rgba(white, 1.0); }
+
+.iw-navbar--light               { background: $gray-100; }
+.iw-navbar--light *             { color: rgba(black, 0.5); }
+.iw-navbar--light *:hover       { color: rgba(black, 0.7); }
+
+.iw-navbar__brand               { font-size: 125%; }
+
+.iw-navbar__nav                 { list-style: none; }
+
+@media (min-width: 576px) { /* landscape phones and larger screens */
+  .iw-navbar__toggler           { display: none; }
+
+  .iw-navbar__nav               { display: flex;
+                                  margin-left: auto;
+                                  margin-right: 0.5em; }
+}
+
+@media (max-width: 575px) { /* phones */
+  .iw-navbar__toggler           { margin-left: auto;
+                                  margin-right: 0.75em;
+                                  outline: none;
+                                  cursor: pointer; }
+
+  /* -------- Bootstrap style hamburger icon; source: copied from Bootstrap 4.4.1 from bootstrap.css file -------- */
+
+  /* names of classes are changed */
+  .iw-navbar__toggler           { border: 1px solid transparent;  // remove default button style
+                                  border-radius: 0.25rem;         // button border radius
+                                  background-color: transparent;  // remove default button style
+                                  padding: 0.25rem 0.75rem;
+                                  font-size: 1.25rem;
+                                  line-height: 1;
+    .iw-navbar--light &         { border-color: rgba(black, 0.1); color: rgba(black, 0.5); }
+    .iw-navbar--dark  &         { border-color: rgba(white, 0.1); color: rgba(white, 0.5); }
+  }
+
+  .iw-navbar__toggler-icon      { display: inline-block;
+                                  background: no-repeat center center;
+                                  background-size: 100% 100%;
+                                  width:  1.5em;
+                                  height: 1.5em;
+                                  content: "";
+                                  vertical-align: middle;
+    .iw-navbar--light &         { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(  0,   0,   0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+    .iw-navbar--dark  &         { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+  }
+
+  /* second alternative: Font Awesome icon --------------------- */
+  // todo: polish it - maybe remove border, colors, hover?
+  // .iw-navbar__toggler-icon::before      { font-size: 1.8rem; font-family: "Font Awesome 5 Free"; content: "\f0c9"; }  // fa-bars
+
+  /* ----------------------------------------------------------------------------------------------------------------- */
+
+  .iw-navbar__nav               { display: none;           // toggler switches it to flex
+                                  flex-direction: column;
+                                  padding: 0;
+                                  padding-left: 0.4em;
+                                  width: 100%; }           // move it to a separate row
+  .iw-navbar__nav > *           { padding-bottom: 0.5em; }
+
+  .iw-navbar__nav--visible      { display: flex; }
+}

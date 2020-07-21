@@ -1,0 +1,41 @@
+iw-table                      - table that can be sorted by calling JS method (sort column and direction will be marked by arrow)
+  iw-table--bordered          - table and table cells have borders
+  iw-table--head-{light|dark} - table header has light/dark gray background
+  iw-table--sortable          - table can be sorted by clicking on column header
+    iw-table--diff-sort-icons - sort icons are different for numeric columns and for other columns
+  iw-table--draggable-col     - table columns can be reordered by Drag & Drop or by a keyboard (using space, arrows and escape keys)
+
+todo:
+ * iw-table--draggable-col operated by a keyboard:
+    - currently possible only if iw-table--sortable is enabled
+    - "content.tabIndex = (col === 0) ? 0 : -1" should be uncommented in iw-browser.ts
+ * https://medium.com/salesforce-ux/4-major-patterns-for-accessible-drag-and-drop-1d43f64ebf09 > "Pattern #4" - resizing table columns
+    using <input type="range">
+
+based on: https://javascript.info/event-delegation > Sortable table
+
+example usage
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-table/iw-table.js"></script>
+  
+  <link  href="lib/iw-table/iw-table.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="content1"></div>
+
+  <script type="module">
+    import { objectTableToHTMLTable, sortHTMLTable, TEST_OBJECTS_FOR_TABLE_1 } from './lib/iw-browser.js'
+
+    const table1 = objectTableToHTMLTable(TEST_OBJECTS_FOR_TABLE_1, 'iw-table iw-table--bordered iw-table--sortable iw-table--draggable-cols iw-table--head-light')
+    document.querySelector('#content1').append(table1)
+    sortHTMLTable(table1, 0, true)  //initially sort by 1st column (ascending); comment it to preserve original sorting
+  </script>  
+</body>
+</html>

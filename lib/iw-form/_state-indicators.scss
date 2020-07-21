@@ -1,0 +1,35 @@
+/**
+ * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
+ * are styled only if the submit button has been clicked.
+ *
+ * The mixin is included in a block of a form control selector in _iw-form.scss and _iw-form-custom-toggles.scss files.
+ * The form control selector should start exactly with the .iw-form[--some-modifier] CSS class, because this mixin
+ * needs to concatenate the .was-validated class to it.
+ */
+@mixin state-indicators() {
+  // remove standard indicators of ...
+  &:focus             { outline: none; }     // focused field in Chrome:   :focus           { outline:    -webkit-focus-ring-color auto 1px; }
+  &:invalid           { outline: none;       // invalid field in Edge:     ???              { outline:    red solid 3px; }
+                        box-shadow: none; }  // invalid field in Firefox:  :-moz-ui-invalid { box-shadow: red 0px 0px 1.5px 1px; }
+
+  // set custom indicators of field state (simplified code from Bootstrap; "lighten($primary, 25%)" was replaced by "scale-color($primary, $lightness: 25%)" -
+  //  - see https://sass-lang.com/documentation/modules/color#lighten)
+  &:focus             { border-color: scale-color($primary, $lightness: 25%);
+                        box-shadow:   0 0 0 0.2rem rgba($primary, .25); }  // or change to $gray-400? (maybe as a component option?)
+
+  // a submit button has been clicked
+  // the .iw-form--custom-toggles .iw-form__check input { @at-root .was-validated#{&} { ... } }
+  // is identical to this selector: .was-validated.iw-form--custom-toggles .iw-form__check input { ... }
+  // see https://stackoverflow.com/questions/41641410/sass-back-nesting-issue
+  @at-root .was-validated#{&} {
+    &:valid           { border-color: iw-theme-color("success"); }
+    &:invalid         { border-color: iw-theme-color("danger");  }
+
+    &:valid:focus     { box-shadow: 0 0 0 0.2rem rgba(iw-theme-color("success"), .25); }
+    &:invalid:focus   { box-shadow: 0 0 0 0.2rem rgba(iw-theme-color("danger"),  .25); }
+
+    // applies only to checkbox and radio <input>s
+    &:valid:checked   { background: rgba(iw-theme-color("success"), .5); }
+    &:invalid:checked { background: rgba(iw-theme-color("danger"),  .5); }
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-navbar/iw-navbar.js"></script>
+
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- iw-page component -->
+  <div id="iw-page" class="iw-page--layout-3column iw-page--style-facebook">
+
+    <header>
+
+      <!-- iw-navbar component -->
+      <nav class="iw-navbar iw-navbar--dark" aria-label="Primary">
+        <a      class="iw-navbar__brand" href="/">Home</a>
+        <button class="iw-navbar__toggler" aria-label="Toggle navigation" aria-expanded="false"><span class="iw-navbar__toggler-icon"></span></button>
+        <ul     class="iw-navbar__nav">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <!-- iw-navbar component -->
+
+    </header>
+
+    <nav id="iw-page__second-nav" aria-label="Secondary">
+
+      <ul>
+        <li><a href="">Navs 1</a></li>
+        <li><a href="">Navs 2</a></li>
+        <li><a href="">Navs 3</a></li>
+      </ul>
+
+    </nav>
+
+    <main>
+
+      <div class="iw-page__section">  <h2>Main content - section1</h2>  <p>Content</p>  </div>
+      <div class="iw-page__section">  <h2>Main content - section2</h2>  <p>Content</p>  </div>
+
+    </main>
+    
+    <aside>
+
+      <div class="iw-page__section">  <p>Content related to this page - section 1</p>  </div>
+
+    </aside>
+    
+    <footer>
+
+      <p>The footer</p>
+
+    </footer>
+
+  </div>
+  <!-- iw-page component -->
+
+</body>
+</html>

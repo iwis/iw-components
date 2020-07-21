@@ -1,0 +1,28 @@
+.iw-tree                                          { margin: 1em 0;         // external top & bottom margins of component
+                                                    line-height: 1.2; }    // can be changed to increase distance between nodes
+.iw-tree__button                                  { display: inline-block;
+                                                    margin-right: 0.1em;
+                                                    width: 1em;
+                                                    color: #878a8c;
+                                                    text-align: center;
+                                                    vertical-align: middle;
+                                                    cursor: pointer; }
+.iw-tree__node--inner > .iw-tree__button::before  { font-family: "Font Awesome 5 Free"; font-size: 125%; content: "\f0da"; }  // caret-right
+.iw-tree__node--open  > .iw-tree__button::before  { font-family: "Font Awesome 5 Free"; font-size: 125%; content: "\f0d7"; }  // caret-down
+
+.iw-tree__node--inner > ul                        { display: none;
+                                                    padding-left: 1.3em;
+                                                    list-style: none; }
+.iw-tree__node--open  > ul                        { display: block; }
+
+.iw-tree__node--leaf                              { padding-left: 1.1em; }
+
+.iw-tree__node--inner,
+.iw-tree__node--leaf                              { margin: 0.2em 0;
+                                                    outline: none; }
+
+.iw-tree__title                                   { border-radius: $border-radius;
+                                                    padding: 0.1em 0.3em; }
+:focus > .iw-tree__title                          { background-color: $gray-200; }
+
+.iw-tree > ul                                     { padding-left: 0; }         // remove default <ul> left padding

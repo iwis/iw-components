@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+  <script type="module" src="lib/iw-form/iw-form.js"></script>
+
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+  
+  <style>
+    body { background-color: #344a72; color: white; }
+  </style>
+</head>
+
+<body>
+  <!-- iw-signup component -->
+  <div class="iw-signup">
+
+    <!-- iw-form component -->
+    <form class="iw-form">
+      <h1>Sign Up</h1>
+      <p>It's free and only takes a minute</p>
+
+      <label for="first-name">First Name</label>       <input type="text"     name="firstName" id="first-name" class="iw-form__control"                       >
+      <label for="last-name">Last Name</label>         <input type="text"     name="lastName"  id="last-name"  class="iw-form__control"                       >
+      <label for="email">Email</label>                 <input type="email"    name="email"     id="email"      class="iw-form__control" required              >
+      <label for="password">Password</label>           <input type="password" name="password"  id="password"   class="iw-form__control" required minlength="8">
+      <label for="password2">Confirm Password</label>  <input type="password" name="password2" id="password2"  class="iw-form__control" required minlength="8">
+
+      <button class="iw-btn iw-btn--primary iw-btn--block" type="submit">Sign Up</button>
+
+      <p class="iw-signup__bottom-text">By clicking the Sign Up button, you agree to our <a href="#">Terms & Conditions</a>
+        and <a href="#">Privacy Policy</a>.</p>
+    </form>
+    <!-- iw-form component -->
+
+    <footer>
+      <p>Already have an account? <a href="#">Login Here</a></p>
+    </footer>
+
+  </div>
+  <!-- iw-signup component -->
+
+</body>
+</html>

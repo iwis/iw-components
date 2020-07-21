@@ -1,0 +1,231 @@
+/**
+ * ===================================== Bootstrap Utilities and Typography =====================================
+ * Source code of many Bootstrap utilities. The code was taken among others from:
+ *   utilities/_sizing.scss     - code was simplified
+ *   utilities/_text.scss
+ *   utilities/_background.scss - code was simplified
+ *   utilities/_display.scss
+ *   utilities/_spacing.scss    - code was simplified
+ *   utilities/_float.scss      - code copied without changes
+ *   utilities/_clearfix.scss   - code was simplified
+ *   utilities/_flex.scss       - code copied without changes
+ *   utilities/_position.scss
+ *   _type.scss
+ *   dist/css/bootstrap.css - if SCSS code was difficult to understand
+ *
+ * This file use !important proactively to ensure that the defined styles always win. See: https://cssguidelin.es/#important.
+ *
+ * Usage:
+ *   Import this file or/and Bootstrap SCSS file in your style.scss file (if both SCSS files are imported then the last
+ *   linked file will have precedence, but anyway they should declare the following CSS classes in the same way).
+ *   Before importing this file you can change for example $primary color variable.
+ *   ex: $primary: #93cb52; //change primary color
+ *       @import '../../../lib/iw-utilities';
+ *   Some of the utilities, for example .container-xl, require * { box-sizing: border-box; }
+ */
+
+@import "variables_functions";
+
+// Typography
+.display-1    { font-size: 6rem;    line-height: 1.2; font-weight: 300; }  // makes element look even bigger than heading (and not bolded)
+.display-2    { font-size: 5.5rem;  line-height: 1.2; font-weight: 300; }
+.display-3    { font-size: 4.5rem;  line-height: 1.2; font-weight: 300; }
+.display-4    { font-size: 3.5rem;  line-height: 1.2; font-weight: 300; }
+.lead         { font-size: 1.25rem;                   font-weight: 400; }  // increase font size of paragraph (in Bootstrap 'font-weight: 400;')
+.small        { font-size: 80%;                       font-weight: 400; }  // decrease font size to 80% of parent's size
+
+// remove default list-style and left margin on <ul> and <ol> lists
+.list-unstyled    { padding-left: 0; list-style: none; }  // keeps list items block level
+.list-inline      { padding-left: 0; list-style: none; }  // turns list items into inline-block
+.list-inline-item { display: inline-block;
+                    &:not(:last-child) { margin-right: .5rem; }
+                  }
+
+// Contextual colors and background colors
+@each $color, $value in $theme-colors {
+  .text-#{$color}                        { color:            $value              !important; }
+
+  // iwis: I cannot set a foreground color here, because it won't apply to inner <a> tags if I used "a { color: ...; }" previously
+  //       I don't use ".bg-... a {}", because it has too large specificity and it will make a problem in iw-btn component
+  .bg-#{$color}                          { background-color: $value              !important; }
+
+  a.text-#{$color}    { &:hover, &:focus { color:            darken($value, 15%) !important; } }
+  a.bg-#{$color},
+  button.bg-#{$color} { &:hover, &:focus { background-color: darken($value, 10%) !important; } }
+}
+
+.text-white     { color:            #fff           !important; }
+.text-body      { color:            $body-color      !important; }
+.text-muted     { color:            $gray-600        !important; }
+.text-white-50  { color:            rgba(#fff, .5) !important; }
+.text-black-50  { color:            rgba(#000, .5) !important; }
+.bg-white       { background-color: #fff           !important; }
+.bg-transparent { background-color: transparent      !important; }
+
+// Width and height
+@each $size, $length in (25: 25%, 50: 50%, 75: 75%, 100: 100%, auto: auto) {
+  .w-#{$size} { width:  $length !important; }
+  .h-#{$size} { height: $length !important; }
+}
+
+.mw-100     { max-width:  100%  !important; }
+.mh-100     { max-height: 100%  !important; }
+// viewport additional helpers
+.vw-100     { width:      100vw !important; }
+.vh-100     { height:     100vh !important; }
+.min-vw-100 { min-width:  100vw !important; }
+.min-vh-100 { min-height: 100vh !important; }
+
+// Toggling 'display' in print (see also "Common 'display' values")
+@media print {
+  @each $value in $displays {
+    .d-print-#{$value} { display: $value !important; }
+  }
+}
+
+// Containers. Source: Bootstrap > dist/css/bootstrap.css (code was simplified)
+.container-fluid, .container, .container-sm, .container-md, .container-lg, .container-xl {
+  margin-left:  auto;
+  margin-right: auto;
+  padding-left:  15px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+@media (min-width:  576px) { .container, .container-sm                                              { max-width:  540px; } }
+@media (min-width:  768px) { .container, .container-sm, .container-md                               { max-width:  720px; } }  // stylelint-disable-line at-rule-empty-line-before
+@media (min-width:  992px) { .container, .container-sm, .container-md, .container-lg                { max-width:  960px; } }  // stylelint-disable-line at-rule-empty-line-before
+@media (min-width: 1200px) { .container, .container-sm, .container-md, .container-lg, .container-xl { max-width: 1140px; } }  // stylelint-disable-line at-rule-empty-line-before
+
+// Clears the floats of any child elements. Add this class to the
+// parent element wrapping the floating elements.
+// see also: https://www.w3schools.com/howto/howto_css_clearfix.asp
+// Instead of this you can try older hack: 'overflow: auto;'
+.clearfix::after { clear: both;
+                   display: block;
+                   content: ""; }
+
+.sticky-top {
+  @supports (position: sticky) {
+    position: sticky;
+    top: 0;
+    z-index: 1020;  // $zindex-sticky
+  }
+}
+
+// ----------------------------------------------------------------------------------------------------
+
+// Minimum breakpoint width. Null for the smallest breakpoint.
+//   breakpoint-min(xs) => null;  breakpoint-min(sm) => 576px
+@function breakpoint-min($name) {
+  $min: map-get($grid-breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name) {
+  $min: breakpoint-min($name);
+  @if $min { @media (min-width: $min) { @content; } }
+  @else    {                            @content;   }  // stylelint-disable-line block-opening-brace-space-after
+}
+
+// For the smallest breakpoint returns "", otherwise returns $name with a dash in front.
+//   breakpoint-infix(xs) => "";  breakpoint-infix(sm) => "-sm"
+@function breakpoint-infix($name) {
+  @return if(breakpoint-min($name) == null, "", "-#{$name}");
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint);
+
+    // Horizontal alignment of text [on given screen and larger]
+    .text#{$infix}-left               { text-align:      left           !important; }
+    .text#{$infix}-center             { text-align:      center         !important; }
+    .text#{$infix}-right              { text-align:      right          !important; }
+
+    // Common 'display' values (see also "Toggling 'display' in print")
+    @each $value in $displays {
+      .d#{$infix}-#{$value}           { display:         $value         !important; }
+    }
+
+    // Margins and paddings of different sizes
+    @each $size, $length in ("0": 0, "1":  0.25rem,  "2":  0.5rem,  "3":  1rem,  "4":  1.5rem,  "5":  3rem,
+                                    "n1": -0.25rem, "n2": -0.5rem, "n3": -1rem, "n4": -1.5rem, "n5": -3rem, // negative margins
+                             "auto": auto) {
+      .m#{$infix}-#{$size}            { margin:          $length        !important; }
+
+      .ml#{$infix}-#{$size}           { margin-left:     $length        !important; }
+      .mr#{$infix}-#{$size}           { margin-right:    $length        !important; }
+      .mt#{$infix}-#{$size}           { margin-top:      $length        !important; }
+      .mb#{$infix}-#{$size}           { margin-bottom:   $length        !important; }
+
+      .mx#{$infix}-#{$size}           { margin-left:     $length        !important;
+                                        margin-right:    $length        !important; }
+      .my#{$infix}-#{$size}           { margin-top:      $length        !important;
+                                        margin-bottom:   $length        !important; }
+    }
+
+    @each $size, $length in ("0": 0, "1": 0.25rem, "2": 0.5rem, "3": 1rem, "4": 1.5rem, "5": 3rem) {
+      .p#{$infix}-#{$size}            { padding:         $length        !important; }
+
+      .pl#{$infix}-#{$size}           { padding-left:    $length        !important; }
+      .pr#{$infix}-#{$size}           { padding-right:   $length        !important; }
+      .pt#{$infix}-#{$size}           { padding-top:     $length        !important; }
+      .pb#{$infix}-#{$size}           { padding-bottom:  $length        !important; }
+
+      .px#{$infix}-#{$size}           { padding-left:    $length        !important;
+                                        padding-right:   $length        !important; }
+      .py#{$infix}-#{$size}           { padding-top:     $length        !important;
+                                        padding-bottom:  $length        !important; }
+    }
+
+    // Float
+    .float#{$infix}-left              { float:           left           !important; }
+    .float#{$infix}-right             { float:           right          !important; }
+    .float#{$infix}-none              { float:           none           !important; }
+
+    // Flex variation. Custom styles for additional flex alignment options.
+    .flex#{$infix}-row                { flex-direction:  row            !important; }
+    .flex#{$infix}-row-reverse        { flex-direction:  row-reverse    !important; }
+    .flex#{$infix}-column             { flex-direction:  column         !important; }
+    .flex#{$infix}-column-reverse     { flex-direction:  column-reverse !important; }
+
+    .flex#{$infix}-nowrap             { flex-wrap:       nowrap         !important; }
+    .flex#{$infix}-wrap               { flex-wrap:       wrap           !important; }
+    .flex#{$infix}-wrap-reverse       { flex-wrap:       wrap-reverse   !important; }
+    .flex#{$infix}-fill               { flex:            1 1 auto       !important; }
+    .flex#{$infix}-grow-0             { flex-grow:       0              !important; }
+    .flex#{$infix}-grow-1             { flex-grow:       1              !important; }
+    .flex#{$infix}-shrink-0           { flex-shrink:     0              !important; }
+    .flex#{$infix}-shrink-1           { flex-shrink:     1              !important; }
+
+    .justify-content#{$infix}-start   { justify-content: flex-start     !important; }
+    .justify-content#{$infix}-end     { justify-content: flex-end       !important; }
+    .justify-content#{$infix}-center  { justify-content: center         !important; }
+    .justify-content#{$infix}-between { justify-content: space-between  !important; }
+    .justify-content#{$infix}-around  { justify-content: space-around   !important; }
+
+    .align-items#{$infix}-start       { align-items:     flex-start     !important; }
+    .align-items#{$infix}-end         { align-items:     flex-end       !important; }
+    .align-items#{$infix}-center      { align-items:     center         !important; }
+    .align-items#{$infix}-baseline    { align-items:     baseline       !important; }
+    .align-items#{$infix}-stretch     { align-items:     stretch        !important; }
+
+    .align-content#{$infix}-start     { align-content:   flex-start     !important; }
+    .align-content#{$infix}-end       { align-content:   flex-end       !important; }
+    .align-content#{$infix}-center    { align-content:   center         !important; }
+    .align-content#{$infix}-between   { align-content:   space-between  !important; }
+    .align-content#{$infix}-around    { align-content:   space-around   !important; }
+    .align-content#{$infix}-stretch   { align-content:   stretch        !important; }
+
+    .align-self#{$infix}-auto         { align-self:      auto           !important; }
+    .align-self#{$infix}-start        { align-self:      flex-start     !important; }
+    .align-self#{$infix}-end          { align-self:      flex-end       !important; }
+    .align-self#{$infix}-center       { align-self:      center         !important; }
+    .align-self#{$infix}-baseline     { align-self:      baseline       !important; }
+    .align-self#{$infix}-stretch      { align-self:      stretch        !important; }
+  }
+}
+// ----------------------------------------------------------------------------------------------------

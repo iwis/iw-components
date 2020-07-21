@@ -1,0 +1,34 @@
+// stylelint-disable selector-max-id
+
+.iw-nav                               { display: flex;
+                                        flex-flow: column nowrap;
+                                        margin: 0.7em 0;                         // external top & bottom margins of component
+                                        line-height: 1.5; }
+
+.iw-nav__item                         { color: inherit;                          // remove link look
+                                        text-decoration: none; }
+.iw-nav__item--disabled               { color: iw-theme-color("secondary");
+                                        cursor: default;
+  #iw-page__second-nav &              { color: #646c73; } }  // I changed $gray-600 to conform iw-page--style-facebook with WCAG
+.iw-nav__item--active                 { font-weight: bold; }
+
+.iw-nav--tabs                         { flex-flow: row wrap;                     // can be > 1 row of tabs
+                                        border-bottom: 1px solid $border-color; }
+.iw-nav--tabs a:hover                 { text-decoration: none; }
+.iw-nav--tabs .iw-nav__item           { margin-bottom: -1px;                     // to hide the bottom border of the active tab
+                                        border:        1px solid transparent;    // remove flickering during (de)activating tab
+                                        border-top-left-radius:  $border-radius;
+                                        border-top-right-radius: $border-radius;
+                                        padding: .3em .6em; }
+
+.iw-nav--tabs .iw-nav__item:not(.iw-nav__item--disabled):hover,
+.iw-nav--tabs .iw-nav__item--active   { border-left:   1px solid $border-color;
+                                        border-right:  1px solid $border-color;
+                                        border-top:    1px solid $border-color; }
+.iw-nav--tabs .iw-nav__item--active   { border-bottom: 1px solid white;
+                                        background: $gray-100;
+                                        font-weight: normal; }                   // remove flickering during (de)activating tab
+
+.iw-panels                            { margin: 0.7em 0; }                       // external top & bottom margins of component
+.iw-panels__panel                     { display: none;  }
+.iw-panels__panel--active             { display: block; }

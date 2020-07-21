@@ -1,0 +1,94 @@
+/**
+ * The component looks similar to:
+ *  - https://www.w3schools.com/howto/howto_css_timeline.asp
+ *  - https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285592 - but it has no animation, boxes have
+ *      rounded corners, an arrow is flatter and placed at the top of a box.
+ *
+ * The code is also inspired by these two timelines, but it is more similar to W3Schools code. More important changes:
+ *  - written as a BEM component
+ *     - default colors changed to shades of gray
+ *  - used iw-triangle-left() mixin for creating triangles/arrows
+ *  - used :nth-child(even) instead of right/left CSS classes (like in code from Udemy)
+ *  - values replaced by Sass and CSS variables
+ *  - mobile first: "transform: scaleX(-1)" is used to get an item on the left on larger screens => the code is simpler
+ *
+ * Both iw-timeline__item and iw-timeline__box are required, because on large screens some iw-timeline__item-s are mirrored relative
+ * to the timeline line, but next we need to reverse the mirroring for the iw-timeline__item content.
+ */
+
+// parameters with the default values - if changed, change some of them also in iw-timeline.ts
+$iw-timeline-line-position-x-mobile: 30px;  // left position of the center of the timeline line on mobile screens
+$iw-timeline-line-width: 6px;
+$iw-timeline-box-position-y: 1em;           // distance between boxes
+$iw-timeline-box-position-x: 40px;          // distance between a box and the center of the timeline line
+$iw-timeline-dot-size: 28px;
+$iw-timeline-arrow-position: 22px;          // distance between the center of an arrow/dot and the top of a box line
+
+// parameters with the default values (can be different for different instances of the component in the same web site)
+:root                         { --iw-timeline-line-color:       #{$gray-200};
+                                --iw-timeline-box-color:        #{$gray-200};
+                                --iw-timeline-dot-border-color: transparent; }  // transparent - the same color as a dot
+
+// styling from https://www.w3schools.com/howto/howto_css_timeline.asp
+.iw-timeline--style-w3schools { --iw-timeline-line-color:       white;
+                                --iw-timeline-box-color:        white;
+                                --iw-timeline-dot-border-color: #ff9f55;   // ~ hsl( 26, 100%, 67%)
+                                background-color:               #474e5d; } // ~ hsl(221,  13%, 32%)
+
+// styling from https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285592
+.iw-timeline--style-brad      { --iw-timeline-line-color:       white;
+                                --iw-timeline-box-color:        #5b7bb4;   // ~ hsl(218, 37%, 53%)
+                                --iw-timeline-dot-border-color: transparent;
+                                background-color:               #425b84;   // ~ hsl(218, 33%, 39%)
+                                color:                          white; }
+
+.iw-timeline                  { position: relative;
+                                margin: 0 auto;  // no top/bottom margin of the component because it cannot be covered by the optional background set by the component; centered horizontally
+                                padding: 1em 1em 1em $iw-timeline-line-position-x-mobile; }      // padding is covered by the optional background set by the component
+
+// the timeline line (the vertical ruler)
+.iw-timeline::after           { position: absolute;
+                                left: $iw-timeline-line-position-x-mobile;
+                                top: 1em; bottom: 1em;                        // the timeline line is as high as the whole component minus 1em from both top and bottom
+                                margin-left: -$iw-timeline-line-width/2;      // a small fix of the left line position
+                                background: var(--iw-timeline-line-color);
+                                width: $iw-timeline-line-width;
+                                content: ""; }
+
+.iw-timeline__item            { position: relative;
+                                margin-top: $iw-timeline-box-position-y;
+                                list-style: none; }
+
+.iw-timeline__box             { margin-left: $iw-timeline-box-position-x;
+                                border-radius: $border-radius-lg;
+                                background: var(--iw-timeline-box-color);
+                                padding: 1px 1em; }  // 1px it here to only enable top/bottom margins of the box content
+
+// the dots on the timeline line
+.iw-timeline__item::after     { box-sizing: border-box;
+                                position: absolute;
+                                left: -$iw-timeline-dot-size/2;
+                                top:  -$iw-timeline-dot-size/2 + $iw-timeline-arrow-position;
+                                z-index: 1;                                   // above the timeline line
+                                @include iw-circle(var(--iw-timeline-box-color), $iw-timeline-dot-size);
+                                border: 4px solid var(--iw-timeline-dot-border-color);
+                                content: ""; }
+
+// box arrows
+.iw-timeline__item::before    { position: absolute;
+                                left: -10px + $iw-timeline-box-position-x + 1px;  // + 1px to avoid any break between the arrow and the box
+                                top:  -10px + $iw-timeline-arrow-position;
+                                @include iw-triangle-left(10px, 10px, var(--iw-timeline-box-color));
+                                content: ""; }
+
+@media (min-width: 1000px) {  // items are placed alternately on the both sides of the timeline line
+  .iw-timeline                { padding-left: 1em; }      // padding should be symmetrical, because we want the timeline line to be in the center
+  .iw-timeline::after         { left: 50%; }              // the timeline line is in the center
+  .iw-timeline__item          { left: 50%; width: 50%; }  // generally items are in the right half of the component, but ...
+
+  .iw-timeline__item:nth-child(odd) { transform: scaleX(-1);  // ... odd items are mirrored relatively to the ...
+                                      transform-origin: 0;    // timeline line, so they are in the left half of the component
+                                      z-index: 1; }           // set it again for the dot, because transform created a new stacking content
+  // cancel mirroring of the content of an even item because we want to read from left to right
+  .iw-timeline__item:nth-child(odd) .iw-timeline__box { transform: scaleX(-1); }
+}

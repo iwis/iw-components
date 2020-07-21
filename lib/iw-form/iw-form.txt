@@ -1,0 +1,173 @@
+Defines CSS classes used in HTML forms (some are based on Bootstrap CSS classes):
+  .iw-form
+  .iw-form--responsive         - show control and its label in one line on desktops
+  .iw-form--custom-toggles     - replaces platform-native checkboxes and radio buttons controls with custom controls
+
+  .iw-form__fieldset           - use it to style <fieldset> grouping several form fields,
+                                 but don't use it for <fieldset> grouping only set of radio or checkbox fields
+
+  For <input> (without radio and checkbox), <textarea>, <select> fields:
+    .iw-form__control          - used on <input>, <textarea>, and <select> elements to span to the entire width of a page
+                                 and make them responsive; based on Bootstrap .form-control
+    .iw-form__control--{sm|lg} - smaller/larger control
+
+  For checkbox and radio <input>s:
+    .iw-form__check
+    .iw-form__check--inline    - show options in a single line
+
+Properly displays :valid and :invalid pseudo-classes with green and red color.
+
+* Grid layout
+  I don't use flexbox because of this problem: https://stackoverflow.com/questions/45224246/best-way-to-arrange-labels-and-inputs-side-by-side. This is why
+  the grid layout is used. Thanks to using grid layout, the layout of an iw-form can be freely customized in an application CSS file.
+  The <fieldset> cannot be a grid Layout container in Google Chrome: https://stackoverflow.com/questions/51076747/grid-layout-on-fieldset-bug-on-chrome,
+  so the <div> inside a <fieldset> is the grid layout container.
+
+* Label of checkbox/radio
+  I use:
+    <input type="checkbox" name="field_checkboxes" value="option1" id="field-checkbox1">
+    <label for="field-checkbox1"> Option 1</label>
+  instead of:
+    <label>
+      <input type="checkbox" name="field_checkboxes" value="option1"> Option 1
+    </label>
+  because the former is easier to style:
+    input[type="checkbox"]:valid   ~ label  { color: iw-theme-color("success"); }
+    input[type="checkbox"]:invalid ~ label  { color: iw-theme-color("danger");  }
+
+* Label of group of checkboxes/radio
+  I use <label> for this group against HTML specification, because of consistency - all labels of controls shown on the 1st column on large screens
+  are written in a HTML file in a <label> tag. Thanks to it the CSS/HTML code is more concise. Alternatively one can use a CSS class for example .iw-form__label
+  to name all these labels.
+
+* A <fieldset> of checkboxes can have data-min="..." and/or data-max="..." attributes:
+   - data-min="2" means that at least 2 checkboxes need to be selected
+   - data-max="4" means that no more than 4 checkboxes can be selected
+
+* these two codes for custom radio buttons and checkboxes do the same:
+  ------------ (tested in Chrome and Firefox without and with 125% and 150% scaling in Windows; and on mobile Chrome) ------------
+  &:checked                                 { --x: 60%; ... }
+
+  ...
+  input[type='radio']:after                 { width:  8px; height:  8px;                           ... transform: translate(-50%, -50%);                                }
+  input[type='checkbox']:not(.switch):after { width:  5px; height:  8px; border: 2px solid $inner; ... transform: translate(-50%, -50%) translateY(-10%) rotate(43deg); }
+  input[type='checkbox'].switch:after       { width: 12px; height: 12px;                           ... transform: translate(-50%, -50%) translateX(var(--x, -60%));     }
+  ------------ OR (tested in Chrome and Firefox without and with 125% and 150% scaling in Windows; and on mobile Chrome) ------------
+  &:checked                                 { --x: 50%; ... }
+
+  ...
+  input[type='radio']:after                 { width: 16px; height: 16px;                           ... transform: translate(-50%, -50%)                                scale(.5);  }
+  input[type='checkbox']:not(.switch):after { width: 10px; height: 16px; border: 4px solid $inner; ... transform: translate(-50%, -50%) translateY(-10%) rotate(43deg) scale(.5);  }
+  input[type='checkbox'].switch:after       { width: 16px; height: 16px;                           ... transform: translate(-50%, -50%) translateX(var(--x, -50%))     scale(.75); }
+  ------------
+
+Tested on Chrome, Firefox, Edge 44 (see below), Edge 83, and mobile Chrome.
+
+The "appearance: none;" used in custom radio buttons and checkboxes doesn't work in Edge < 79. Others also have this problem in
+Edge: https://stackoverflow.com/questions/53657488/how-do-i-make-this-checkbox-styling-work-in-edge 
+Works in Edge 80+, which become popular in June 2020 https://www.tenforums.com/windows-10-news/155943-new-kb4559309-microsoft-edge-update-windows-10-version-2004-a.html),
+Thanks to "appearance: none;" we can style <input> element directly, like on https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/. Otherwise additional HTML elements
+need to be added like in Bootstrap.
+
+Todo:
+ - '*' displayed after labels of required fields isn't accessible for the blind
+
+Example usage
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  
+  <script type="module" src="lib/iw-form/iw-form.js"></script>
+
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+  <style>
+    body { margin: 8px; }
+  </style>
+</head>
+
+<body>
+  <form class="iw-form iw-form--responsive iw-form--custom-toggles">
+    <h1>Form</h1>
+    
+    <p>Form with all field types supported by all browsers. The fields new in HTML5 are marked. The form presents different types of constraints, for example <code>required</code>
+       or <code>min</code> value. If the form contains incorrect fields, they will be marked in red after clicking <em>Submit</em> button. The form is responsive by default - it has
+       a different layout on small and large screens. Additionally, the layout of the form can be customized in a CSS file thanks to the grid layout.</p>
+    
+    <datalist id="datalist1">
+      <option value="Option 1">
+      <option value="Option 2">
+      <option value="Option 3">
+      <option value="Option 4">
+    </datalist>
+    
+    <fieldset class="iw-form__fieldset">
+      <legend>Fields with a special status</legend>
+      <div>
+        <label for="field-disabled">Disabled                                       </label>  <input type="text"     name="field_disabled" id="field-disabled" class="iw-form__control" disabled                          >
+        <label for="field-readonly">Read only                                      </label>  <input type="text"     name="field_readonly" id="field-readonly" class="iw-form__control" readonly value="read only"        >
+      </div>
+    </fieldset>
+
+    <fieldset class="iw-form__fieldset">
+      <legend>Text fields</legend>
+      <div>
+        <label for="field-text"    >Text     (max length 30, combo with a datalist)</label>  <input type="text"     name="field_text"     id="field-text"     class="iw-form__control" maxlength="30"  list="datalist1"  >
+        <label for="field-password">Password (min length 8)                        </label>  <input type="password" name="field_password" id="field-password" class="iw-form__control" minlength="8"                     >
+        <label for="field-email"   >Email    (HTML5)                               </label>  <input type="email"    name="field_email"    id="field-email"    class="iw-form__control"                                   >
+        <label for="field-url"     >URL      (HTML5)                               </label>  <input type="url"      name="field_url"      id="field-url"      class="iw-form__control"                                   >
+        <label for="field-search"  >Search   (HTML5) (required, placeholder)       </label>  <input type="search"   name="field_search"   id="field-search"   class="iw-form__control" placeholder="Fill me ..." required>
+      </div>
+    </fieldset>
+
+    <fieldset class="iw-form__fieldset">
+      <legend>Numeric fields</legend>
+      <div>
+        <label for="field-number"  >Number   (HTML5) (2 - 150)                     </label>  <input type="number"   name="field_number"   id="field-number"   class="iw-form__control" min="2"          max="150"        >
+        <label for="field-range"   >Range    (HTML5) (1 - 7)                       </label>  <input type="range"    name="field_range"    id="field-range"    class="iw-form__control" min="1"          max="7"          >
+        <label for="field-date"    >Date     (HTML5) (2019-06-01 - 2019-12-31)     </label>  <input type="date"     name="field_date"     id="field-date"     class="iw-form__control" min="2019-06-01" max="2019-12-31" >
+        <label for="field-time"    >Time     (HTML5) (13:15 - 16:25)               </label>  <input type="time"     name="field_time"     id="field-time"     class="iw-form__control" min="13:15"      max="16:25"      >
+      </div>
+    </fieldset>
+
+    <fieldset class="iw-form__fieldset">
+      <legend>Other fields</legend>
+      <div>
+        <label for="field-file"    >File     (multiple, required)                  </label>  <input type="file"     name="field_file"     id="field-file"     class="iw-form__control" multiple required                 >
+
+        <label for="field-textarea">Textarea                                       </label>  <textarea              name="field_textarea" id="field-textarea" class="iw-form__control">initial text</textarea>
+        
+        <label for="field-select"  >Select                                         </label>  <select                name="field_select"   id="field-select"   class="iw-form__control">
+                                                                                               <option value="ipod"    >Option 1</option>
+                                                                                               <option value="radio"   >Option 2</option>
+                                                                                               <option value="computer">Option 3</option>
+                                                                                             </select>
+        
+        <label id="field-radio">Radio (required, inline layout)</label>
+        <fieldset aria-labelledby="field-radio">
+          <div class="iw-form__check iw-form__check--inline">  <input type="radio"    name="field_radio"      value="option1" id="field-radio1" required           >  <label for="field-radio1"   > Option 1           </label>  </div>
+          <div class="iw-form__check iw-form__check--inline">  <input type="radio"    name="field_radio"      value="option2" id="field-radio2" required           >  <label for="field-radio2"   > Option 2           </label>  </div>
+          <div class="iw-form__check iw-form__check--inline">  <input type="radio"    name="field_radio"      value="option3" id="field-radio3" required disabled  >  <label for="field-radio3"   > Option 3 (disabled)</label>  </div>
+        </fieldset>
+        
+        <label id="field-checkbox">Checkboxes (select 2-3, stacked layout)</label>
+        <fieldset aria-labelledby="field-checkbox" data-min="2" data-max="3">
+          <div class="iw-form__check">                         <input type="checkbox" name="field_checkboxes" value="option1" id="field-checkbox1" disabled checked>  <label for="field-checkbox1"> Option 1 (disabled)</label>  </div>
+          <div class="iw-form__check">                         <input type="checkbox" name="field_checkboxes" value="option2" id="field-checkbox2"                 >  <label for="field-checkbox2"> Option 2           </label>  </div>
+          <div class="iw-form__check">                         <input type="checkbox" name="field_checkboxes" value="option3" id="field-checkbox3"                 >  <label for="field-checkbox3"> Option 3           </label>  </div>
+          <div class="iw-form__check">                         <input type="checkbox" name="field_checkboxes" value="option4" id="field-checkbox4"                 >  <label for="field-checkbox4"> Option 4           </label>  </div>
+        </fieldset>
+      </div>
+    </fieldset>
+
+    <div class="text-center">
+      <button class="iw-btn iw-btn--primary" type="submit">Submit</button>
+    </div>
+  </form>
+</body>
+</html>

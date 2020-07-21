@@ -1,0 +1,9 @@
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  line-height: 1.5;
+}
+/*# sourceMappingURL=common.css.map */

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script type="module" src="lib/iw-tree/iw-tree.js"></script>
+  
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+</head>
+
+<body>
+  <p>Tree1:</p>
+
+  <div class="iw-tree iw-tree__node--inner iw-tree__node--open" id="tree1"></div>
+
+  <p>Tree2:</p>
+
+  <div class="iw-tree iw-tree__node--inner iw-tree__node--open" id="tree2"></div>
+
+  <!-- iw-tree component -->
+  <script type="module">
+    import { createTreeHTML, addControlsCSSClassesAndARIAToTree, TEST_OBJECTS_FOR_TREE_1, TEST_OBJECTS_FOR_TREE_2 } from './lib/iw-browser.js'
+    import { openAllTreeNodes }                                                                                     from './lib/iw-tree/iw-tree.js'
+
+    const tree1 = document.querySelector('#tree1')
+    const tree2 = document.querySelector('#tree2')
+    tree1.innerHTML = createTreeHTML(TEST_OBJECTS_FOR_TREE_1)
+    tree2.innerHTML = createTreeHTML(TEST_OBJECTS_FOR_TREE_2)
+    addControlsCSSClassesAndARIAToTree(tree1)
+    addControlsCSSClassesAndARIAToTree(tree2)
+    
+    openAllTreeNodes(tree1)
+  </script>
+  <!-- iw-tree component -->
+
+</body>
+</html>

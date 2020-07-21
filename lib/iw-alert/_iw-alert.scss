@@ -1,0 +1,24 @@
+.iw-alert                 { margin: 0.4em 0;                    // external top & bottom margins of component
+                            border: 1px solid transparent;      // color can be set by iw-alert modifier
+                            border-radius: $border-radius;
+                            padding: 0.75em; }
+
+/* Color styles of alert. Colors are the same as in Bootstrap, ex.: .iw-alert--{success|warning|...} */
+@each $color, $value in $theme-colors {
+  .iw-alert--#{$color}    { border-color:     iw-theme-color-level($color,  -9);
+                            background-color: iw-theme-color-level($color, -10);
+                            color:            iw-theme-color-level($color,   6); }
+}
+
+.iw-alert__dismiss-button { float: right;
+                            position: relative;
+                            top: -6px;            // I don't know why it looks the best when it is 6px
+                            opacity: 50%;
+                            border: none;
+                            background: transparent;
+                            color: black;
+                            font: 1.7rem Arial, sans-serif;
+                            cursor: pointer;
+  &:hover                 { opacity: 75%;
+                            color: black; }
+}

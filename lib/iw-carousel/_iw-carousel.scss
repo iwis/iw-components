@@ -1,0 +1,32 @@
+.iw-carousel                        { position: relative;
+                                      margin: 1em;                             // external margins of component
+                                      text-align: center; }
+
+.iw-carousel__inner                 { margin: 0 auto;
+                                      max-width: 1000px; }
+.iw-carousel__item                  { display: none;
+                                      margin: 0;                               // reset default "margin: 1em 40px" of <figure>
+  &.active                          { display: block; } }
+
+.iw-carousel__control               { transition: background-color 0.6s;
+                                      margin-top: 7px;
+                                      border: none;
+                                      background-color: rgba(black, 0.4);
+                                      padding: 4px 6px;
+                                      color: white;
+                                      font-size: 18px;
+                                      font-weight: bold;
+                                      cursor: pointer;
+                                      user-select: none;
+  &:hover                           { background-color: rgba(black, 0.8); } }  // black background color with a little bit see-through
+.iw-carousel__control--prev         { border-radius: 3px 0 0 3px; }
+.iw-carousel__control--next         { border-radius: 0 3px 3px 0; }
+
+.iw-carousel__indicators            { display: inline;
+                                      padding-left: 0; }
+.iw-carousel__indicators li         { display: inline-block;
+                                      transition: background-color 0.6s;
+                                      margin: 0 2px;
+                                      @include iw-circle(#bbb, 15px);
+                                      cursor: pointer;
+  &:hover, &.active                 { background-color: #717171; } }

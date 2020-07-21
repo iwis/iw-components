@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-navbar/iw-navbar.js"></script>
+  <script type="module" src="lib/iw-nav/iw-nav.js"></script>  
+  <script type="module" src="lib/iw-carousel/iw-carousel.js"></script>
+  <script type="module" src="lib/iw-carousel-mul/iw-carousel-mul.js"></script>
+  <script type="module" src="lib/iw-table/iw-table.js"></script>
+  <script type="module" src="lib/iw-tree/iw-tree.js"></script>
+  <script type="module" src="lib/iw-timeline/iw-timeline.js"></script>  
+
+  <link  href="style.css" rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+
+  <style>
+    /* Set the size of a single image and the total width of a carousel (to a multiply of the width of an image) */
+    .iw-carousel-mul                                 { width: 240px;              }
+    .iw-carousel-mul .iw-carousel-mul__inner ul img  { width: 80px; height: 80px; }
+
+    #alerts { padding: 0 0.4em; }
+  </style>
+</head>
+
+<body>
+
+
+
+
+
+  <!-- iw-page component -->
+  <div id="iw-page" class="iw-page--layout-3column iw-page--style-facebook">
+
+
+
+
+
+    <header>
+
+      <!-- iw-navbar component -->
+      <nav class="iw-navbar iw-navbar--dark" aria-label="Primary">
+        <a      class="iw-navbar__brand" href="/">Home</a>
+        <button class="iw-navbar__toggler" aria-label="Toggle navigation" aria-expanded="false"><span class="iw-navbar__toggler-icon"></span></button>
+        <ul     class="iw-navbar__nav">
+          <li><a href="iw-form.html">Form</a></li>
+          <li><a href="iw-signup.html">Sign up</a></li>
+          <li><a href="../iw-components/">Index</a></li>
+        </ul>
+      </nav>
+      <!-- iw-navbar component -->
+
+    </header>
+
+
+
+
+
+
+    <nav id="iw-page__second-nav" aria-label="Secondary">
+
+      <div class="iw-nav" role="tablist">
+        <a href="#" data-panel-id="iw-panels__panel--home"    class="iw-nav__item"                        role="tab"                     >Home</a>
+        <a href="#" data-panel-id="iw-panels__panel--contact" class="iw-nav__item iw-nav__item--active"   role="tab" aria-selected="true">Contact</a>
+        <a href="#" data-panel-id="iw-panels__panel--profile" class="iw-nav__item"                        role="tab"                     >Profile</a>
+        <a href="#" data-panel-id="iw-panels__panel--4"       class="iw-nav__item iw-nav__item--disabled" role="tab" aria-disabled="true">Disabled panel</a>
+        <a href="#" data-panel-id="iw-panels__panel--5"       class="iw-nav__item"                        role="tab"                     >Panel 5</a>
+        <a href="#" data-panel-id="iw-panels__panel--6"       class="iw-nav__item"                        role="tab"                     >Panel 6</a>
+        <a href="#" data-panel-id="iw-panels__panel--7"       class="iw-nav__item"                        role="tab"                     >Panel 7</a>
+        <a href="#" data-panel-id="iw-panels__panel--8"       class="iw-nav__item"                        role="tab"                     >Panel 8</a>
+        <a href="#" data-panel-id="iw-panels__panel--9"       class="iw-nav__item"                        role="tab"                     >Panel 9</a>
+      </div>
+
+    </nav>
+
+
+
+
+
+    <main>
+
+
+
+
+
+      <div id="alerts"></div>
+
+
+
+
+
+      <div class="iw-page__section">
+
+        <!-- iw-nav component -->
+        <div class="iw-nav iw-nav--tabs" role="tablist">
+          <a href="#" data-panel-id="iw-panels__panel--home"    class="iw-nav__item"                        role="tab"                     >Home</a>
+          <a href="#" data-panel-id="iw-panels__panel--contact" class="iw-nav__item iw-nav__item--active"   role="tab" aria-selected="true">Contact</a>
+          <a href="#" data-panel-id="iw-panels__panel--profile" class="iw-nav__item"                        role="tab"                     >Profile</a>
+          <a href="#" data-panel-id="iw-panels__panel--4"       class="iw-nav__item iw-nav__item--disabled" role="tab" aria-disabled="true">Disabled panel</a>
+          <a href="#" data-panel-id="iw-panels__panel--5"       class="iw-nav__item"                        role="tab"                     >Panel 5</a>
+          <a href="#" data-panel-id="iw-panels__panel--6"       class="iw-nav__item"                        role="tab"                     >Panel 6</a>
+          <a href="#" data-panel-id="iw-panels__panel--7"       class="iw-nav__item"                        role="tab"                     >Panel 7</a>
+          <a href="#" data-panel-id="iw-panels__panel--8"       class="iw-nav__item"                        role="tab"                     >Panel 8</a>
+          <a href="#" data-panel-id="iw-panels__panel--9"       class="iw-nav__item"                        role="tab"                     >Panel 9</a>
+        </div>
+        
+        <div class="iw-panels">
+          <div id="iw-panels__panel--home"    class="iw-panels__panel"                         >Home panel</div>
+          <div id="iw-panels__panel--contact" class="iw-panels__panel iw-panels__panel--active">Contact panel</div>
+          <div id="iw-panels__panel--profile" class="iw-panels__panel"                         >Profile panel</div>
+          <div id="iw-panels__panel--4"       class="iw-panels__panel"                         >Panel 4</div>
+          <div id="iw-panels__panel--5"       class="iw-panels__panel"                         >Panel 5</div>
+          <div id="iw-panels__panel--6"       class="iw-panels__panel"                         >Panel 6</div>
+          <div id="iw-panels__panel--7"       class="iw-panels__panel"                         >Panel 7</div>
+          <div id="iw-panels__panel--8"       class="iw-panels__panel"                         >Panel 8</div>
+          <div id="iw-panels__panel--9"       class="iw-panels__panel"                         >Panel 9</div>    
+        </div>
+        <!-- iw-nav component -->
+
+      </div>
+
+
+
+
+
+      <div class="iw-page__section">
+
+          <p>Sortable table with columns reorderable by Drag & Drop. The data comes from a JavaScript object.</p>
+
+          <!-- iw-table component -->
+          <div id="content"></div>
+          <script type="module">
+            import { objectTableToHTMLTable, sortHTMLTable, TEST_OBJECTS_FOR_TABLE_1 } from './lib/iw-browser.js'
+
+            const table1 = objectTableToHTMLTable(TEST_OBJECTS_FOR_TABLE_1, 'iw-table iw-table--bordered iw-table--sortable iw-table--draggable-cols iw-table--head-light')
+            document.querySelector('#content').append(table1)
+            sortHTMLTable(table1, 0, true)  //initially sort by 1st column (ascending); comment it to preserve original sorting
+          </script>
+          <!-- iw-table component -->
+
+      </div>
+
+
+
+
+
+      <div class="iw-page__section">
+
+          <p>Tree with data created from a JavaScript object:</p>
+
+          <!-- iw-tree component -->
+          <div class="iw-tree iw-tree__node--inner iw-tree__node--open" id="tree1"></div>
+          <script type="module">
+            import { createTreeHTML, addControlsCSSClassesAndARIAToTree, TEST_OBJECTS_FOR_TREE_1 } from './lib/iw-browser.js'
+            import { openAllTreeNodes }                                                            from './lib/iw-tree/iw-tree.js'
+
+            const tree1 = document.querySelector('#tree1')
+            tree1.innerHTML = createTreeHTML(TEST_OBJECTS_FOR_TREE_1)
+            addControlsCSSClassesAndARIAToTree(tree1)
+            openAllTreeNodes(tree1)
+          </script>
+          <!-- iw-tree component -->
+
+      </div>
+
+
+
+
+
+      <div class="iw-page__section">
+
+        <p>A tooltip:</p>
+
+        <p>
+          <button class="iw-btn iw-btn--primary"
+                  type="button" 
+                  data-tippy-content="This tooltip is created from <em>data-tippy-content</em> attribute. It is displayed at the top of an element, or at the bottom if there is no space at the top.">
+            Button with a tooltip
+          </button>
+        </p>
+
+      </div>
+
+
+
+
+
+      <div class="iw-page__section">
+
+        <p>Carousel:</p>
+
+        <!-- iw-carousel component -->
+        <div class="iw-carousel">
+
+          <div class="iw-carousel__inner">
+            <figure class="iw-carousel__item active">  <img src="https://source.unsplash.com/PIso4WnCne8/900x600" alt="mountains" style="width:100%;">  <figcaption>Yosemite Valley 1</figcaption>  </figure>
+            <figure class="iw-carousel__item">         <img src="https://source.unsplash.com/i6-447LjtqY/900x600" alt="mountains" style="width:100%;">  <figcaption>Yosemite Valley 2</figcaption>  </figure>
+            <figure class="iw-carousel__item">         <img src="https://source.unsplash.com/tGTVxeOr_Rs/900x600" alt="tree"      style="width:100%;">  <figcaption>Nicaragua</figcaption>  </figure>
+            <figure class="iw-carousel__item">         <img src="https://source.unsplash.com/83h69HUgWKg/900x600" alt="boats"     style="width:100%;">  <figcaption>Some boats</figcaption>  </figure>
+          </div>
+          
+          <button class="iw-carousel__control iw-carousel__control--prev" aria-label="Previous image">&#10094;</button>
+          <ol class="iw-carousel__indicators">
+            <li data-slide-to="0" class="active"></li>
+            <li data-slide-to="1"></li>
+            <li data-slide-to="2"></li>
+            <li data-slide-to="3"></li>
+          </ol>
+          <button class="iw-carousel__control iw-carousel__control--next" aria-label="Next image">&#10095;</button>
+
+        </div>
+        <!-- iw-carousel component -->
+
+        <p>Carousel with 3 visible images:</p>
+
+        <!-- iw-carousel-mul component -->
+        <div class="iw-carousel-mul iw-carousel-mul2">
+
+          <button class="iw-carousel-mul__control iw-carousel-mul__control--prev" aria-label="Previous images"></button>
+
+          <div class="iw-carousel-mul__inner">
+            <ul>
+              <li><img src="https://en.js.cx/carousel/1.png" alt="Blushed emoticon"></li>
+              <li><img src="https://en.js.cx/carousel/2.png" alt="Dynamite emoticon"></li>
+              <li><img src="https://en.js.cx/carousel/3.png" alt="Grinned emoticon"></li>
+              <li><img src="https://en.js.cx/carousel/4.png" alt="Smiling emoticon"></li>
+              <li><img src="https://en.js.cx/carousel/5.png" alt="Love emoticon"></li>
+              <li><img src="https://en.js.cx/carousel/6.png" alt="Bomb emoticon"></li>
+              <li><img src="https://en.js.cx/carousel/7.png" alt="Ninja emoticon"></li>
+            </ul>
+          </div>
+          
+          <button class="iw-carousel-mul__control iw-carousel-mul__control--next" aria-label="Next images"></button>
+
+        </div>
+        <!-- iw-carousel-mul component -->
+
+      </div>
+
+
+
+
+
+      <div class="iw-page__section">
+
+        <p>A list represented as a timeline:</p>
+
+        <!-- iw-timeline component -->
+        <ul class="iw-timeline iw-timeline--compact">
+          <li class="iw-timeline__item">
+            <div class="iw-timeline__box">
+              <h3>1993: HTML</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+          </li>
+          <li class="iw-timeline__item">
+            <div class="iw-timeline__box">
+              <h3>1995: PHP</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea aut eum assumenda architecto, perspiciatis itaque maiores ex rerum libero provident!</p>
+            </div>
+          </li>
+          <li class="iw-timeline__item">
+            <div class="iw-timeline__box">
+              <h3>1995: JavaScript</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea aut eum assumenda architecto.</p>
+            </div>
+          </li>
+          <li class="iw-timeline__item">
+            <div class="iw-timeline__box">
+              <h3>1996: CSS</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+          </li>
+        </ul>
+        <!-- iw-timeline component -->
+
+      </div>
+
+
+
+
+
+    </main>
+
+
+
+
+
+    <aside>
+
+      <div class="iw-page__section">
+        <p>Aside content related to this page - section 1</p>
+      </div>
+
+      <div class="iw-page__section">
+        <p>Aside content related to this page - section 2</p>
+      </div>
+
+    </aside>
+
+
+
+
+
+    <footer>
+      <p>The footer</p>
+    </footer>
+
+
+
+
+
+  </div>
+  <!-- iw-page component -->
+
+
+
+
+  <!-- iw-alert component -->
+  <script type="module">
+    import showAlert from './lib/iw-alert/iw-alert.js'
+
+    showAlert('The object cannot be deleted.', 'iw-alert--warning',                       document.querySelector('#alerts'))
+    showAlert('The object has been added.',    'iw-alert--success iw-alert--dismissible', document.querySelector('#alerts'))
+  </script>
+  <!-- iw-alert component -->
+
+
+
+
+
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <script src="lib/iw-tooltip/iw-tooltip.js"></script>
+
+
+
+
+
+</body>
+</html>

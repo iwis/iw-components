@@ -1,0 +1,18 @@
+.iw-signup                { // the component is a centered container with a restricted width
+                            box-sizing: border-box;
+                            margin: 30px auto;      // center
+                            padding: 20px;
+                            max-width: 400px;       // restrict width
+
+                            font-family: "Raleway", sans-serif; }
+
+.iw-signup form           { background-color: white;
+                            padding: 15px 25px;
+                            color: $body-color; }
+.iw-signup h1,
+.iw-signup p              { margin: 0; }            // reset margins, because it is a non-standard layout
+.iw-signup p              { text-align: center; }
+.iw-signup__bottom-text   { margin-top: 1.25em;
+                            font-size: smaller; }
+.iw-signup footer         { margin-top: 0.62em; }
+.iw-signup footer a       { color: $primary; }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+  <!-- iw-alert component -->
+  <script type="module">
+    import showAlert from './lib/iw-alert/iw-alert.js'
+
+    showAlert('The object cannot be deleted.', 'iw-alert--warning',                       document.body)
+    showAlert('The object has been added.',    'iw-alert--success iw-alert--dismissible', document.body)
+  </script>
+  <!-- iw-alert component -->
+
+
+</body>
+</html>

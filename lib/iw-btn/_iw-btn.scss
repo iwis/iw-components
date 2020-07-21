@@ -1,0 +1,43 @@
+.iw-btn                   { display: inline-block;           // otherwise one button can overlay another one if they are in several lines
+                            border: 1px solid transparent;   // color can be modified by iw-btn--... modifier
+                            border-radius: $border-radius;
+                            background-color: $gray-200;     // color can be modified by iw-btn--... modifier
+                            padding: .375em .75em;
+                            color: $body-color;              // color can be modified by iw-btn--... modifier
+                            font: inherit;                   // (<button> changes font by default)
+                            text-decoration: none;
+  &:not(:disabled)        { cursor: pointer; }               // (only <a> has pointer cursor by default)
+  &:disabled              { opacity: .65;
+                            pointer-events: none; }
+  &:focus                 { outline: none;
+                            box-shadow: 0 0 0 .2em rgba(iw-theme-color("primary"), .25); }  // color can be modified by iw-btn-... modifier
+  &::-moz-focus-inner     { border-style: none; }  // Bootstrap Reboot: remove inner border in Firefox
+}
+
+// Block button - spans the entire width of the parent element. Source: Bootstrap
+.iw-btn--block            { display: block;
+                            width: 100%;
+                            text-align: center; }  // ex. for <a> links styled as buttons
+
+// Color styles of iw-btn. Colors are the same as in Bootstrap, ex.: .iw-btn--{success|warning|...}. Source: Bootstrap
+@each $color, $value in $theme-colors {
+  .iw-btn--#{$color}      { border-color: $value;              background-color: $value;               color: iw-color-yiq($value);
+    &:hover, &:focus      { border-color: darken($value, 10%); background-color: darken($value, 7.5%); color: iw-color-yiq($value); }
+    &:focus               { box-shadow: 0 0 0 .2em rgba(mix(iw-color-yiq($value), $value, 15%), .5); }
+  }
+}
+
+// Link buttons (look and behave like a link). Source: Bootstrap
+.iw-btn--link             { background-color: transparent;
+                            color: $link-color;
+                            text-decoration: $link-decoration;
+  &:hover                 { color: $link-hover-color;
+                            text-decoration: $link-hover-decoration; }
+  &:focus                 { box-shadow: none;
+                            text-decoration: $link-hover-decoration; }
+  &:disabled              { color: $gray-600; }
+}
+
+// Button Sizes
+.iw-btn--lg               { border-radius: $border-radius-lg; padding: 0.5rem  1rem;   font-size: 1.25rem;  }
+.iw-btn--sm               { border-radius: $border-radius-sm; padding: 0.25rem 0.5rem; font-size: 0.875rem; }

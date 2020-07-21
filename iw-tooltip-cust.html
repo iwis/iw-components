@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-tooltip-cust/iw-tooltip-cust.js"></script>
+
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+  
+  <style>
+    #container { position: relative;
+                 left: 150px; top: 150px;
+                 margin: 10px;
+                 border: 10px solid gray;
+                 background-color: #aaa;
+                 padding: 10px;
+                 width: 400px; height: 400px; }
+  </style>
+</head>
+<body>
+
+  <div id="container" data-tooltip="Tooltip for outside element">
+    <button data-tooltip="<b>Hello, world!</b> This is a very long tooltip with many words. Its function is to show you how a large tooltip is placed on a web page.">Button with tooltip</button>
+  </div>
+
+</body>
+</html>

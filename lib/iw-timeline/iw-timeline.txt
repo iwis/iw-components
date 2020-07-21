@@ -1,0 +1,20 @@
+A timeline component based on:
+ - https://www.w3schools.com/howto/howto_css_timeline.asp and
+ - "Knowledge Timeline" lesson made by Brad Traversy: https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285592
+
+CSS classes:
+  iw-timeline
+      [iw-timeline--style-{w3schools|brad}] - colors of a timeline
+      [iw-timeline--compact]                - a timeline is lower on wide screens
+    iw-timeline__item
+      iw-timeline__box
+
+Default values of parameters can be changed also in this way:
+  .iw-timeline  { --iw-timeline-line-color: white;
+                  --iw-timeline-box-color:  #5b7bb4;
+                  background-color:         #425b84;
+                  color:                    white; }
+
+Todo:
+ - boxes with borders can look better, but arrows also should have it ...
+ - to large whitespace between paragraph and the iw-timeline

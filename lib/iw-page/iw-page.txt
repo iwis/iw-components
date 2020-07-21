@@ -1,0 +1,83 @@
+Website layout.
+
+The grid areas are displayed in source order for any screen less that 700 pixels wide. On larger screens layout can change to
+a 2-column, and then to a 3-column by redefining the grid, and the placement of items on the grid.
+
+Possible layouts - All of the following layouts are responsive, i.e. they reduce number of columns on smaller screens.
+Number of columns for the largest screen is given below.
+  .iw-page--layout-1column       - 1-column layout on all screen sizes
+  .iw-page--layout-2column-right - 2-column layout: 2nd navigation & aside item in right column
+  .iw-page--layout-2column       - 2-column layout: 2nd navigation in left column; aside item below main content
+  .iw-page--layout-3column       - 3-column layout: 2nd navigation in left column; aside item in right column
+All items (2nd navigation, main, aside) are optional.
+
+The #iw-page__second-nav isn't displayed in 1-column layout (or on small screens). So if these navigation items are unique, then
+they should be available also in the main site menu.
+
+Styles:
+  .iw-page--style-facebook - Reddit/Facebook/Wykop.pl style. Allegro.pl has the same style but it doesn't have rounded corners.
+
+based on: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Realizing_common_layouts_using_CSS_Grid_Layout
+
+todo:
+ - restrict max width of page on large screens - like in the other mentioned web sites, .container-xl class in Bootstrap,
+   or .container class in Section 4 of https://www.udemy.com/course/modern-html-css-from-the-beginning/ tutorial
+ - other styles for grid items ex: StackOverflow, Quora - grid container has white background
+ - different web sites have different colors of header backgrounds
+
+Other checked pages: Wikipedia, YouTube.
+Some web sites don't have footer because they allow infinite scroll (ex. YouTube).
+
+example usage
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-navbar/iw-navbar.js"></script>
+
+  <link  href="lib/iw-page/iw-page.css" rel="stylesheet">
+  <link  href="lib/iw-navbar/iw-navbar.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- iw-page component -->
+  <div id="iw-page" class="iw-page--layout-3column iw-page--style-facebook">
+    <header>
+      <!-- iw-navbar component -->
+      <nav class="iw-navbar iw-navbar--dark" aria-label="Primary">
+        <a      class="iw-navbar__brand" href="/">Home</a>
+        <button class="iw-navbar__toggler"><span>&#9776<span></button>
+        <ul     class="iw-navbar__nav">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <!-- iw-navbar component -->
+    </header>
+    
+    <nav id="iw-page__second-nav" aria-label="Secondary">
+      <ul>
+        <li><a href="">Navs 1</a></li>
+        <li><a href="">Navs 2</a></li>
+        <li><a href="">Navs 3</a></li>
+      </ul>
+    </nav>
+    
+    <main>
+      <div class="iw-page__section">  <h2>Main content - section1</h2>  <p>Content</p>  </div>
+      <div class="iw-page__section">  <h2>Main content - section2</h2>  <p>Content</p>  </div>
+    </main>
+    
+    <aside>
+      <div class="iw-page__section">  <p>Content related to this page - section 1</p>  </div>
+    </aside>
+    
+    <footer><p>The footer</p></footer>
+  </div>
+  <!-- iw-page component -->
+</body>
+</html>

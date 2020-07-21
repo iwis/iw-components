@@ -1,0 +1,28 @@
+// Styles common for all pages.
+// I use it to check if components work well with different web page styles - often set by:
+//  - Bootstrap Reboot  https://getbootstrap.com/docs/4.4/content/reboot/
+//  - sanitize.css      https://github.com/jonathantneal/sanitize.css
+// To check it comment/uncomment a line.
+
+// --- font stacks ------------
+// Native font stack (sanitize.css, Bootstrap Reboot)
+// read more on: https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/
+$font-family-sans-serif-native: system-ui,
+                                -apple-system,       // Safari for macOS and iOS (San Francisco)
+                                "Segoe UI",          // Windows
+                                "Roboto",            // Android
+                                "Helvetica Neue", "Arial", sans-serif,                    // Basic web fallback
+                                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; // Emoji fonts
+// (older Bootstrap)
+$font-family-sans-serif: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+// ----------------------------
+
+// some properties are also set in iw-page.scss
+
+*, *::before, *::after { box-sizing: border-box; }                       // Bootstrap Reboot, sanitize.css
+body                   { line-height: 1.5; }                             // Bootstrap Reboot, sanitize.css
+//body                   { font-family: $font-family-sans-serif-native; }  // Bootstrap Reboot
+//body                   { font-family: $font-family-sans-serif; }
+
+//a                      { text-decoration: none; }                        // Bootstrap Reboot
+//a:hover                { text-decoration: underline; }                   // Bootstrap Reboot

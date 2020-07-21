@@ -1,0 +1,30 @@
+Alert component similar to Bootstrap alert.
+
+iwAlertShow(html, cssClass, where) - adds alert as the last child of the where element with optional additional cssClass
+                                     (can be many classes separated by space) and the given inner HTML.
+
+Possible modifiers are the same as in Bootstrap: iw-alert--{primary|secondary|success|warning|danger|info|light|dark}
+If cssClass contains 'iw-alert--dismissible' then the iw-alert has a close button.
+
+based on: https://javascript.info/introduction-browser-events#add-a-closing-button and Bootstrap.
+
+example usage
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link  href="lib/iw-alert/iw-alert.css" rel="stylesheet">
+</head>
+
+<body>
+  <script type="module">
+    import showAlert from './lib/iw-alert/iw-alert.js'
+
+    showAlert('The object cannot be deleted.', 'iw-alert--warning',                       document.body)
+    showAlert('The object has been added.',    'iw-alert--success iw-alert--dismissible', document.body)
+  </script>
+</body>
+</html>

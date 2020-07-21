@@ -1,0 +1,56 @@
+Sign up form component. The component uses iw-form and iw-btn components.
+
+Source: lessons 32-33 "Form Style" in "Modern HTML & CSS From The Beginning (Including Sass)" tutorial by Brad Traversy
+        https://www.udemy.com/course/modern-html-css-from-the-beginning/
+
+The component code was modified to use BEM methodology, and to use iw-btn and iw-form components based on Bootstrap.
+
+todo:
+ - make the blue background as a modifier?
+ - define "'Raleway', sans-serif;" rather in iw-browser.scss and import 
+     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+   in iw-browser.scss?
+
+
+Example usage
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+  <script type="module" src="lib/iw-form/iw-form.js"></script>
+
+  <link href="lib/iw-signup/iw-signup.css" rel="stylesheet">
+  <link href="lib/iw-form/iw-form.css"     rel="stylesheet">
+  <link href="lib/iw-btn/iw-btn.css"       rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+  
+  <style>
+    body { background-color: #344a72; color: white; }
+  </style>
+</head>
+
+<body>
+  <div class="iw-signup">
+    <form class="iw-form">
+      <h1>Sign Up</h1>
+      <p>It's free and only takes a minute</p>
+      <label for="first-name">First Name</label>       <input type="text"     name="firstName" id="first-name" class="iw-form__control"                       >
+      <label for="last-name">Last Name</label>         <input type="text"     name="lastName"  id="last-name"  class="iw-form__control"                       >
+      <label for="email">Email</label>                 <input type="email"    name="email"     id="email"      class="iw-form__control" required              >
+      <label for="password">Password</label>           <input type="password" name="password"  id="password"   class="iw-form__control" required minlength="8">
+      <label for="password2">Confirm Password</label>  <input type="password" name="password2" id="password2"  class="iw-form__control" required minlength="8">
+      <button class="iw-btn iw-btn--primary iw-btn--block" type="submit">Sign Up</button>
+      <p class="iw-signup__bottom-text">By clicking the Sign Up button, you agree to our <a href="#">Terms & Conditions</a>
+        and <a href="#">Privacy Policy</a>.</p>
+    </form>
+    <footer>
+      <p>Already have an account? <a href="#">Login Here</a></p>
+    </footer>
+  </div>
+</body>
+</html>

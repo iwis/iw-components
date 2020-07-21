@@ -1,0 +1,59 @@
+Button component looking like Bootstrap btn button.
+
+Possible modifiers are the same as in Bootstrap: iw-btn--{primary|secondary|success|warning|danger|info|light|dark} 
+Additionally, like in Bootstrap, iw-btn--link changes <button> to look like a link (i.e. an <a> element).
+Like in Bootstrap, iw-btn--block modifier changes a button to span the entire width of the parent element.
+Like in Bootstrap, iw-btn--sm/lg modifiers change button size.
+
+<buttons> can have "disabled" attribute. Currently disabling <a> links using CSS class is not implemented.
+
+Almost all SCSS code of this component has been copied from Bootstrap and simplified.
+
+Example usage
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link  href="lib/iw-btn/iw-btn.css" rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+</head>
+<body>
+  <p>Buttons:</p>
+  <button class="iw-btn"                   type="button">Unmodified</button>
+  <button class="iw-btn iw-btn--primary"   type="button">Primary</button>
+  <button class="iw-btn iw-btn--secondary" type="button">Secondary</button>
+  <button class="iw-btn iw-btn--success"   type="button">Success</button>
+  <button class="iw-btn iw-btn--danger"    type="button">Danger</button>
+  <button class="iw-btn iw-btn--warning"   type="button">Warning</button>
+  <button class="iw-btn iw-btn--info"      type="button">Info</button>
+  <button class="iw-btn iw-btn--light"     type="button">Light</button>
+  <button class="iw-btn iw-btn--dark"      type="button">Dark</button>
+  
+  <button class="iw-btn iw-btn--link"      type="button">Link</button>
+
+  <p>Links styled as buttons:</p>
+  <a class="iw-btn"                   href="#">Unmodified</a>
+  <a class="iw-btn iw-btn--primary"   href="#">Primary</a>
+  <a class="iw-btn iw-btn--secondary" href="#">Secondary</a>
+  <a class="iw-btn iw-btn--success"   href="#">Success</a>
+  <a class="iw-btn iw-btn--danger"    href="#">Danger</a>
+  <a class="iw-btn iw-btn--warning"   href="#">Warning</a>
+  <a class="iw-btn iw-btn--info"      href="#">Info</a>
+  <a class="iw-btn iw-btn--light"     href="#">Light</a>
+  <a class="iw-btn iw-btn--dark"      href="#">Dark</a>
+
+  <a class="iw-btn iw-btn--link"      href="#">Link</a>
+  
+  <p>Disabled buttons:</p>
+  <button class="iw-btn iw-btn--unmodified" type="button" disabled>Unmodified (disabled)</button>
+  <button class="iw-btn iw-btn--primary"    type="button" disabled>Primary (disabled)</button>
+
+  <button class="iw-btn iw-btn--link"       type="button" disabled>Link (disabled)</button>
+
+  <p>Block button:</p>
+  <button class="iw-btn iw-btn--primary iw-btn--block" type="button">Primary</button>
+</body>
+</html>

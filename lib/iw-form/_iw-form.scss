@@ -1,0 +1,101 @@
+/* stylelint-disable selector-max-compound-selectors */ // especially because <fieldset> cannot be a grid Layout container in Google Chrome - see iw-form.txt
+
+@import "state-indicators";
+
+.iw-form                                  { margin: 1em 0; }
+
+.iw-form h1                               { text-align: center; }
+
+.iw-form fieldset                         { border: none;                    // <fieldset> grouping only set of radio or checkbox fields: it is more readable without borders
+                                            padding: 0; }
+.iw-form .iw-form__fieldset               { margin: 1.5em 0;
+                                            border: 1px solid scale-color($primary, $lightness: 25%);
+                                            border-radius: $border-radius;
+                                            background-color: $gray-100;
+                                            padding: 0.35em 0.75em 0.625em; } // default for <fieldset>
+.iw-form .iw-form__fieldset legend        { border: 1px solid $primary;
+                                            border-radius: $border-radius;
+                                            background-color: $primary;
+                                            padding: 0 0.2em;                // "0 2px;" is default
+                                            color: white;
+                                            font-size: 1.17em;               // like default <h3>
+                                            line-height: 1.5; }
+.iw-form .iw-form__fieldset > div         { margin-top: 1em; }
+
+.iw-form                          > label,
+.iw-form .iw-form__fieldset > div > label { display: block;                  // to be able to set margin
+                                            margin-top:    1em;              // similarly to Bootstrap
+                                            margin-bottom: 0.1em; }          // the space between label and control
+
+.iw-form .iw-btn:not([type="button"])     { margin: 2em 0 1em; }             // increase top/bottom margins of submit and reset buttons
+
+.iw-form label.required::after            { color: red; content: " *"; }   // the "required" class is set in JavaScript
+
+// on desktops show control and its label in one line because there is space to do this
+@media (min-width: 992px) {
+  .iw-form--responsive .iw-form__fieldset { margin: 1em 0 0; }
+
+  .iw-form--responsive,
+  .iw-form--responsive .iw-form__fieldset > div {
+                          display: grid;
+                        //grid-template-columns: auto               1fr;  // 1st column width is the width of the longest element in this column (i.e. the longest label)
+                          grid-template-columns: fit-content(350px) 1fr;  // 1st column width is the width of the longest element in this column (i.e. the longest label) but no more than 350px
+                        //grid-template-columns: 1fr                2fr;  // columns widths are 33.3% and 66.6%
+                          gap: 1rem;
+
+    > label             { grid-column: 1 / span 1;          // <label>s are in the 1st column
+                          align-self: center;               // center labels vertically
+                          margin: 0;                        // reset margin set above
+                          max-width: 400px; }               // max width of label (longer labels will be wrapped; can be adjusted)
+    > label + *         { grid-column: 2 / span 1; }        // form controls are in the 2nd column
+    > *                 { grid-column: 1 / span 2;          // other elements (<h1>-<h6>, <p>, <ul>, <ol>, <div>, .iw-form__fieldset, .iw-btn:not([type="button"]), ...) span 2 columns
+                          margin: 0; }                      // reset margin because there is already the gap property
+    > .iw-btn           { justify-self: center; }           // don't stretch buttons
+  }
+}
+
+/********************* <input> (without radio and checkbox), <textarea>, <select> *********************/
+.iw-form__control       { box-sizing: border-box;           // we can use width: 100% together with padding
+                          border: 1px solid $gray-400;      // like in Bootstrap
+                          border-radius: $border-radius;    // like in Bootstrap; note from Bootstrap: has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS
+                          padding: .375rem .75rem;          // like in Bootstrap
+                          width: 100%;                      // like in Bootstrap
+                          color: $gray-700;                 // like in Bootstrap
+                          font: inherit; }
+input[type="file"].iw-form__control { background-color: inherit; }  // reset the default gray background in Edge 44
+textarea.iw-form__control           { height: 12.5em;               // make <textarea> higher by default
+                                      resize: vertical; }           // and resizable only vertically (default is both vertically and horizontally)
+
+// code source: Bootstrap
+.iw-form__control--sm   { border-radius: $border-radius-sm; padding: .25rem .5rem; height: calc(1.5em + 0.5rem + 2px); font-size: .875rem; line-height: 1.5; }
+.iw-form__control--lg   { border-radius: $border-radius-lg; padding: .5rem  1rem;  height: calc(1.5em + 1rem + 2px);   font-size: 1.25rem; line-height: 1.5; }
+
+/* ---------- State indicators ---------- */
+.iw-form .iw-form__control {
+  @include state-indicators();  // :focus, :valid, :invalid, and :checked states
+}
+
+/********************* Checkboxes and radios *********************/
+// code source: Bootstrap
+
+.iw-form__check                                  { position: relative;  display: block; padding-left: 1.25rem;    }  //  $form-check-input-gutter
+.iw-form__check         input                    { position: absolute;  margin-left: -1.25rem; margin-top: .3rem; }  // -$form-check-input-gutter
+.iw-form__check--inline                          { display: inline-flex;
+                                                   align-items: center;
+                                                   margin-right: .75rem;
+                                                   padding-left: 0; }        // override base .iw-form__check
+.iw-form__check--inline input                    { position: static;         // undo ".iw-form__check input" defaults and add some `margin-right`
+                                                   margin-left:  0;
+                                                   margin-right: .3125rem;
+                                                   margin-top:   0; }
+// see also iw-form--custom-toggles
+.iw-form__check         input[disabled] ~ label,                             // use [disabled] and :disabled for workaround https://github.com/twbs/bootstrap/issues/28247
+.iw-form__check         input:disabled  ~ label  { color: $gray-600; }
+.iw-form__check         label                    { margin-bottom: 0; }       // override default `<label>` bottom margin
+.iw-form__check:not(.iw-form__check--inline) input.iw-form__switch ~ label { margin-left: 1.25rem; }  // moves label of the switch input; not in Bootstrap
+
+/* ---------- State indicators ---------- */
+.was-validated {
+  .iw-form__check       input:valid     ~ label  { color: iw-theme-color("success"); }
+  .iw-form__check       input:invalid   ~ label  { color: iw-theme-color("danger");  }
+}

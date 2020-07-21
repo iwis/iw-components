@@ -1,0 +1,20 @@
+Navigation on the top of website. It is:
+ - right-aligned on screens wider than 600px, and
+ - collapsible single-columned on smaller screens.
+
+based on: https://css-tricks.com/snippets/css/a-guide-to-flexbox/ and Bootstrap
+
+todo:
+ - submenus
+
+example usage
+-------------
+  <nav class="iw-navbar iw-navbar--{dark|light}">
+    <a      class="iw-navbar__brand" href="/">Home</a>
+    <button class="iw-navbar__toggler" aria-label="Toggle navigation" aria-expanded="false"><span class="iw-navbar__toggler-icon"></span></button>
+    <ul     class="iw-navbar__nav">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>

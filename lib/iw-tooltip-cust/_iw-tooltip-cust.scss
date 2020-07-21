@@ -1,0 +1,16 @@
+.iw-tooltip-cust          { z-index: 9999;
+                            border: 1px solid $gray-500;
+                            border-radius: $border-radius;
+                            box-shadow: 3px 3px 3px rgba(black, .3);
+                            background: white;
+                            padding: 5px 8px;
+                            max-width: 400px;
+                            color: #333;
+                            font: italic 14px/1.3 sans-serif;
+                            text-align: center; }
+
+.iw-tooltip-cust--dark    { border: none;
+                            box-shadow: none;
+                            background: #333;
+                            color: white;
+                            font-style: normal; }

@@ -1,0 +1,20 @@
+iw-tree                        - collapsible tree
+  iw-tree__node--{inner|leaf}
+  iw-tree__node--open          - the iw-tree__node--inner node of the tree that is open
+    iw-tree__button            - "button" for expanding node of the tree
+    iw-tree__title             - the <span> can be changed for example to <a> if needed
+
+The 'iw-tree__node' BEM class isn't added to increase readability of a tree. It can be added later if needed.
+
+iw-tree can be also navigated using keyboard:
+ - press [shift+]tab or up/down arrow to focus another tree node,
+ - press enter to expand/collapse the focused tree node.
+
+todo:
+ - optionally <span> tags can be replaced with <a> tags, buttons, checkboxes etc.
+
+based on:
+ - https://javascript.info/introduction-browser-events#create-a-sliding-menu
+ - https://javascript.info/event-delegation#tree-menu
+ - https://www.w3schools.com/howto/howto_js_treeview.asp
+ - http://accessibleculture.org/articles/2013/02/not-so-simple-aria-tree-views-and-screen-readers/ - contains 4 interesting examples

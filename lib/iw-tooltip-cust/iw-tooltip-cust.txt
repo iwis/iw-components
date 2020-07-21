@@ -1,0 +1,42 @@
+Custom implementation of tooltip visible when mouse hovers over the element with data-tooltip attribute.
+It is more advanced than title="..." HTML attribute, however iw-tooltip is better, so use it instead.
+CSS classes: iw-tooltip-cust [iw-tooltip-cust--dark]
+
+triggered by mouseover and focusin events
+
+Example usage
+-------------
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-tooltip-cust/iw-tooltip-cust.js"></script>
+
+  <link  href="lib/iw-tooltip-cust/iw-tooltip-cust.css" rel="stylesheet">
+  
+  <style>
+    #outside   { background-color: #aaa;
+                 margin: 10px;
+                 border: 10px solid gray;
+                 width: 400px; height: 400px;
+                 padding: 10px;
+                 position: relative;
+                 left: 150px; top: 150px; }
+             
+    #inside    { background-color: #ccc;
+                 margin: 10px;
+                 border: 10px solid gray;
+                 width: 200px; height: 200px;
+                 padding: 10px;
+                 position: relative;
+                 left: 0px; top: 0px; }
+  </style>
+</head>
+<body>
+  <div id="outside" data-tooltip="Tooltip for outside element">
+    <div id="inside" data-tooltip="<b>Hello, world!</b> This is a very long tooltip with many words. Its function is to show you how a large tooltip is placed on a web page.">inside</div>
+  </div>
+</body>
+</html>

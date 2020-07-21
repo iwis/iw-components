@@ -1,0 +1,46 @@
+Tooltip/popover using Tippy.js 6 (https://atomiks.github.io/tippyjs/).
+Tippy.js 6 uses Popper.js 2 (https://popper.js.org, written in TypeScript).
+
+Other info (todo if needed):
+ - content from AJAX: https://atomiks.github.io/tippyjs/ajax/
+
+Todo: think about whether to distinguish between these two types of tooltip in the source code or just use one type: "aria-describedby"
+
+Some defaults
+-------------
+aria-describedby="..."
+role="tooltip"
+flips if there is no space on the screen for the tooltip
+triggered by mouseenter and focus events
+z-index: 9999
+
+Usage
+-----
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="lib/iw-tooltip/iw-tooltip.css" rel="stylesheet">
+  
+  <style>
+    #container { margin: 10px;
+                 border: 1px solid gray;
+                 width: 400px; height: 400px;
+                 padding: 10px;
+                 position: relative;
+                 left: 150px; top: 150px; }
+  </style>
+</head>
+<body>
+
+  <div id="container">
+    <button data-tippy-content="This is a very long <em>tooltip</em> with many words. Its function is to show you how a large tooltip is placed on a web page.">Button with tooltip</button>
+  </div>
+
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <script src="lib/iw-tooltip/iw-tooltip.js"></script>
+</body>
+</html>

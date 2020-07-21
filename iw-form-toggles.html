@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-form/iw-form.js"></script>
+
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+  <style>
+    body      { margin: 1em;
+                background: #f8f9fa; color: #212529;
+                font-family: "Inter", Arial, sans-serif; }
+  </style>
+</head>
+<body>
+  <div>
+
+    <!-- iw-form component -->
+    <form class="iw-form iw-form--custom-toggles">
+      <div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f1"  type="radio" name="radio1" value="1"    required                  >  <label for="f1">Radio</label>     </div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f2"  type="radio" name="radio1" value="1"                      disabled>  <label for="f2">Radio</label>     </div>
+      </div><div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f3"  type="radio" name="radio2" value="2"              checked         >  <label for="f3">Radio</label>     </div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f4"  type="radio" name="radio2" value="2"              checked disabled>  <label for="f4">Radio</label>     </div>
+      </div><div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f5"  type="checkbox"                         required                  >  <label for="f5">Checkbox</label>  </div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f6"  type="checkbox"                                           disabled>  <label for="f6">Checkbox</label>  </div>
+      </div><div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f7"  type="checkbox"                                   checked         >  <label for="f7">Checkbox</label>  </div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f8"  type="checkbox"                                   checked disabled>  <label for="f8">Checkbox</label>  </div>
+      </div><div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f9"  type="checkbox" class="iw-form__switch" required                  >  <label for="f9">Switch</label>    </div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f10" type="checkbox" class="iw-form__switch"                   disabled>  <label for="f10">Switch</label>   </div>
+      </div><div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f11" type="checkbox" class="iw-form__switch"           checked         >  <label for="f11">Switch</label>   </div>
+        <div class="iw-form__check iw-form__check--inline">  <input id="f12" type="checkbox" class="iw-form__switch"           checked disabled>  <label for="f12">Switch</label>   </div>
+      </div>
+
+      <button class="iw-btn iw-btn--primary" type="submit">Submit</button>
+    </form>
+    <!-- iw-form component -->
+
+    <!-- iw-form component -->
+    <form class="iw-form iw-form--custom-toggles">
+      <div>
+        <div class="iw-form__check">                         <input id="f21" type="radio" name="radio3" value="1"                    >  <label for="f21">Radio</label>     </div>
+        <div class="iw-form__check">                         <input id="f22" type="radio" name="radio3" value="1"            disabled>  <label for="f22">Radio</label>     </div>
+      </div><div>
+        <div class="iw-form__check">                         <input id="f23" type="radio" name="radio4" value="2"    checked         >  <label for="f23">Radio</label>     </div>
+        <div class="iw-form__check">                         <input id="f24" type="radio" name="radio4" value="2"    checked disabled>  <label for="f24">Radio</label>     </div>
+      </div><div>
+        <div class="iw-form__check">                         <input id="f25" type="checkbox"                                         >  <label for="f25">Checkbox</label>  </div>
+        <div class="iw-form__check">                         <input id="f26" type="checkbox"                                 disabled>  <label for="f26">Checkbox</label>  </div>
+      </div><div>
+        <div class="iw-form__check">                         <input id="f27" type="checkbox"                         checked         >  <label for="f27">Checkbox</label>  </div>
+        <div class="iw-form__check">                         <input id="f28" type="checkbox"                         checked disabled>  <label for="f28">Checkbox</label>  </div>
+      </div><div>
+        <div class="iw-form__check">                         <input id="f29" type="checkbox" class="iw-form__switch"                 >  <label for="f29">Switch</label>    </div>
+        <div class="iw-form__check">                         <input id="f30" type="checkbox" class="iw-form__switch"         disabled>  <label for="f30">Switch</label>    </div>
+      </div><div>
+        <div class="iw-form__check">                         <input id="f31" type="checkbox" class="iw-form__switch" checked         >  <label for="f31">Switch</label>    </div>
+        <div class="iw-form__check">                         <input id="f32" type="checkbox" class="iw-form__switch" checked disabled>  <label for="f32">Switch</label>    </div>
+      </div>
+
+      <button class="iw-btn iw-btn--primary" type="submit">Submit</button>
+    </form>
+    <!-- iw-form component -->
+
+  </div>
+
+  <p>If Windows scaling is enabled, then artifacts can be visible in small elements which have width/height or position not divisible by 4px.
+    You can check if there are no artifacts by clicking on the button below several times.</p>
+
+  <button type="button" id="btn1">Check artifacts</button>
+
+  <script>
+    let i = 0;
+    btn1.addEventListener('click', () => {
+      i++;
+      const form = document.querySelector('body > div')
+      form.style.paddingLeft = `${i}px`;
+      form.style.paddingTop  = `${i}px`;
+    })
+  </script>
+
+</body>
+</html>

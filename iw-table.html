@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="module" src="lib/iw-table/iw-table.js"></script>
+  
+  <link  href="style.css"  rel="stylesheet">
+  <link  href="common.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <p>Sortable tables with with columns reorderable by Drag & Drop:</p>
+
+  <!-- iw-table component -->
+  <div id="content1"></div>
+  <div id="content2"></div>
+
+  <script type="module">
+    import { objectTableToHTMLTable, sortHTMLTable, TEST_OBJECTS_FOR_TABLE_1, TEST_OBJECTS_FOR_TABLE_2 } from './lib/iw-browser.js'
+
+    const table1 = objectTableToHTMLTable(TEST_OBJECTS_FOR_TABLE_1, 'iw-table iw-table--bordered iw-table--sortable iw-table--draggable-cols iw-table--head-light')
+    const table2 = objectTableToHTMLTable(TEST_OBJECTS_FOR_TABLE_2, 'iw-table iw-table--bordered iw-table--sortable iw-table--draggable-cols iw-table--head-light')
+    document.querySelector('#content1').append(table1)
+    document.querySelector('#content2').append(table2)
+    sortHTMLTable(table1, 0, true)  //initially sort by 1st column (ascending); comment it to preserve original sorting
+    sortHTMLTable(table2, 0, true)  //initially sort by 1st column (ascending); comment it to preserve original sorting
+  </script>
+  <!-- iw-table component -->
+
+</body>
+</html>
