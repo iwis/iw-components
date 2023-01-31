@@ -6,7 +6,7 @@
  *     - using standard colors defined with Sass
  *     - using iw-utilities:  .sticky-top, .container-xl, .py-4, .bg-..., .text-white
  *     - using iw-components: .iw-btn
- *     - using mixins: iw-flex-center(), iw-flex-scatter(), iw-grid-cols(...), and iw-flex-gap() hack
+ *     - using mixins: iw-flex-center(), iw-flex-scatter(), and iw-grid-cols(...)
  *     - using linear-gradient for #showcase background overlay
  *     - using flex instead of grid for "#main-nav .container-xl" and "#showcase .showcase-container", as suggested in the course
  *     - changed formatting
@@ -133,8 +133,10 @@ img           { width: 100%; }                          // restrict images width
 
 /* Article */
 #article .meta                                      { @include iw-flex-scatter(0);
-                                                      @include iw-flex-gap(0.5rem, 0.5rem);               // also resets the margin set in .category
-                                                      background: $gray-200; }
+                                                      gap: 0.5rem;
+                                                      background: $gray-200;
+                                                      padding: 0.5rem; }
+#article .meta .category                            { margin: 0; }                                        // reset the margin set in .category
 
 /* Footer */
 #main-footer .footer-container                      { @include iw-grid-cols(600px, 1fr 1fr 1fr 1fr, 1.5rem); }

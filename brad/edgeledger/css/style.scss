@@ -33,8 +33,9 @@ a               { text-decoration: none; }
 /* Navbar */
 #navbar                         { @extend .sticky-top;        // always visible at the top of the page
                                   @include iw-flex-scatter(500px);
-                                  @include iw-flex-gap(1rem, 1rem);
+                                  gap: 1rem;
                                   background: $gray-800;
+                                  padding: 1rem;
                                   color: white; }
 #navbar ul                      { display: flex;
                                   align-items: center;
@@ -59,7 +60,8 @@ a               { text-decoration: none; }
 
 /* Section: What we do */
 #what .items                    { @include iw-flex-equal(768px);
-                                  @include iw-flex-gap(2rem, 2rem); }
+                                  gap: 2rem;
+                                  padding: 2rem; }
 #what .items .item              { text-align: center; }
 #what .items .item i            { margin-bottom: 1rem;
                                   @include iw-circle($primary);

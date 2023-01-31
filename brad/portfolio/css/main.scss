@@ -6,7 +6,7 @@
  *  - used btn class besides btn-... classes (BEM standard)
  *  - used "transform: scale(...);" instead of changing dimensions:
  *    https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13875776#questions/8116965
- *  - used mixins: iw-circle(), iw-grid-cols(), iw-flex-center(), iw-flex-scatter(), iw-overlay(), and iw-flex-gap() hack
+ *  - used mixins: iw-circle(), iw-grid-cols(), iw-flex-center(), iw-flex-scatter(), and iw-overlay()
  *  - used Bootstrap color variables: $primary, $gray-100, $gray-800, $border-color
  *  - "grid-gap" changed to "gap"
  *  - order of CSS properties
@@ -166,7 +166,8 @@ img         { width: 100%; }
 #main-footer                      { background: iw-theme-color("dark");
                                     color: white; }
 #main-footer .footer-content      { @include iw-flex-scatter(501px);
-                                    @include iw-flex-gap(1rem, 1.2rem); }
+                                    gap: 1rem;
+                                    padding: 1.2rem; }
 #main-footer .social .fab         { margin-right: 1rem;
                                     @include iw-circled-sign(transparent, 20px);
                                     border: 2px white solid;
