@@ -1,7 +1,7 @@
 Alert component similar to Bootstrap alert.
 
-iwAlertShow(html, cssClass, where) - adds alert as the last child of the where element with optional additional cssClass
-                                     (can be many classes separated by space) and the given inner HTML.
+showAlert(html, cssClass, where) - adds alert as the last child of the where element with optional additional cssClass
+                                   (can be many classes separated by space) and the given inner HTML.
 
 Possible modifiers are the same as in Bootstrap: iw-alert--{primary|secondary|success|warning|danger|info|light|dark}
 If cssClass contains 'iw-alert--dismissible' then the iw-alert has a close button.

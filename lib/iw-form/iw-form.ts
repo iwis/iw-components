@@ -17,7 +17,7 @@ document.addEventListener('click', (event) => {
  * add a "required" CSS class to the <label> of the whole <fieldset> being a group of radios with the same name.
  * field - <input>, <textarea> or <select> field
  */
-function addRelation_RequiredField_LabelAsterisk(field: Element) {  // eslint-disable-line @typescript-eslint/camelcase
+function addRelation_RequiredField_LabelAsterisk(field: Element) {  // eslint-disable-line @typescript-eslint/naming-convention
   let label: Element
   if (field instanceof HTMLInputElement && field.type === 'radio') {  // for <input type="radio" required>
     if (!field.closest('.iw-form__check')) return  // only for fields from the iw-components library

@@ -7,7 +7,7 @@ Components features
  - conformant with WCAG level AA
  - written in SCSS and TypeScript
  - all TypeScript code is in ES modules, so web pages need to run on a web server (local or remote), they will
-   not work if simply open from an HDD/SDD
+   not work if simply open from an HDD/SSD
  - work well with and without: `*, *::before, *::after { box-sizing: border-box; }`
  - the coding style is checked with ESLint and stylelint
 
@@ -16,8 +16,6 @@ See Rules.xlsx file for rules that were obeyed.
 Some code was copied from Bootstrap - every time I copied the code from Bootstrap I tried to mention it in a comment.
 
 For a general description of components see https://ui-patterns.com/patterns and https://boagworld.com/design/pattern-library/.
-
-The code is in a pre-alpha phase.
 
 CSS coding style
 ================

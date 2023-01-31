@@ -365,7 +365,7 @@ export function createTreeHTML(obj: object): string {
   return result
 }
 
-export function createTreeDOM(obj: object): HTMLUListElement|'' {
+export function createTreeDOM(obj: object): HTMLUListElement | '' {
   if (Object.keys(obj).length === 0) return ''
   const ul = document.createElement('ul')
   for (const key of Object.keys(obj)) {
@@ -548,7 +548,7 @@ export function positionAt(anchor: HTMLElement, elem: HTMLElement, placement: st
  * Used in: iw-tree
  * Possible problem in Chrome and Firefox: https://stackoverflow.com/questions/34223580/focus-outline-not-shown-when-set-on-anchor-programmatically
  */
-export function focusNextElementOf(mainElement: HTMLElement, direction: 1|-1 = 1) {
+export function focusNextElementOf(mainElement: HTMLElement, direction: 1 | -1 = 1) {
   const focusableElements = 'a:not([disabled]), button:not([disabled]), '
                           + 'input:not([disabled]), select:not([disabled]), textarea:not([disabled]), '
                           + '[tabindex]:not([disabled]):not([tabindex="-1"])'
@@ -575,7 +575,7 @@ export function focusNextElementOf(mainElement: HTMLElement, direction: 1|-1 = 1
  * Focus can be gained only by focusable elements: <a>, <iframe>; <input>, <select> and <textarea>
  * fields; <button> (not disabled); any element with tabIndex attribute (even with -1 value!).
  */
-export function focusNextSiblingOf(element: HTMLElement, direction: 1|-1 = 1) {
+export function focusNextSiblingOf(element: HTMLElement, direction: 1 | -1 = 1) {
   if (document.activeElement) {
     const nextElement = (direction === 1) ? element.nextElementSibling : element.previousElementSibling
     if (nextElement && nextElement instanceof HTMLElement)
@@ -589,7 +589,7 @@ export function focusNextSiblingOf(element: HTMLElement, direction: 1|-1 = 1) {
  * Reimplementation of Document/Element.getElementsByTagName(tagName) method.
  * Difference: Returns array of elements.
  */
-export function eduGetElementsByTagName(node: Document|Element, tagName: string): Element[] {
+export function eduGetElementsByTagName(node: Document | Element, tagName: string): Element[] {
   let found: Element[] = []
   const tagName2 = tagName.toUpperCase()
 

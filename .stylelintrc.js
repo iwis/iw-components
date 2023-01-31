@@ -1,4 +1,5 @@
 module.exports = {
+  customSyntax: "postcss-scss",
   plugins: [
     "stylelint-scss",  // not needed if extends: 'stylelint-config-sass-guidelines'/'stylelint-config-recommended-scss'
     "stylelint-order",
@@ -8,9 +9,9 @@ module.exports = {
   ],
   defaultSeverity: "warning",  // my change: all rules are reported as warnings except of some stylelint-config-recommended rules with the { severity: "error" } set
   rules: {
-    /* This is the list of rules merged from popular configs: stylelint-config-standard and stylelint-config-sass-guidelines. Duplicates were removed.
-     * Some rules were disabled by commenting them      and giving the disable reason on the right side of them
-     *              or changed  by changing their value and giving the change  reason on the right side of them in a comment.
+    /* This is the list of rules merged from popular configurations: stylelint-config-standard and stylelint-config-sass-guidelines. I removed duplicates and some rules describing whitespace.
+     * Some other rules were disabled by commenting them      and giving the disable reason on the right side of them
+     *                    or changed  by changing their value and giving the change  reason on the right side of them in a comment.
      */
 
     /****************** Possible errors - https://github.com/stylelint/stylelint-config-recommended (25 rules) ************************************/
@@ -23,7 +24,6 @@ module.exports = {
     "declaration-block-no-shorthand-property-overrides":   [true, { severity: "error" }],
     "font-family-no-duplicate-names":                       true,
     "font-family-no-missing-generic-family-keyword":       [true, { "ignoreFontFamilies": ["Font Awesome 5 Free"] }],  // changed from "true", because "Font Awesome 5 Free" is a proper font family name
-    "function-calc-no-invalid":                            [true, { severity: "error" }],
     "function-calc-no-unspaced-operator":                   true,
     "function-linear-gradient-no-nonstandard-direction":   [true, { severity: "error" }],
     "keyframe-declaration-no-important":                    true,
@@ -47,43 +47,27 @@ module.exports = {
     "at-rule-name-case": "lower",
     "at-rule-name-space-after": "always-single-line",
     "at-rule-semicolon-newline-after": "always",
-  
-  //"block-opening-brace-space-before":      "always",                    // any number or spaces    before '{'
-    "block-opening-brace-space-after":       "always-single-line",
-  //"block-opening-brace-newline-after":     "always-multi-line",         // there can be no newline after  '{'
+    "block-opening-brace-space-after": "always-single-line",
     "block-closing-brace-empty-line-before": "never",
-  //"block-closing-brace-newline-before":    "always-multi-line",         // there can be no newline before '}'
-  //"block-closing-brace-space-before":      "always-single-line",        // any number of spaces    before '}'
-    "block-closing-brace-newline-after":     "always",
-    
+    "block-closing-brace-newline-after": "always",
     "color-hex-case": "lower",
     "color-hex-length": "short",
     "comment-empty-line-before": ["always", { except: ["first-nested"], ignore: ["stylelint-commands"] }],
     "comment-whitespace-inside": "always",
     "custom-property-empty-line-before": ["always", { except: ["after-custom-property", "first-nested"], ignore: ["after-comment", "inside-single-line-block"] }],
     "declaration-bang-space-after": "never",
-  //"declaration-bang-space-before": "always",                        // any number of spaces before "!important"
-  //"declaration-block-semicolon-newline-after": "always-multi-line", // optional newline     after ';' in a declaration block (except the last ';' of declaration blocks)
-  //"declaration-block-semicolon-space-after": "always-single-line",  // any number of spaces after ";" in a declaration block
     "declaration-block-semicolon-space-before": "never",
-  //"declaration-block-single-line-max-declarations": 1,              // single-line declaration block can contain more than one declaration
     "declaration-block-trailing-semicolon": "always",
     "declaration-colon-space-before": "never",
-  //"declaration-colon-space-after": "always-single-line",            // any number of spaces      after ':' in a declaration
-  //"declaration-colon-newline-after": "always-multi-line",           // a new line isn't required after ':' in a declaration with a multiline value
-  //"declaration-empty-line-before": ["always", { except: ["after-declaration", "first-nested"], ignore: ["after-comment", "inside-single-line-block"] }], // possible empty line between properties
     "function-comma-newline-after": "always-multi-line",
-  //"function-comma-space-after": "always-single-line",               // any number of spaces after "," in a function arguments list
     "function-comma-space-before": "never",
     "function-max-empty-lines": 0,
     "function-name-case": "lower",
     "function-parentheses-newline-inside": "always-multi-line",
     "function-parentheses-space-inside": "never-single-line",         // set to "never" by stylelint-config-sass-guidelines
     "function-whitespace-after": "always",
-  //"indentation": 2,                                                 // any indentation
     "length-zero-no-unit": true,
     "max-empty-lines": 1,
-  //"media-feature-colon-space-after": "always",                      // any number of spaces after ":" in @media features
     "media-feature-colon-space-before": "never",
     "media-feature-name-case": "lower",
     "media-feature-parentheses-space-inside": "never",
@@ -97,13 +81,10 @@ module.exports = {
   //"number-leading-zero": "always",                                  // a leading zero in fractional numbers < 1 is possible, because people use different styles
   //"number-no-trailing-zeros": true,                                 // trailing zeros in numbers are possible
     "property-case": "lower",
-  //"rule-empty-line-before": ["always-multi-line", { except: ["first-nested"], ignore: ["after-comment"] }],  // empty line before rule is optional
     "selector-attribute-brackets-space-inside": "never",
     "selector-attribute-operator-space-after": "never",
     "selector-attribute-operator-space-before": "never",
     "selector-combinator-space-after": "always",
-  //"selector-combinator-space-before": "always",                     // any number of spaces before the combinators of selectors (> + ~)
-  //"selector-descendant-combinator-no-non-space": true,              // any number of spaces inside descendant combinators of selectors
     "selector-list-comma-newline-after": "always-multi-line",         // changed from "always"; require a newline after ',' of selector list only if it is multiline
     "selector-list-comma-space-before": "never",
     "selector-max-empty-lines": 0,
@@ -138,12 +119,12 @@ module.exports = {
     "selector-max-compound-selectors": 3,
 
     // Specify acceptable selector, units, properties, functions and words in comments
-    "at-rule-blacklist": ["debug"],                                       // disallow the use of @debug
+    "at-rule-disallowed-list": ["debug"],                                 // disallow the use of @debug
   //"color-named": "never",                                               // I use white and black names - what could be wrong with them? https://sass-guidelin.es/#color-formats says nothing about white and black
-  //"declaration-property-value-blacklist": { "border": ["none"], "border-top": ["none"], "border-right": ["none"], "border-bottom": ["none"], "border-left": ["none"] },  // use 0 instead of none, not so important
+  //"declaration-property-value-disallowed-list": { "border": ["none"], "border-top": ["none"], "border-right": ["none"], "border-bottom": ["none"], "border-left": ["none"] },  // use 0 instead of none, not so important
     "selector-max-id": 0,                                                 // don't disable it - using ID selectors is really dangerous because they have almost the greatest specificity
-  //"selector-no-qualifying-type": true,                                  // I sometimes qualify selectors, for example input[type='checkbox'], li.active, in accordance with https://cssguidelin.es/#portability
-  //"selector-class-pattern": ["^[a-z0-9\\-]+$", { "message": "Selector should be written in lowercase with hyphens (selector-class-pattern)" } ], // not conformant with BEM classes with underscores ex: iw-carousel__item, todo: maybe use some plugin with conformant BEM classes?
+  //"selector-no-qualifying-type": true,                                  // I sometimes qualify selectors, e.g. input[type='checkbox'], li.active, in accordance with https://cssguidelin.es/#portability
+  //"selector-class-pattern": ["^[a-z0-9\\-]+$", { "message": "Selector should be written in lowercase with hyphens (selector-class-pattern)" } ], // not conformant with BEM classes with underscores e.g. iw-carousel__item, todo: maybe use some plugin with conformant BEM classes?
     "shorthand-property-no-redundant-values": true,                       // Disallow redundant values in shorthand properties.
 
     // SCSS
@@ -153,7 +134,7 @@ module.exports = {
     "scss/at-import-no-partial-leading-underscore": true,                 // disallow leading '_'            in partial SCSS file name in @import
     "scss/at-import-partial-extension-blacklist": ["scss"],               // disallow '.scss' file extension in partial SCSS file name in @import
     "scss/dollar-variable-colon-space-after": "at-least-one-space",       // changed from "always" - more than one space can be after ":" in "$var1:  ..." declaration => values can be aligned in columns
-    "scss/dollar-variable-colon-space-before": "never",                   // disallow whitespace before   the colon in "$var1: ..." declaration
+    "scss/dollar-variable-colon-space-before": "never",                   // disallow whitespace before the colon in "$var1: ..." declaration
     "scss/at-function-pattern":         "^[a-z]+([a-z0-9-]+[a-z0-9]+)?$", // SCSS functions
     "scss/at-mixin-pattern":            "^[a-z]+([a-z0-9-]+[a-z0-9]+)?$", // SCSS mixins
     "scss/percent-placeholder-pattern": "^[a-z]+([a-z0-9-]+[a-z0-9]+)?$", // SCSS %-placeholders
@@ -170,7 +151,6 @@ module.exports = {
                     //{ "type": "at-rule", "name": "include", "hasBlock": true  },  // mixin calls with a content block     e.g. .class1 { @include mixin2 { color: white; } }
                       "rules" ]],                                                   //|nested rules                         e.g. .class1 { .class2 { ... }                   }
 
-  //"order/properties-alphabetical-order": true,
     "order/properties-order": [[
       /* Modified Concentric CSS order - https://rhodesmill.org/brandon/2011/concentric-css/
        * Changes:
