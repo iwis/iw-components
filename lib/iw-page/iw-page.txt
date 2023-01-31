@@ -26,7 +26,7 @@ todo:
  - different web sites have different colors of header backgrounds
 
 Other checked pages: Wikipedia, YouTube.
-Some web sites don't have footer because they allow infinite scroll (ex. YouTube).
+Some web sites don't have footer because they allow infinite scroll (e.g. YouTube).
 
 example usage
 -------------

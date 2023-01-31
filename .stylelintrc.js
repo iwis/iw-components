@@ -197,7 +197,7 @@ module.exports = {
       'order',
       'justify-self', 'align-self',
 
-      'display',  // after properties of grid, flex and column layout item, because if both are present, then display describes the inside layout, ex. { justify-self: end; display: flex; }
+      'display',  // after properties of grid, flex and column layout item, because if both are present, then display describes the inside layout, e.g. { justify-self: end; display: flex; }
 
       // grid, flex and column layout - container (properties describing the inside layout):
       'grid', 'grid-template', 'grid-template-areas', 'grid-template-rows', 'grid-template-columns', 'grid-auto-rows', 'grid-auto-columns', 'grid-auto-flow',

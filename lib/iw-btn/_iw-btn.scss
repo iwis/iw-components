@@ -17,9 +17,9 @@
 // Block button - spans the entire width of the parent element. Source: Bootstrap
 .iw-btn--block            { display: block;
                             width: 100%;
-                            text-align: center; }  // ex. for <a> links styled as buttons
+                            text-align: center; }  // e.g. for <a> links styled as buttons
 
-// Color styles of iw-btn. Colors are the same as in Bootstrap, ex.: .iw-btn--{success|warning|...}. Source: Bootstrap
+// Color styles of iw-btn. Colors are the same as in Bootstrap, e.g.: .iw-btn--{success|warning|...}. Source: Bootstrap
 @each $color, $value in $theme-colors {
   .iw-btn--#{$color}      { border-color: $value;              background-color: $value;               color: iw-color-yiq($value);
     &:hover, &:focus      { border-color: darken($value, 10%); background-color: darken($value, 7.5%); color: iw-color-yiq($value); }
