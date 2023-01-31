@@ -1,5 +1,7 @@
 /* stylelint-disable selector-max-compound-selectors */ // especially because <fieldset> cannot be a grid Layout container in Google Chrome - see iw-form.txt
 
+@use "sass:color";
+
 @import "state-indicators";
 
 .iw-form                                  { margin: 1em 0; }
@@ -9,7 +11,7 @@
 .iw-form fieldset                         { border: none;                    // <fieldset> grouping only set of radio or checkbox fields: it is more readable without borders
                                             padding: 0; }
 .iw-form .iw-form__fieldset               { margin: 1.5em 0;
-                                            border: 1px solid scale-color($primary, $lightness: 25%);
+                                            border: 1px solid color.scale($primary, $lightness: 25%);
                                             border-radius: $border-radius;
                                             background-color: $gray-100;
                                             padding: 0.35em 0.75em 0.625em; } // default for <fieldset>

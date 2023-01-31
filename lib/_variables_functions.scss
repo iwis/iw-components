@@ -1,4 +1,6 @@
-@use 'sass:math';
+@use "sass:math";
+@use "sass:map";
+@use "sass:color";
 
 /* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
  * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
@@ -37,7 +39,7 @@ $theme-colors: ("primary":   $primary,
                 "dark":      $gray-800);
 
 // Get theme color with the given name. Based on: https://getbootstrap.com/docs/4.4/getting-started/theming/; Bootstrap function (unmodified)
-@function iw-theme-color($color-name: "primary") { @return map-get($theme-colors, $color-name); }
+@function iw-theme-color($color-name: "primary") { @return map.get($theme-colors, $color-name); }
 
 // Get the particular level (belonging to <-12.5, 12.5>) of theme color with the given name.
 // $level > 0 => darken the color, $level < 0 => lighten the color.
@@ -45,7 +47,7 @@ $theme-colors: ("primary":   $primary,
 // Bootstrap function (unmodified)
 // Recommended also on: https://sass-guidelin.es/#lightening-and-darkening-colors
 @function iw-theme-color-level($color-name: "primary", $level: 0) {
-  @return mix(if($level > 0, #000, #fff), iw-theme-color($color-name), abs($level) * 8%);
+  @return color.mix(if($level > 0, #000, #fff), iw-theme-color($color-name), math.abs($level) * 8%);
 }
 
 // If given $color is dark then returns white color. If given $color is light then returns $body-color (which is dark).
@@ -74,7 +76,7 @@ $border-radius-sm: .2rem;
 
 // used by: iw-btn
 $link-color:            iw-theme-color("primary");
-$link-hover-color:      darken($link-color, 15%);
+$link-hover-color:      color.adjust($link-color, $lightness: -15%);
 $link-decoration:       none;
 $link-hover-decoration: underline;
 

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /**
  * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
  * are styled only if the submit button has been clicked.
@@ -12,9 +14,9 @@
   &:invalid           { outline: none;       // invalid field in Edge:     ???              { outline:    red solid 3px; }
                         box-shadow: none; }  // invalid field in Firefox:  :-moz-ui-invalid { box-shadow: red 0px 0px 1.5px 1px; }
 
-  // set custom indicators of field state (simplified code from Bootstrap; "lighten($primary, 25%)" was replaced by "scale-color($primary, $lightness: 25%)" -
+  // set custom indicators of field state (simplified code from Bootstrap; "lighten($primary, 25%)" was replaced by "color.scale($primary, $lightness: 25%)" -
   //  - see https://sass-lang.com/documentation/modules/color#lighten)
-  &:focus             { border-color: scale-color($primary, $lightness: 25%);
+  &:focus             { border-color: color.scale($primary, $lightness: 25%);
                         box-shadow:   0 0 0 0.2rem rgba($primary, .25); }  // or change to $gray-400? (maybe as a component option?)
 
   // a submit button has been clicked

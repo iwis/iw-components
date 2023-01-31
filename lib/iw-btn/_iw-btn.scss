@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .iw-btn                   { display: inline-block;           // otherwise one button can overlay another one if they are in several lines
                             border: 1px solid transparent;   // color can be modified by iw-btn--... modifier
                             border-radius: $border-radius;
@@ -21,9 +23,9 @@
 
 // Color styles of iw-btn. Colors are the same as in Bootstrap, e.g.: .iw-btn--{success|warning|...}. Source: Bootstrap
 @each $color, $value in $theme-colors {
-  .iw-btn--#{$color}      { border-color: $value;              background-color: $value;               color: iw-color-yiq($value);
-    &:hover, &:focus      { border-color: darken($value, 10%); background-color: darken($value, 7.5%); color: iw-color-yiq($value); }
-    &:focus               { box-shadow: 0 0 0 .2em rgba(mix(iw-color-yiq($value), $value, 15%), .5); }
+  .iw-btn--#{$color}      { border-color: $value;                                 background-color: $value;                                  color: iw-color-yiq($value);
+    &:hover, &:focus      { border-color: color.adjust($value, $lightness: -10%); background-color: color.adjust($value, $lightness: -7.5%); color: iw-color-yiq($value); }
+    &:focus               { box-shadow: 0 0 0 .2em rgba(color.mix(iw-color-yiq($value), $value, 15%), .5); }
   }
 }
 

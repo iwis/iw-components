@@ -24,6 +24,9 @@
  *   Some of the utilities, for example .container-xl, require * { box-sizing: border-box; }
  */
 
+@use "sass:map";
+@use "sass:color";
+
 @import "variables_functions";
 
 // Typography
@@ -49,9 +52,9 @@
   //       I don't use ".bg-... a {}", because it has too large specificity and it will make a problem in iw-btn component
   .bg-#{$color}                          { background-color: $value              !important; }
 
-  a.text-#{$color}    { &:hover, &:focus { color:            darken($value, 15%) !important; } }
+  a.text-#{$color}    { &:hover, &:focus { color:            color.adjust($value, $lightness: -15%) !important; } }
   a.bg-#{$color},
-  button.bg-#{$color} { &:hover, &:focus { background-color: darken($value, 10%) !important; } }
+  button.bg-#{$color} { &:hover, &:focus { background-color: color.adjust($value, $lightness: -10%) !important; } }
 }
 
 .text-white     { color:            #fff           !important; }
@@ -116,7 +119,7 @@
 // Minimum breakpoint width. Null for the smallest breakpoint.
 //   breakpoint-min(xs) => null;  breakpoint-min(sm) => 576px
 @function breakpoint-min($name) {
-  $min: map-get($grid-breakpoints, $name);
+  $min: map.get($grid-breakpoints, $name);
   @return if($min != 0, $min, null);
 }
 
