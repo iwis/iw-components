@@ -18,10 +18,12 @@ $primary: #f7c08a;  // change primary color
 *               { box-sizing: border-box;
                   margin: 0;                // reset
                   padding: 0; }
-html, body      { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+body            { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
                   line-height: 1.7em; }
+
 h1, h2, h3      { padding-bottom: 1.25rem; }
 p               { margin: 0.62rem 0; }
+
 a               { color: $gray-800;
                   text-decoration: none; }
 

@@ -14,7 +14,7 @@
 
 .iw-nav--tabs                         { flex-flow: row wrap;                     // can be > 1 row of tabs
                                         border-bottom: 1px solid $border-color; }
-.iw-nav--tabs a:hover                 { text-decoration: none; }
+.iw-nav--tabs a:hover                 { text-decoration: none !important; }      // !important => no underline even in another class underlines <a> on hover (for ex. .iw-page--style-facebook)
 .iw-nav--tabs .iw-nav__item           { margin-bottom: -1px;                     // to hide the bottom border of the active tab
                                         border:        1px solid transparent;    // remove flickering during (de)activating tab
                                         border-top-left-radius:  $border-radius;
