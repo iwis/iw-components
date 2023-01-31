@@ -106,11 +106,9 @@
                    content: ""; }
 
 .sticky-top {
-  @supports (position: sticky) {
-    position: sticky;
-    top: 0;
-    z-index: 1020;  // $zindex-sticky
-  }
+  position: sticky;
+  top: 0;
+  z-index: 1020;  // $zindex-sticky
 }
 
 // ----------------------------------------------------------------------------------------------------

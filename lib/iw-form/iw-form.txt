@@ -61,11 +61,8 @@ Properly displays :valid and :invalid pseudo-classes with green and red color.
   input[type='checkbox'].switch:after       { width: 16px; height: 16px;                           ... transform: translate(-50%, -50%) translateX(var(--x, -50%))     scale(.75); }
   ------------
 
-Tested on Chrome, Firefox, Edge 44 (see below), Edge 83, and mobile Chrome.
+Tested on Chrome, Firefox, Edge, and mobile Chrome.
 
-The "appearance: none;" used in custom radio buttons and checkboxes doesn't work in Edge < 79. Others also have this problem in
-Edge: https://stackoverflow.com/questions/53657488/how-do-i-make-this-checkbox-styling-work-in-edge 
-Works in Edge 80+, which become popular in June 2020 https://www.tenforums.com/windows-10-news/155943-new-kb4559309-microsoft-edge-update-windows-10-version-2004-a.html),
 Thanks to "appearance: none;" we can style <input> element directly, like on https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/. Otherwise additional HTML elements
 need to be added like in Bootstrap.
 
