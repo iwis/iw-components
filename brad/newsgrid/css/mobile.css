@@ -9,7 +9,6 @@
     padding: 0.5rem;
   }
 }
-
 @media (max-width: 599px) {
   .l-heading {
     font-size: 2rem;
@@ -21,5 +20,4 @@
     border-bottom: #495057 dotted 1px;
     padding-bottom: 1rem;
   }
-}
-/*# sourceMappingURL=mobile.css.map */
+}/*# sourceMappingURL=mobile.css.map */

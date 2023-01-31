@@ -179,7 +179,6 @@
   top: 0;
   z-index: 1;
 }
-
 .menu-wrap .toggler {
   position: absolute;
   left: 0;
@@ -190,7 +189,6 @@
   height: 50px;
   cursor: pointer;
 }
-
 .menu-wrap .hamburger {
   position: absolute;
   left: 0;
@@ -200,30 +198,18 @@
   padding: 1rem;
   width: 60px;
   height: 60px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
 .menu-wrap .hamburger > div {
   position: relative;
-  -webkit-transition: all 0.4s;
   transition: all 0.4s;
   background: white;
   width: 100%;
   height: 2px;
 }
-
 .menu-wrap .hamburger > div::before,
 .menu-wrap .hamburger > div::after {
   position: absolute;
@@ -233,32 +219,23 @@
   height: 2px;
   content: "";
 }
-
 .menu-wrap .hamburger > div::before {
   top: -10px;
 }
-
 .menu-wrap .hamburger > div::after {
   top: 10px;
 }
-
 .menu-wrap .toggler:checked + .hamburger > div::before,
 .menu-wrap .toggler:checked + .hamburger > div::after {
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transform: rotate(90deg);
   top: 0;
 }
-
 .menu-wrap .toggler:checked + .hamburger > div {
-  -webkit-transform: rotate(135deg);
-          transform: rotate(135deg);
+  transform: rotate(135deg);
 }
-
 .menu-wrap .toggler:checked:hover + .hamburger > div {
-  -webkit-transform: rotate(225deg);
-          transform: rotate(225deg);
+  transform: rotate(225deg);
 }
-
 .menu-wrap .menu {
   position: fixed;
   left: 0;
@@ -267,89 +244,53 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
 .menu-wrap .menu-overlay {
-  -webkit-box-flex: 0;
-      -ms-flex: none;
-          flex: none;
-  -webkit-transform: scale(0);
-          transform: scale(0);
-  -webkit-transition: all 0.4s;
+  flex: none;
+  transform: scale(0);
   transition: all 0.4s;
   border-radius: 50%;
   background-color: var(--overlay-color);
   width: 200vw;
   height: 200vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
 .menu-wrap .menu-container {
-  -webkit-transition: opacity 0.4s;
   transition: opacity 0.4s;
   opacity: 0;
   max-width: 90vw;
   max-height: 100vh;
   text-align: center;
 }
-
 .menu-wrap .menu-container > ul > li {
   padding: 1rem;
   list-style: none;
   color: white;
   font-size: 1.5rem;
 }
-
 .menu-wrap .menu-container > ul > li > a {
-  -webkit-transition: color 0.4s;
   transition: color 0.4s;
   color: inherit;
   text-decoration: none;
 }
-
 .menu-wrap .menu-container > ul > li > a:hover {
   color: var(--secondary-color);
 }
-
 .menu-wrap .toggler:checked ~ .menu {
   visibility: visible;
 }
-
 .menu-wrap .toggler:checked ~ .menu .menu-overlay {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition-duration: 0.75s;
-          transition-duration: 0.75s;
+  transform: scale(1);
+  transition-duration: 0.75s;
 }
-
 .menu-wrap .toggler:checked ~ .menu .menu-container {
   opacity: 1;
-  -webkit-transition-delay: 0.4s;
-          transition-delay: 0.4s;
-}
-/*# sourceMappingURL=menu.css.map */
+  transition-delay: 0.4s;
+}/*# sourceMappingURL=menu.css.map */

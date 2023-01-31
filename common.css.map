@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAqBA,AAAA,CAAC,EAAE,CAAC,AAAA,QAAQ,EAAE,CAAC,AAAA,OAAO,CAAC;EAAE,UAAU,EAAE,UAAU;CAAI;;AACnD,AAAA,IAAI,CAAmB;EAAE,WAAW,EAAE,GAAG;CAAI",
-    "sources": [
-        "common.scss"
-    ],
-    "names": [],
-    "file": "common.css"
-}
+{"version":3,"sources":["common.scss","common.css"],"names":[],"mappings":"AAqBA;EAAyB,sBAAA;ACnBzB;;ADoBA;EAAyB,gBAAA;AChBzB","file":"common.css"}

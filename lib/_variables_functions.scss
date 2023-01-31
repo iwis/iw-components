@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 /* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
  * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
  * because these variables are defined in Bootstrap using "!default". So here I can change values of variables
@@ -53,7 +55,7 @@ $theme-colors: ("primary":   $primary,
   // YIQ lightness Y value (from 0 to 255) - it is more perceptually relevant than the lightness() function, which
   // returns: (max($R, $G, $B) + min($R, $G, $B)) / 2 / 255, where $R: red($color); $G: green($color); $B: blue($color);
   // see https://en.wikipedia.org/wiki/HSL_and_HSV#Lightness
-  $yiq: ((red($color) * 299) + (green($color) * 587) + (blue($color) * 114)) / 1000;
+  $yiq: math.div((red($color) * 299) + (green($color) * 587) + (blue($color) * 114), 1000);
 
   @if ($yiq >= 150) { @return $body-color; }
   @else             { @return white;     }
@@ -322,9 +324,9 @@ $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px);
   // works for me in brad/portfolio. Unfortunatelly, if padding is set for a container, the container gap is always >= $items-gap/2.
   // We shouldn't set padding for flex items here, because the items can have a background or a border which requires
   // a fine tuned padding.
-  padding: $container-gap - $items-gap/2;  // the -$items-gap/2 compensates the paddings created by the items
+  padding: $container-gap - math.div($items-gap, 2);  // the -$items-gap/2 compensates the paddings created by the items
 
-  > * { margin: $items-gap/2; }  // flex items margins don't collapse, they double up, so the total gap between any 2 items is: 2 * $items-gap/2 = $items-gap
+  > * { margin: math.div($items-gap, 2); }  // flex items margins don't collapse, they double up, so the total gap between any 2 items is: 2 * $items-gap/2 = $items-gap
 }
 
 // -------------------- Other mixins ---------------------

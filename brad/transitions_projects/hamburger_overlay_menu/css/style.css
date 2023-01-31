@@ -165,14 +165,13 @@
  * element in the page layout.
  */
 :root {
-  --primary-color:   rgba( 13, 110, 139, 0.75);
-  --secondary-color: rgba(229, 148,   0, 0.9 );
-  --overlay-color:   rgba( 24,  39,  51, 0.85);
+  --primary-color: rgba( 13, 110, 139, 0.75);
+  --secondary-color: rgba(229, 148, 0, 0.9 );
+  --overlay-color: rgba( 24, 39, 51, 0.85);
 }
 
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -190,26 +189,16 @@ body {
 }
 
 #showcase {
-  background: -webkit-gradient(linear, left top, left bottom, from(var(--primary-color)), to(var(--primary-color))), url("../img/showcase.jpg") no-repeat center center/cover;
   background: linear-gradient(var(--primary-color), var(--primary-color)), url("../img/showcase.jpg") no-repeat center center/cover;
   height: 100vh;
   color: white;
 }
 
 #showcase .showcase-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   text-align: center;
 }
@@ -224,7 +213,6 @@ body {
 
 .btn {
   display: inline-block;
-  -webkit-transition: opacity 1s ease-in-out;
   transition: opacity 1s ease-in-out;
   margin-top: 1rem;
   border: none;
@@ -236,5 +224,4 @@ body {
 
 .btn:hover {
   opacity: 0.7;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
