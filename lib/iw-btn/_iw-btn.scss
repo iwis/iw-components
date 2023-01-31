@@ -1,3 +1,4 @@
+@use "../core" as *;
 @use "sass:color";
 
 .iw-btn                   { display: inline-block;           // otherwise one button can overlay another one if they are in several lines

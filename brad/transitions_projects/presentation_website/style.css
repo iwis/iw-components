@@ -1,19 +1,11 @@
-/* Changes:
- *  - used iw-flex-center() mixin
- *  - used standard colors defined using Sass
- *  - reordered CSS properties
- */ /* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
- * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
- * because these variables are defined in Bootstrap using "!default". So here I can change values of variables
- * used both in iw-components and in Bootstrap.
- *
- * The names of the defined functions are prefixed with "iw-" to avoid any clash with functions from other
- * libraries. See https://github.com/necolas/idiomatic-css#preprocessors-additional-format-considerations
- * and https://sass-guidelin.es/#namespace.
- */
+/* All variables defined in this file have the same name as variables in Bootstrap 4. */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/solid.min.css");
+@import url("https://unpkg.com/tippy.js@6/themes/light.css");
+@import url("https://unpkg.com/tippy.js@6/themes/light-border.css");
+@import url("https://unpkg.com/tippy.js@6/themes/material.css");
+@import url("https://unpkg.com/tippy.js@6/themes/translucent.css");
 /* usage (from Font Awesome documentation):
  *  in HTML: solid:   <i class="fas fa-camera"></i>
  *           brands:  <i class="fab fa-facebook"></i>
@@ -124,10 +116,6 @@
  * Of course, the current element is removed from the normal document flow, so no space is created for the current
  * element in the page layout.
  */
-@import url("https://unpkg.com/tippy.js@6/themes/light.css");
-@import url("https://unpkg.com/tippy.js@6/themes/light-border.css");
-@import url("https://unpkg.com/tippy.js@6/themes/material.css");
-@import url("https://unpkg.com/tippy.js@6/themes/translucent.css");
 .iw-alert {
   margin: 0.4em 0;
   border: 1px solid transparent;
@@ -504,7 +492,6 @@
   content: "\f105";
 }
 
-/* stylelint-disable selector-max-compound-selectors */
 /**
  * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
  * are styled only if the submit button has been clicked.
@@ -513,6 +500,7 @@
  * The form control selector should start exactly with the .iw-form[--some-modifier] CSS class, because this mixin
  * needs to concatenate the .was-validated class to it.
  */
+/* stylelint-disable selector-max-compound-selectors */
 .iw-form {
   margin: 1em 0;
 }
@@ -722,14 +710,6 @@ textarea.iw-form__control {
  * that there are no artifacts visible (like in a radio button or a toggle), then it is best if:
  *  - all widths and heights are a multiple of 4px,
  *  - "transform: ..." functions are used because their result can be non-integer pixels that are displayed correctly.
- */
-/**
- * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
- * are styled only if the submit button has been clicked.
- *
- * The mixin is included in a block of a form control selector in _iw-form.scss and _iw-form-custom-toggles.scss files.
- * The form control selector should start exactly with the .iw-form[--some-modifier] CSS class, because this mixin
- * needs to concatenate the .was-validated class to it.
  */
 .iw-form--custom-toggles .iw-form__check input {
   -webkit-appearance: none;
@@ -1408,6 +1388,11 @@ body {
   padding-left: 0;
 }
 
+/* Changes:
+ *  - used iw-flex-center() mixin
+ *  - used standard colors defined using Sass
+ *  - reordered CSS properties
+ */
 body {
   margin: 0;
   padding: 0;

@@ -12,7 +12,8 @@
  *  - "transform: ..." functions are used because their result can be non-integer pixels that are displayed correctly.
  */
 
-@import "state-indicators";
+@use "../core" as *;
+@use "state-indicators" as *;
 
 .iw-form--custom-toggles .iw-form__check input {
                                                 appearance: none;           // don't use platform-native controls

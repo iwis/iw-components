@@ -15,6 +15,8 @@
 
 /* stylelint-disable order/properties-order */
 
+@use "../../../lib/core" as *;
+
 $item-timing: cubic-bezier(0.2, 1, 0.3, 1);
 
 .items                { @include iw-grid-cols(501px, repeat(3, 1fr), 0);

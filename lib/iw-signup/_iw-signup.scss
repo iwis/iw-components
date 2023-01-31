@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 .iw-signup                { // the component is a centered container with a restricted width
                             box-sizing: border-box;
                             margin: 30px auto;      // center

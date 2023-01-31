@@ -1,8 +1,8 @@
 /* stylelint-disable selector-max-compound-selectors */ // especially because <fieldset> cannot be a grid Layout container in Google Chrome - see iw-form.txt
 
+@use "../core" as *;
+@use "state-indicators" as *;
 @use "sass:color";
-
-@import "state-indicators";
 
 .iw-form                                  { margin: 1em 0; }
 

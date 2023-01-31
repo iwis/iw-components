@@ -1,12 +1,13 @@
-// optionally change primary color (the default is like in Bootstrap)
-// $primary: #3ea1e6;  // ~ hsl(205, 77%, 57%)  https://hackerthemes.com/bootstrap-themes/harbor/
-// $primary: #5371fb;  // ~ hsl(229, 95%, 65%)  https://hackerthemes.com/bootstrap-themes/growth/
-// $primary: #3e5af1;  // ~ hsl(231, 86%, 59%)  https://hackerthemes.com/bootstrap-themes/bubblegum/
-// $primary: #49c1a2;  // ~ hsl(165, 49%, 52%)  Brad's signup page (with the page having 'background-color: #344a72;')
-// $primary: #93cb52;  // ~ hsl( 88, 54%, 56%)  Brad's EdgeLedger website
-// $primary: #f7c08a;  // ~ hsl( 30, 87%, 75%)  Brad's Hotel website
-
-@import "lib/iw-components";
-@import "lib/iw-utilities";  // reimplementation of Bootstrap utilities
+@use "lib/iw-components" with (
+  // optionally change primary color (the default is like in Bootstrap)
+  $primary: #007bff  // the default color in _core.scss
+            // #3ea1e6  // ~ hsl(205, 77%, 57%)  https://hackerthemes.com/bootstrap-themes/harbor/
+            // #5371fb  // ~ hsl(229, 95%, 65%)  https://hackerthemes.com/bootstrap-themes/growth/
+            // #3e5af1  // ~ hsl(231, 86%, 59%)  https://hackerthemes.com/bootstrap-themes/bubblegum/
+            // #49c1a2  // ~ hsl(165, 49%, 52%)  Brad's signup page (with the page having 'background-color: #344a72;')
+            // #93cb52  // ~ hsl( 88, 54%, 56%)  Brad's EdgeLedger website
+            // #f7c08a  // ~ hsl( 30, 87%, 75%)  Brad's Hotel website
+);
+@use "lib/iw-utilities";  // reimplementation of Bootstrap utilities
 
 .iw-timeline { margin-bottom: 1em; }

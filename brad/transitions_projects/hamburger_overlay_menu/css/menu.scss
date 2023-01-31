@@ -15,7 +15,7 @@
  *  - the hamburger HTML and CSS code can be simplified by using "appearance: none;" as in iw-form-custom-togglers.scss
  */
 
-@import "../../../../lib/variables_functions";
+@use "../../../../lib/core" as *;
 
 .menu-wrap {                  $transition-duration: 0.4s;
                               position: fixed; left: 0; top: 0;

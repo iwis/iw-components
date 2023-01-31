@@ -7,7 +7,7 @@
  *  - write iw-badge component and then use it
  */
 
-@import "../../../lib/variables_functions";
+@use "../../../lib/core" as *;
 
 :root                                 { --primary-color:   coral;
                                         --secondary-color: chocolate; }

@@ -18,16 +18,16 @@
  * Usage:
  *   Import this file or/and Bootstrap SCSS file in your style.scss file (if both SCSS files are imported then the last
  *   linked file will have precedence, but anyway they should declare the following CSS classes in the same way).
- *   Before importing this file you can change for example $primary color variable.
- *   ex: $primary: #93cb52; //change primary color
- *       @import '../../../lib/iw-utilities';
+ *   While importing this file you can optionally change for example $primary color variable e.g.:
+ *       @use "../../../lib/iw-utilities" [with ($primary: #93cb52)];
  *   Some of the utilities, for example .container-xl, require * { box-sizing: border-box; }
  */
 
+@forward "core";
+
+@use "core" as *;
 @use "sass:map";
 @use "sass:color";
-
-@import "variables_functions";
 
 // Typography
 .display-1    { font-size: 6rem;    line-height: 1.2; font-weight: 300; }  // makes element look even bigger than heading (and not bolded)
@@ -46,11 +46,11 @@
 
 // Contextual colors and background colors
 @each $color, $value in $theme-colors {
-  .text-#{$color}                        { color:            $value              !important; }
+  .text-#{$color}                        { color:            $value                                 !important; }
 
   // iwis: I cannot set a foreground color here, because it won't apply to inner <a> tags if I used "a { color: ...; }" previously
   //       I don't use ".bg-... a {}", because it has too large specificity and it will make a problem in iw-btn component
-  .bg-#{$color}                          { background-color: $value              !important; }
+  .bg-#{$color}                          { background-color: $value                                 !important; }
 
   a.text-#{$color}    { &:hover, &:focus { color:            color.adjust($value, $lightness: -15%) !important; } }
   a.bg-#{$color},
@@ -108,11 +108,9 @@
                    display: block;
                    content: ""; }
 
-.sticky-top {
-  position: sticky;
-  top: 0;
-  z-index: 1020;  // $zindex-sticky
-}
+.sticky-top { position: sticky;
+              top: 0;
+              z-index: 1020; } // $zindex-sticky
 
 // ----------------------------------------------------------------------------------------------------
 

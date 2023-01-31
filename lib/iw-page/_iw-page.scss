@@ -1,5 +1,7 @@
 // stylelint-disable selector-max-id
 
+@use "../core" as *;
+
 // phones, tablets and desktops
 
 body                                          { margin: 0;            // reset default "margin: 8px" of <body>

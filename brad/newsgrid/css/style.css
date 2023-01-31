@@ -1,38 +1,11 @@
-/* Code source and description: Section 12: "NewsGrid Website" in the "Modern HTML & CSS From The Beginning (Including Sass)" course by Brad Traversy
- *                              https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285632
- *
- * Changes:
- *  - simpler or shorter code thanks to:
- *     - using standard colors defined with Sass
- *     - using iw-utilities:  .sticky-top, .container-xl, .py-4, .bg-..., .text-white
- *     - using iw-components: .iw-btn
- *     - using mixins: iw-flex-center(), iw-flex-scatter(), and iw-grid-cols(...)
- *     - using linear-gradient for #showcase background overlay
- *     - using flex instead of grid for "#main-nav .container-xl" and "#showcase .showcase-container", as suggested in the course
- *     - changed formatting
- *     - adding comments
- *  - properties ordered similarly to https://rhodesmill.org/brandon/2011/concentric-css/
- *  - other smaller changes
- *
- * Todo:
- *  - use additional components: badge (.category), .card?
- *  - mobile first?
- *
- * Notes:
- *  - Brad uses rem instead of em
- */
-/* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
- * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
- * because these variables are defined in Bootstrap using "!default". So here I can change values of variables
- * used both in iw-components and in Bootstrap.
- *
- * The names of the defined functions are prefixed with "iw-" to avoid any clash with functions from other
- * libraries. See https://github.com/necolas/idiomatic-css#preprocessors-additional-format-considerations
- * and https://sass-guidelin.es/#namespace.
- */
+/* All variables defined in this file have the same name as variables in Bootstrap 4. */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/solid.min.css");
+@import url("https://unpkg.com/tippy.js@6/themes/light.css");
+@import url("https://unpkg.com/tippy.js@6/themes/light-border.css");
+@import url("https://unpkg.com/tippy.js@6/themes/material.css");
+@import url("https://unpkg.com/tippy.js@6/themes/translucent.css");
 /* usage (from Font Awesome documentation):
  *  in HTML: solid:   <i class="fas fa-camera"></i>
  *           brands:  <i class="fab fa-facebook"></i>
@@ -143,13 +116,6 @@
  * Of course, the current element is removed from the normal document flow, so no space is created for the current
  * element in the page layout.
  */
-@import url("https://unpkg.com/tippy.js@6/themes/light.css");
-@import url("https://unpkg.com/tippy.js@6/themes/light-border.css");
-@import url("https://unpkg.com/tippy.js@6/themes/material.css");
-@import url("https://unpkg.com/tippy.js@6/themes/translucent.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.min.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.min.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/solid.min.css");
 .iw-alert {
   margin: 0.4em 0;
   border: 1px solid transparent;
@@ -526,7 +492,6 @@
   content: "\f105";
 }
 
-/* stylelint-disable selector-max-compound-selectors */
 /**
  * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
  * are styled only if the submit button has been clicked.
@@ -535,6 +500,7 @@
  * The form control selector should start exactly with the .iw-form[--some-modifier] CSS class, because this mixin
  * needs to concatenate the .was-validated class to it.
  */
+/* stylelint-disable selector-max-compound-selectors */
 .iw-form {
   margin: 1em 0;
 }
@@ -744,14 +710,6 @@ textarea.iw-form__control {
  * that there are no artifacts visible (like in a radio button or a toggle), then it is best if:
  *  - all widths and heights are a multiple of 4px,
  *  - "transform: ..." functions are used because their result can be non-integer pixels that are displayed correctly.
- */
-/**
- * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
- * are styled only if the submit button has been clicked.
- *
- * The mixin is included in a block of a form control selector in _iw-form.scss and _iw-form-custom-toggles.scss files.
- * The form control selector should start exactly with the .iw-form[--some-modifier] CSS class, because this mixin
- * needs to concatenate the .was-validated class to it.
  */
 .iw-form--custom-toggles .iw-form__check input {
   -webkit-appearance: none;
@@ -1450,129 +1408,9 @@ body {
  * Usage:
  *   Import this file or/and Bootstrap SCSS file in your style.scss file (if both SCSS files are imported then the last
  *   linked file will have precedence, but anyway they should declare the following CSS classes in the same way).
- *   Before importing this file you can change for example $primary color variable.
- *   ex: $primary: #93cb52; //change primary color
- *       @import '../../../lib/iw-utilities';
+ *   While importing this file you can optionally change for example $primary color variable e.g.:
+ *       @use "../../../lib/iw-utilities" [with ($primary: #93cb52)];
  *   Some of the utilities, for example .container-xl, require * { box-sizing: border-box; }
- */
-/* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
- * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
- * because these variables are defined in Bootstrap using "!default". So here I can change values of variables
- * used both in iw-components and in Bootstrap.
- *
- * The names of the defined functions are prefixed with "iw-" to avoid any clash with functions from other
- * libraries. See https://github.com/necolas/idiomatic-css#preprocessors-additional-format-considerations
- * and https://sass-guidelin.es/#namespace.
- */
-/* usage (from Font Awesome documentation):
- *  in HTML: solid:   <i class="fas fa-camera"></i>
- *           brands:  <i class="fab fa-facebook"></i>
- *  in CSS:
- *    HTML part: <button class="class1"></button>   (button for example)
- *    CSS  part: solid:   .class1::before { font-family: "Font Awesome 5 Free";   content: "\f030"; }
- *               brands:  .class1::before { font-family: "Font Awesome 5 Brands"; content: "\f09a"; }
- *
- * icon modifier classes:
- *   change size: fa-xs   0.75em
-                  fa-sm   0.875em
-                  fa-lg   1.33em  also applies vertical-align: -25%
-                  fa-2x   2em
-                  ...     ...
-                  fa-10x  10em
- *   rotate/flip: fa-rotate-{90|180|270}
- *                fa-flip-{horizontal|vertical|both}
- *   animate:     fa-spin
- *                fa-pulse
- *                see https://fontawesome.com/how-to-use/on-the-web/styling/animating-icons
- */
-/**
- * Creates an isosceles triangle pointing left, right, down, or up, with the given: length, half the width and the color.
- *
- * Example: @include iw-triangle-left(16px, 8px, blue);
- * Usage:
- *  - can be included in an element, or in a ::before/::after pseudo-element (then add content: "";)
- *  - can be positioned
- * How it works: https://www.youtube.com/watch?v=4cXgXZ3Tf0s
- */
-/**
- * Creates a circle with the given color and the size.
- * If size isn't given, it is like if the width and height properties weren't set, thus the circle size
- * comes from its content.
- * Example: @include iw-circle(blue, 16px);
- * Usage:
- *  - can be included in an element, or in a ::before/::after pseudo-element (then add: content: "";)
- *  - can be positioned
- */
-/**
- * Behaves like iw-circle mixin, but additionally prepares the circle for displaying a single character in it (Font Awesome icon,
- * leter, digit etc.) by centering this character.
- *
- * Usage:
- *   <i class="inline fab fa-facebook"></i>
- *
- *   .inline.fab { @include iw-circled-sign(lightgreen, 96px);
- *                 // vertical-align: middle;  // optional
- *                 // font-size: $size/2;      // optional, can be default or for example set by fa-4x for Font Awesome icon
- *               }
- * Source: https://stackoverflow.com/questions/41532908/make-font-awesome-icons-in-a-circle-border-with-right-11-ratio
- * This centering method has been used by Brad Traversy in the "Modern HTML & CSS From The Beginning (Including Sass)" course
- * https://www.udemy.com/course/modern-html-css-from-the-beginning/
- */
-/**
- * Use flex to center the child(ren) of the current element along both axes: the main axis and the cross axis.
- * After calling "@include iw-flex-center();":
- *  - optionally set the height and the width of the current element
- *  - optionally set "text-align: center;" to center text inside <p>, <h1> etc.
- *  - optionally set "flex-direction: row;" to lay out children horizontally
- *  - optionally set "flex: none;" on a flex item to not allow to shrink this child along the main axis
- * Todo: add $min argument similarly as in iw-flex-scatter/iw-flex-equal($min)
- */
-/**
- * Uses flex to lay out the children of the current element vertically by default, and horizontally on the given screen and larger.
- * If there is a free space, scatters the children along the main axis and centers them along the cross axis.
- */
-/**
- * Uses flex to lay out the children of the current element vertically by default, and horizontally on the given screen and larger.
- * If there is enough free space, the children will have the same length along the main axis (by using "flex: 1;").
- * Note: The children have "flex-grow: 1", so justify-content has no effect, and iw-flex-center/scatter() should not be used.
- */
-/**
- * A simple grid view with the given columns on the given screen and larger [, and the given gap between columns and rows]. On smaller
- * screens, $cols defaults to "none", i.e. as if there were no grid, or the grid had only one column with 1fr/auto width [1], because
- * on smaller screens one column usually looks the best.
- * To obtain different grid layouts for different resolutions you can call the iw-grid-cols() mixin several times with different
- * $min arguments in one CSS rule, for example:
- *   .class1 { @include iw-grid-cols( 768px, 1fr 1fr,     1rem);
- *             @include iw-grid-cols(1200px, 1fr 1fr 1fr, 1rem); }
- *
- * [1] If there is no grid-template-areas property, there is no explicit grid. By default, grid-auto-columns is auto. One auto column
- * behaves as if there were no grid.
- *
- * Examples (with description for screens at least 768px wide):
- *   @include iw-grid-cols(768px, auto 1fr);                - 2 columns: the 1st column width is the width of the longest element in this column
- *   @include iw-grid-cols(768px, fit-content(350px) 1fr);  - 2 columns: the 1st column width is the width of the longest element in this column, but no more than 350px
- *   @include iw-grid-cols(768px, 1fr 2fr);                 - 2 columns with widths: 33.3% and 66.6%
- *   @include iw-grid-cols(768px, 1fr 1fr 1fr);             - 3 columns with equal width
- *   @include iw-grid-cols(768px, auto auto auto auto);     - todo: check
- *
- *   @include iw-grid-cols(768px, 5fr 2fr, 1.5rem);         - with the 1.5rem gap between both rows and columns
- *   @include iw-grid-cols(768px, 5fr 2fr, 1.5rem 1rem);    - with the 1.5rem gap between rows and the 1rem gap between columns
- */
-/**
- * Creates an overlay over the parent element with the given background color and opacity (less than 1).
- * The parent element needs to be positioned (i.e. not static).
- * See: https://www.w3schools.com/howto/howto_css_overlay.asp
- * Used in "Modern HTML & CSS From The Beginning (Including Sass)" course by Brad Traversy, for example in portfolio website.
- *
- * Example usage:
- *   .class1        { position: relative; }
- *   .class1::after { @include iw-overlay(black, 0.9); }
- */
-/**
- * Use absolute positioning and the transform property to center the CURRENT element both vertically and horizonatally
- * within the closest positioned (i.e. not static) ancestor, if any; or the whole document, otherwise.
- * Of course, the current element is removed from the normal document flow, so no space is created for the current
- * element in the page layout.
  */
 .display-1 {
   font-size: 6rem;
@@ -4919,6 +4757,29 @@ button.bg-dark:focus {
     align-self: stretch !important;
   }
 }
+/* Code source and description: Section 12: "NewsGrid Website" in the "Modern HTML & CSS From The Beginning (Including Sass)" course by Brad Traversy
+ *                              https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13285632
+ *
+ * Changes:
+ *  - simpler or shorter code thanks to:
+ *     - using standard colors defined with Sass
+ *     - using iw-utilities:  .sticky-top, .container-xl, .py-4, .bg-..., .text-white
+ *     - using iw-components: .iw-btn
+ *     - using mixins: iw-flex-center(), iw-flex-scatter(), and iw-grid-cols(...)
+ *     - using linear-gradient for #showcase background overlay
+ *     - using flex instead of grid for "#main-nav .container-xl" and "#showcase .showcase-container", as suggested in the course
+ *     - changed formatting
+ *     - adding comments
+ *  - properties ordered similarly to https://rhodesmill.org/brandon/2011/concentric-css/
+ *  - other smaller changes
+ *
+ * Todo:
+ *  - use additional components: badge (.category), .card?
+ *  - mobile first?
+ *
+ * Notes:
+ *  - Brad uses rem instead of em
+ */
 * {
   box-sizing: border-box;
   margin: 0;

@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 .iw-table                                         { margin: 1em 0;      // external top & bottom margins of component
                                                     border-collapse: collapse; }
 

@@ -1,18 +1,18 @@
-@import "variables_functions";
+@forward "core";
 
 // all iw-components
-@import "iw-alert/iw-alert";
-@import "iw-btn/iw-btn";
-@import "iw-carousel/iw-carousel";
-@import "iw-carousel-mul/iw-carousel-mul";
-@import "iw-form/iw-form";
-@import "iw-form/iw-form-custom-toggles";
-@import "iw-nav/iw-nav";
-@import "iw-navbar/iw-navbar";
-@import "iw-page/iw-page";
-@import "iw-signup/iw-signup";
-@import "iw-table/iw-table";
-@import "iw-timeline/iw-timeline";
-@import "iw-tooltip/iw-tooltip";
-@import "iw-tooltip-cust/iw-tooltip-cust";
-@import "iw-tree/iw-tree";
+@use "iw-alert/iw-alert";
+@use "iw-btn/iw-btn";
+@use "iw-carousel/iw-carousel";
+@use "iw-carousel-mul/iw-carousel-mul";
+@use "iw-form/iw-form";
+@use "iw-form/iw-form-custom-toggles";
+@use "iw-nav/iw-nav";
+@use "iw-navbar/iw-navbar";
+@use "iw-page/iw-page";
+@use "iw-signup/iw-signup";
+@use "iw-table/iw-table";
+@use "iw-timeline/iw-timeline";
+@use "iw-tooltip/iw-tooltip";
+@use "iw-tooltip-cust/iw-tooltip-cust";
+@use "iw-tree/iw-tree";

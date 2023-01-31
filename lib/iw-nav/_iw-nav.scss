@@ -1,5 +1,7 @@
 // stylelint-disable selector-max-id
 
+@use "../core" as *;
+
 .iw-nav                               { display: flex;
                                         flex-flow: column nowrap;
                                         margin: 0.7em 0;                         // external top & bottom margins of component

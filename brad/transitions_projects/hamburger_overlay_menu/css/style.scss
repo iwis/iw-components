@@ -6,7 +6,7 @@
  *     - using the iw-flex-center() mixin
  */
 
-@import "../../../../lib/variables_functions";
+@use "../../../../lib/core" as *;
 
 :root                         { --primary-color:   rgba( 13, 110, 139, 0.75);
                                 --secondary-color: rgba(229, 148,   0, 0.9 );

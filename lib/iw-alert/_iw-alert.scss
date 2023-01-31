@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 .iw-alert                 { margin: 0.4em 0;                    // external top & bottom margins of component
                             border: 1px solid transparent;      // color can be set by iw-alert modifier
                             border-radius: $border-radius;

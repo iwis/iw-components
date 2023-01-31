@@ -1,33 +1,4 @@
-/* Source code and description: https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13875758
- * based on: https://mobirise.com/html-templates/profile/
- *
- * Changed:
- *  - simpler selectors by removing nesting: https://sass-guidelin.es/#selector-nesting
- *  - used btn class besides btn-... classes (BEM standard)
- *  - used "transform: scale(...);" instead of changing dimensions:
- *    https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13875776#questions/8116965
- *  - used mixins: iw-circle(), iw-grid-cols(), iw-flex-center(), iw-flex-scatter(), and iw-overlay()
- *  - used Bootstrap color variables: $primary, $gray-100, $gray-800, $border-color
- *  - "grid-gap" changed to "gap"
- *  - order of CSS properties
- *  - formatting
- *  - other smaller changes
- *
- * Todo:
- *  - optionally integrate with iw-utilities
- *  - optionally mobile first
- *  - make a "progress" component
- *  - other
- */
-/* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
- * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
- * because these variables are defined in Bootstrap using "!default". So here I can change values of variables
- * used both in iw-components and in Bootstrap.
- *
- * The names of the defined functions are prefixed with "iw-" to avoid any clash with functions from other
- * libraries. See https://github.com/necolas/idiomatic-css#preprocessors-additional-format-considerations
- * and https://sass-guidelin.es/#namespace.
- */
+/* All variables defined in this file have the same name as variables in Bootstrap 4. */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/solid.min.css");
@@ -318,6 +289,27 @@
   font-size: 2rem;
 }
 
+/* Source code and description: https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13875758
+ * based on: https://mobirise.com/html-templates/profile/
+ *
+ * Changed:
+ *  - simpler selectors by removing nesting: https://sass-guidelin.es/#selector-nesting
+ *  - used btn class besides btn-... classes (BEM standard)
+ *  - used "transform: scale(...);" instead of changing dimensions:
+ *    https://www.udemy.com/course/modern-html-css-from-the-beginning/learn/lecture/13875776#questions/8116965
+ *  - used mixins: iw-circle(), iw-grid-cols(), iw-flex-center(), iw-flex-scatter(), and iw-overlay()
+ *  - used Bootstrap color variables: $primary, $gray-100, $gray-800, $border-color
+ *  - "grid-gap" changed to "gap"
+ *  - order of CSS properties
+ *  - formatting
+ *  - other smaller changes
+ *
+ * Todo:
+ *  - optionally integrate with iw-utilities
+ *  - optionally mobile first
+ *  - make a "progress" component
+ *  - other
+ */
 * {
   margin: 0;
   padding: 0;

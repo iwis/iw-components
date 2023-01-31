@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 .iw-carousel                        { position: relative;
                                       margin: 1em;                             // external margins of component
                                       text-align: center; }

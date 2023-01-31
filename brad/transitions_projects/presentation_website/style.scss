@@ -4,7 +4,7 @@
  *  - reordered CSS properties
  */
 
-@import "../../../lib/iw-components";
+@use "../../../lib/iw-components" as *;
 
 body            { margin: 0;
                   padding: 0;

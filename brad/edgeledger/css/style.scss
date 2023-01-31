@@ -7,11 +7,9 @@
 //          more clean setting of gaps in flex: https://stackoverflow.com/a/20653092/4592248
 //          other changes to make code more logical and more DRY
 
-$primary: #93cb52; // change primary color
-
 // use a reimplementation of Bootstrap utility, form and btn classes
-@import "../../../lib/iw-components";
-@import "../../../lib/iw-utilities";
+@use "../../../lib/iw-components" as * with ($primary: #93cb52);  // change primary color
+@use "../../../lib/iw-utilities";
 
 /* Main styling */
 *               { box-sizing: border-box;

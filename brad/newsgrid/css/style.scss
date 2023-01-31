@@ -22,13 +22,12 @@
  *  - Brad uses rem instead of em
  */
 
-// change the primary and secondary colors
-$primary:   #c72727;  // ~ hsl( 0,  67%, 47%)
-$secondary: #f99500;  // ~ hsl(36, 100%, 49%)
-
 // use a reimplementation of Bootstrap utility classes, and btn class; use iw-flex-center() mixin
-@import "../../../lib/iw-components";
-@import "../../../lib/iw-utilities";
+@use "../../../lib/iw-components" as * with (
+  $primary:   #c72727,  // change the primary   color to ~ hsl( 0,  67%, 47%)
+  $secondary: #f99500   // change the secondary color to ~ hsl(36, 100%, 49%)
+);
+@use "../../../lib/iw-utilities";
 
 *             { box-sizing: border-box;
                 margin: 0;

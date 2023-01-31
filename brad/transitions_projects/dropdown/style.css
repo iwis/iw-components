@@ -1,20 +1,4 @@
-/* Changes:
- *  - used Sass: color variables from Bootstrap, iw-flex-center() mixin
- *  - formatting
- * Todo:
- *  - change to BEM component - it needs to be integrated with iw-navbar and maybe with iw-nav
- *                              see also Bootstrap's .nav-item and .dropdown
- *  - write iw-badge component and then use it
- */
-/* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
- * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
- * because these variables are defined in Bootstrap using "!default". So here I can change values of variables
- * used both in iw-components and in Bootstrap.
- *
- * The names of the defined functions are prefixed with "iw-" to avoid any clash with functions from other
- * libraries. See https://github.com/necolas/idiomatic-css#preprocessors-additional-format-considerations
- * and https://sass-guidelin.es/#namespace.
- */
+/* All variables defined in this file have the same name as variables in Bootstrap 4. */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/solid.min.css");
@@ -127,6 +111,14 @@
  * within the closest positioned (i.e. not static) ancestor, if any; or the whole document, otherwise.
  * Of course, the current element is removed from the normal document flow, so no space is created for the current
  * element in the page layout.
+ */
+/* Changes:
+ *  - used Sass: color variables from Bootstrap, iw-flex-center() mixin
+ *  - formatting
+ * Todo:
+ *  - change to BEM component - it needs to be integrated with iw-navbar and maybe with iw-nav
+ *                              see also Bootstrap's .nav-item and .dropdown
+ *  - write iw-badge component and then use it
  */
 :root {
   --primary-color: coral;

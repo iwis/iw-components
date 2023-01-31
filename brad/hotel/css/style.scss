@@ -8,11 +8,9 @@
 //          added form validation
 //          centering using iw-flex-center() mixin
 
-$primary: #f7c08a;  // change primary color
-
 // use a reimplementation of Bootstrap utility, form and btn classes
-@import "../../../lib/iw-components";
-@import "../../../lib/iw-utilities";
+@use "../../../lib/iw-components" as * with ($primary: #f7c08a);  // change primary color
+@use "../../../lib/iw-utilities";
 
 /* Main styling */
 *               { box-sizing: border-box;

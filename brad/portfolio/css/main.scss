@@ -20,15 +20,15 @@
  *  - other
  */
 
-// Change colors
-$primary:      #ffbc00;
-$gray-100:     #f4f4f4;  // remove a Bootstrap blue-ish tint, hsl(0, 0%, 96%)
-$gray-800:     #333;     // remove a Bootstrap blue-ish tint, hsl(0, 0%, 20%)
-$border-color: #ccc;     // remove a Bootstrap blue-ish tint, hsl(0, 0%, 80%)
-
-@import "../../../lib/variables_functions";
-@import "utilities";
-@import "item_grid";                         // work.html page style
+@use "../../../lib/core" as * with (
+  // change colors
+  $primary:      #ffbc00,
+  $gray-100:     #f4f4f4,  // remove a Bootstrap blue-ish tint, hsl(0, 0%, 96%)
+  $gray-800:     #333,     // remove a Bootstrap blue-ish tint, hsl(0, 0%, 20%)
+  $border-color: #ccc      // remove a Bootstrap blue-ish tint, hsl(0, 0%, 80%)
+);
+@use "utilities";
+@use "item_grid";                           // work.html page style
 
 // ---------- General Styles ------------------------------------------------------------
 *           { margin: 0;
@@ -175,6 +175,47 @@ img         { width: 100%; }
   &:hover                         { background: $primary; }
 }
 
-// --------------------------------------------------------------------------------------
+// ---------- Media ---------------------------------------------------------------------
+@media (min-width: 501px) {
+  #main-nav                               { align-items: stretch; }  // move up because of border-bottom
+  #main-nav li                            { padding: 1rem 1.5rem; }  // larger horizontal distance
 
-@import "media";  // media queries
+  #about-a .bio,
+  #contact-a .message-input               { grid-column: span 2; }
+  #contact-a .subject-input               { grid-row: 2; }
+}
+
+@media (max-width: 800px) {  // Tablets & smaller
+  #header-home                            { height: 30rem; }     // smaller
+  #header-home .header-content            { padding-top: 5rem; }
+}
+
+@media (max-width: 500px) {  // Smartphones
+  #header-home                            { border-bottom: 3px solid $primary;
+                                            background-position: 20% 30%;
+                                            height: 10rem; }
+  #header-home .header-content            { display: none; }
+  #header-inner                           { height: 10rem; }  // the same as for #header-home
+
+  // Home
+  #home-a .specials div:not(:last-child)  { border-bottom: 1px iw-theme-color("light") solid;
+                                            padding-bottom: 1rem; }
+  #home-b .stats div                      { padding: 2rem 0 1rem; }  // smaller padding
+
+  // About
+  #about-c                                { display: none; }  // hide logos
+
+  // Contact
+  #contact-b div:not(:last-child)         { margin-bottom: 1rem;
+                                            border-bottom: 1px #555 solid;
+                                            padding-bottom: 1rem; }
+  #contact-c h1                           { font-size: 2rem; }  // smaller font
+}
+
+@media (max-height: 580px) {  // Landscape
+  #header-home .header-content            { padding-top: 3rem; }  // in the middle
+}
+
+@media (max-height: 330px) {  // Landscape iPhone 5
+  #header-home .header-content h1         { font-size: 2rem; }  // smaller font
+}

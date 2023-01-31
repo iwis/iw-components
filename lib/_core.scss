@@ -2,15 +2,7 @@
 @use "sass:map";
 @use "sass:color";
 
-/* If the name of a variable defined in this file isn't prefixed with "iw-", then Bootstrap 4 also defines it.
- * Bootstrap can be imported AFTER the whole iw-components.scss library - it will not overwrite variables,
- * because these variables are defined in Bootstrap using "!default". So here I can change values of variables
- * used both in iw-components and in Bootstrap.
- *
- * The names of the defined functions are prefixed with "iw-" to avoid any clash with functions from other
- * libraries. See https://github.com/necolas/idiomatic-css#preprocessors-additional-format-considerations
- * and https://sass-guidelin.es/#namespace.
- */
+/* All variables defined in this file have the same name as variables in Bootstrap 4. */
 
 // ------------------------------- Colors -------------------------------------
 

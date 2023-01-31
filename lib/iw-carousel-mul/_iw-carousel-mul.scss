@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 .iw-carousel-mul                        { box-sizing: content-box;  // component width without padding is set in HTML
                                           position: relative;
                                           margin: 1em 0;            // external top & bottom margins of component
