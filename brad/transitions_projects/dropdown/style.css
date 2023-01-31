@@ -113,43 +113,6 @@
  *   @include iw-grid-cols(768px, 5fr 2fr, 1.5rem 1rem);    - with the 1.5rem gap between rows and the 1rem gap between columns
  */
 /**
- * (todo: remove when the gap property in flex container will be supported by all web browsers)
- *
- * Sets a space between flex items to $items-gap, and the distance between the flex container and its items to $container-gap.
- *
- * Usage:
- *   .flex-container { display: flex;
- *                     @include iw-flex-gap(1rem, 0.25rem); }
- *
- *   <div class="flex-container [container-xl]">
- *     <div [class="flex-item"]> ... </div>
- *     <div [class="flex-item"]> ... </div>
- *   </div>
- *
- * If needed, the following version can be created: iw-flex-{row|column}-gap($items-gap, $container-gap: 0), to set gaps only between rows or columns.
- *
- * The mixin is a hack, therefore, it has the following disadvantages:
- *  - The minimum $container-gap is $items-gap/2.
- *      See the implementation to understand why.
- *  - It is better to use "box-sizing: border-box;".
- *      If we use the Bootstrap .container-xl utility class with a horizontal padding to restrict the width of a content on a page,
- *      and one of this containers has also the flex-container class with the @include iw-flex-gap(...), then it is better if
- *      "box-sizing: border-box;" is used. Thanks to it, the content of the .container-xl containers, will have the same width.
- *      This oddity results again from the usage of the hack, and won't have a place when all web browsers will implement
- *      the gap property in flex.
- *
- * When all web browser will support the gap property in flex containers https://caniuse.com/#feat=flexbox-gap,
- * then the mixin can be replaced with the following code:
- *   .flex-container { display: flex;
- *                     gap: 1rem;
- *                     margin: 0.25rem; }  // or "padding: 0.25rem;" if the container has a border or a background color
- * As of July 2020 we still wait at least for Safari:
- *   https://www.chromestatus.com/feature/6031643502444544
- *   https://b.webkit.org/show_bug.cgi?id=206767
- *
- * Other flex gap hacks can be found here: https://stackoverflow.com/questions/20626685/better-way-to-set-distance-between-flexbox-items
- */
-/**
  * Creates an overlay over the parent element with the given background color and opacity (less than 1).
  * The parent element needs to be positioned (i.e. not static).
  * See: https://www.w3schools.com/howto/howto_css_overlay.asp

@@ -105,43 +105,6 @@
  *   @include iw-grid-cols(768px, 5fr 2fr, 1.5rem 1rem);    - with the 1.5rem gap between rows and the 1rem gap between columns
  */
 /**
- * (todo: remove when the gap property in flex container will be supported by all web browsers)
- *
- * Sets a space between flex items to $items-gap, and the distance between the flex container and its items to $container-gap.
- *
- * Usage:
- *   .flex-container { display: flex;
- *                     @include iw-flex-gap(1rem, 0.25rem); }
- *
- *   <div class="flex-container [container-xl]">
- *     <div [class="flex-item"]> ... </div>
- *     <div [class="flex-item"]> ... </div>
- *   </div>
- *
- * If needed, the following version can be created: iw-flex-{row|column}-gap($items-gap, $container-gap: 0), to set gaps only between rows or columns.
- *
- * The mixin is a hack, therefore, it has the following disadvantages:
- *  - The minimum $container-gap is $items-gap/2.
- *      See the implementation to understand why.
- *  - It is better to use "box-sizing: border-box;".
- *      If we use the Bootstrap .container-xl utility class with a horizontal padding to restrict the width of a content on a page,
- *      and one of this containers has also the flex-container class with the @include iw-flex-gap(...), then it is better if
- *      "box-sizing: border-box;" is used. Thanks to it, the content of the .container-xl containers, will have the same width.
- *      This oddity results again from the usage of the hack, and won't have a place when all web browsers will implement
- *      the gap property in flex.
- *
- * When all web browser will support the gap property in flex containers https://caniuse.com/#feat=flexbox-gap,
- * then the mixin can be replaced with the following code:
- *   .flex-container { display: flex;
- *                     gap: 1rem;
- *                     margin: 0.25rem; }  // or "padding: 0.25rem;" if the container has a border or a background color
- * As of July 2020 we still wait at least for Safari:
- *   https://www.chromestatus.com/feature/6031643502444544
- *   https://b.webkit.org/show_bug.cgi?id=206767
- *
- * Other flex gap hacks can be found here: https://stackoverflow.com/questions/20626685/better-way-to-set-distance-between-flexbox-items
- */
-/**
  * Creates an overlay over the parent element with the given background color and opacity (less than 1).
  * The parent element needs to be positioned (i.e. not static).
  * See: https://www.w3schools.com/howto/howto_css_overlay.asp
@@ -171,7 +134,7 @@
   padding: 0.75em;
 }
 
-/* Color styles of alert. Colors are the same as in Bootstrap, ex.: .iw-alert--{success|warning|...} */
+/* Color styles of alert. Colors are the same as in Bootstrap, e.g.: .iw-alert--{success|warning|...} */
 .iw-alert--primary {
   border-color: #fdedde;
   background-color: #fdf2e8;
@@ -540,7 +503,8 @@
   content: "\f105";
 }
 
-/* stylelint-disable selector-max-compound-selectors */ /**
+/* stylelint-disable selector-max-compound-selectors */
+/**
  * Styles :focus, :valid, :invalid, and :checked pseudo-classes of form controls. The :valid, :invalid, and :checked
  * are styled only if the submit button has been clicked.
  *
@@ -766,126 +730,126 @@ textarea.iw-form__control {
  * The form control selector should start exactly with the .iw-form[--some-modifier] CSS class, because this mixin
  * needs to concatenate the .was-validated class to it.
  */
-@supports ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
-  .iw-form--custom-toggles .iw-form__check input {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-    box-sizing: border-box;
-    display: inline-block;
-    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
-    border: 1px solid #adb5bd;
-    height: 16px;
-    vertical-align: middle;
-  }
-  .iw-form--custom-toggles .iw-form__check input:disabled {
-    background: #f8f9fa;
-    opacity: 0.9;
-  }
-  .iw-form--custom-toggles .iw-form__check input:not(:disabled) {
-    background: white;
-  }
-  .iw-form--custom-toggles .iw-form__check input:disabled:checked {
-    background: #dee2e6;
-  }
-  .iw-form--custom-toggles .iw-form__check input:not(:disabled):checked {
-    background: #f7c08a;
-    border-color: #f7c08a;
-  }
-  .iw-form--custom-toggles .iw-form__check input:checked {
-    --opacity: 1;
-    --x: 50%;
-    --color: white;
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=radio] {
-    border-radius: 50%;
-    width: 16px;
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=checkbox]:not(.iw-form__switch) {
-    border-radius: 5px;
-    width: 16px;
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=checkbox].iw-form__switch {
-    border-radius: 8px;
-    width: 32px;
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=radio]::after, .iw-form--custom-toggles .iw-form__check input[type=checkbox]::after {
-    box-sizing: border-box;
-    position: relative;
-    left: 50%;
-    top: 50%;
-    display: block;
-    transition: transform 0.15s, opacity 0.15s;
-    height: 16px;
-    content: "";
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=radio]::after {
-    border-radius: 50%;
-    background: white;
-    width: 16px;
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=checkbox]:not(.iw-form__switch)::after {
-    border: 4px solid white;
-    border-left: 0;
-    border-top: 0;
-    width: 10px;
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=checkbox].iw-form__switch::after {
-    border-radius: 50%;
-    background: var(--color, #adb5bd);
-    width: 16px;
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=radio]::after {
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: var(--opacity, 0);
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=checkbox]:not(.iw-form__switch)::after {
-    transform: translate(-50%, -50%) translateY(-10%) rotate(43deg) scale(0.5);
-    opacity: var(--opacity, 0);
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=checkbox].iw-form__switch::after {
-    transform: translate(-50%, -50%) translateX(var(--x, -50%)) scale(0.75);
-    opacity: 1;
-  }
-  .iw-form--custom-toggles .iw-form__check input[type=checkbox].iw-form__switch:disabled:not(:checked)::after {
-    opacity: 0.6;
-  }
-  .iw-form--custom-toggles .iw-form__check input:focus {
-    outline: none;
-  }
-  .iw-form--custom-toggles .iw-form__check input:invalid {
-    outline: none;
-    box-shadow: none;
-  }
-  .iw-form--custom-toggles .iw-form__check input:focus {
-    border-color: #f9d0a7;
-    box-shadow: 0 0 0 0.2rem rgba(247, 192, 138, 0.25);
-  }
-  .was-validated.iw-form--custom-toggles .iw-form__check input:valid {
-    border-color: #28a745;
-  }
-  .was-validated.iw-form--custom-toggles .iw-form__check input:invalid {
-    border-color: #dc3545;
-  }
-  .was-validated.iw-form--custom-toggles .iw-form__check input:valid:focus {
-    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-  }
-  .was-validated.iw-form--custom-toggles .iw-form__check input:invalid:focus {
-    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
-  }
-  .was-validated.iw-form--custom-toggles .iw-form__check input:valid:checked {
-    background: rgba(40, 167, 69, 0.5);
-  }
-  .was-validated.iw-form--custom-toggles .iw-form__check input:invalid:checked {
-    background: rgba(220, 53, 69, 0.5);
-  }
-  .iw-form--custom-toggles .iw-form__check input + label {
-    display: inline-block;
-    margin-left: 0.25em;
-    line-height: 1.5;
-    vertical-align: middle;
-  }
+.iw-form--custom-toggles .iw-form__check input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  box-sizing: border-box;
+  display: inline-block;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+  border: 1px solid #adb5bd;
+  height: 16px;
+  vertical-align: middle;
 }
+.iw-form--custom-toggles .iw-form__check input:disabled {
+  background: #f8f9fa;
+  opacity: 0.9;
+}
+.iw-form--custom-toggles .iw-form__check input:not(:disabled) {
+  background: white;
+}
+.iw-form--custom-toggles .iw-form__check input:disabled:checked {
+  background: #dee2e6;
+}
+.iw-form--custom-toggles .iw-form__check input:not(:disabled):checked {
+  background: #f7c08a;
+  border-color: #f7c08a;
+}
+.iw-form--custom-toggles .iw-form__check input:checked {
+  --opacity: 1;
+  --x: 50%;
+  --color: white;
+}
+.iw-form--custom-toggles .iw-form__check input[type=radio] {
+  border-radius: 50%;
+  width: 16px;
+}
+.iw-form--custom-toggles .iw-form__check input[type=checkbox]:not(.iw-form__switch) {
+  border-radius: 5px;
+  width: 16px;
+}
+.iw-form--custom-toggles .iw-form__check input[type=checkbox].iw-form__switch {
+  border-radius: 8px;
+  width: 32px;
+}
+.iw-form--custom-toggles .iw-form__check input[type=radio]::after, .iw-form--custom-toggles .iw-form__check input[type=checkbox]::after {
+  box-sizing: border-box;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  display: block;
+  transition: transform 0.15s, opacity 0.15s;
+  height: 16px;
+  content: "";
+}
+.iw-form--custom-toggles .iw-form__check input[type=radio]::after {
+  border-radius: 50%;
+  background: white;
+  width: 16px;
+}
+.iw-form--custom-toggles .iw-form__check input[type=checkbox]:not(.iw-form__switch)::after {
+  border: 4px solid white;
+  border-left: 0;
+  border-top: 0;
+  width: 10px;
+}
+.iw-form--custom-toggles .iw-form__check input[type=checkbox].iw-form__switch::after {
+  border-radius: 50%;
+  background: var(--color, #adb5bd);
+  width: 16px;
+}
+.iw-form--custom-toggles .iw-form__check input[type=radio]::after {
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: var(--opacity, 0);
+}
+.iw-form--custom-toggles .iw-form__check input[type=checkbox]:not(.iw-form__switch)::after {
+  transform: translate(-50%, -50%) translateY(-10%) rotate(43deg) scale(0.5);
+  opacity: var(--opacity, 0);
+}
+.iw-form--custom-toggles .iw-form__check input[type=checkbox].iw-form__switch::after {
+  transform: translate(-50%, -50%) translateX(var(--x, -50%)) scale(0.75);
+  opacity: 1;
+}
+.iw-form--custom-toggles .iw-form__check input[type=checkbox].iw-form__switch:disabled:not(:checked)::after {
+  opacity: 0.6;
+}
+.iw-form--custom-toggles .iw-form__check input:focus {
+  outline: none;
+}
+.iw-form--custom-toggles .iw-form__check input:invalid {
+  outline: none;
+  box-shadow: none;
+}
+.iw-form--custom-toggles .iw-form__check input:focus {
+  border-color: #f9d0a7;
+  box-shadow: 0 0 0 0.2rem rgba(247, 192, 138, 0.25);
+}
+.was-validated.iw-form--custom-toggles .iw-form__check input:valid {
+  border-color: #28a745;
+}
+.was-validated.iw-form--custom-toggles .iw-form__check input:invalid {
+  border-color: #dc3545;
+}
+.was-validated.iw-form--custom-toggles .iw-form__check input:valid:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+.was-validated.iw-form--custom-toggles .iw-form__check input:invalid:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+.was-validated.iw-form--custom-toggles .iw-form__check input:valid:checked {
+  background: rgba(40, 167, 69, 0.5);
+}
+.was-validated.iw-form--custom-toggles .iw-form__check input:invalid:checked {
+  background: rgba(220, 53, 69, 0.5);
+}
+
+.iw-form--custom-toggles .iw-form__check input + label {
+  display: inline-block;
+  margin-left: 0.25em;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
 .iw-nav {
   display: flex;
   flex-flow: column nowrap;
@@ -1572,43 +1536,6 @@ body {
  *   @include iw-grid-cols(768px, 5fr 2fr, 1.5rem 1rem);    - with the 1.5rem gap between rows and the 1rem gap between columns
  */
 /**
- * (todo: remove when the gap property in flex container will be supported by all web browsers)
- *
- * Sets a space between flex items to $items-gap, and the distance between the flex container and its items to $container-gap.
- *
- * Usage:
- *   .flex-container { display: flex;
- *                     @include iw-flex-gap(1rem, 0.25rem); }
- *
- *   <div class="flex-container [container-xl]">
- *     <div [class="flex-item"]> ... </div>
- *     <div [class="flex-item"]> ... </div>
- *   </div>
- *
- * If needed, the following version can be created: iw-flex-{row|column}-gap($items-gap, $container-gap: 0), to set gaps only between rows or columns.
- *
- * The mixin is a hack, therefore, it has the following disadvantages:
- *  - The minimum $container-gap is $items-gap/2.
- *      See the implementation to understand why.
- *  - It is better to use "box-sizing: border-box;".
- *      If we use the Bootstrap .container-xl utility class with a horizontal padding to restrict the width of a content on a page,
- *      and one of this containers has also the flex-container class with the @include iw-flex-gap(...), then it is better if
- *      "box-sizing: border-box;" is used. Thanks to it, the content of the .container-xl containers, will have the same width.
- *      This oddity results again from the usage of the hack, and won't have a place when all web browsers will implement
- *      the gap property in flex.
- *
- * When all web browser will support the gap property in flex containers https://caniuse.com/#feat=flexbox-gap,
- * then the mixin can be replaced with the following code:
- *   .flex-container { display: flex;
- *                     gap: 1rem;
- *                     margin: 0.25rem; }  // or "padding: 0.25rem;" if the container has a border or a background color
- * As of July 2020 we still wait at least for Safari:
- *   https://www.chromestatus.com/feature/6031643502444544
- *   https://b.webkit.org/show_bug.cgi?id=206767
- *
- * Other flex gap hacks can be found here: https://stackoverflow.com/questions/20626685/better-way-to-set-distance-between-flexbox-items
- */
-/**
  * Creates an overlay over the parent element with the given background color and opacity (less than 1).
  * The parent element needs to be positioned (i.e. not static).
  * See: https://www.w3schools.com/howto/howto_css_overlay.asp
@@ -1974,13 +1901,11 @@ button.bg-dark:focus {
   content: "";
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sticky-top {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-  }
+.sticky-top {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
 }
 
 .text-left {
