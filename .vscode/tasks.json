@@ -10,7 +10,10 @@
       "problemMatcher": [
         "$tsc-watch"
       ],
-      "group": "build"
+      "group": "build",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
     },
     {
       "type": "typescript",
@@ -21,6 +24,15 @@
       "group": {
         "kind": "build",
         "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "label": "Browsersync",
+      "command": "browser-sync . -w",
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
       }
     }
   ]
